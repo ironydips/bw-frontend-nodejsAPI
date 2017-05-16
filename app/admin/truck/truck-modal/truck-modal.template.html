@@ -1,0 +1,75 @@
+<!-- / profileComponent \  -->
+<div class="profileComponent">
+    <div class="container">
+        <div class="profileBg">
+            <h2>Truck Profile</h2>
+            <div class="inner-adjust">
+                <form name="$ctrl.truckDetailForm">
+                    <h3>Image</h3>
+                    <div class="image">
+                        <img ng-src="{{$ctrl.imageUrl}}" alt="No Image Selected" style="width: 208px;height: 200px" />
+                    </div>
+                    <input style="margin-left:250px" ng-disabled={{$ctrl.isDisabled}} type="file" class="form-controls" name="imageUrl" ng-model="$ctrl.selectedImage" base-sixty-four-input accept="image/*" required>
+                    <!-- <span class="red">*</span>
+                    <span class="red" ng-show="$ctrl.showMessage($ctrl.truckDetailForm.imageUrl)">This field is mandatory.</span> -->
+                    <h3>General Info</h3>
+                    <table class="table-responsive">
+                        <tbody>
+                            <tr>
+                                <td class="gap">Truck Type<span class="red">*</span></td>
+                                <td class="gap2 gap3">
+                                    <input ng-disabled={{$ctrl.isDisabled}} type="text" name="truckType" class="form-controls" ng-model="$ctrl.truck.truckType" required>
+                                    <span class="red" ng-show="$ctrl.showMessage($ctrl.truckDetailForm.truckType)">This field is mandatory.</span></td>
+                                <td class="gap gap4">License Plate Number<span class="red">*</span></td>
+                                <td class="gap2">
+                                    <input name="licensePlate" ng-disabled={{$ctrl.isDisabled}} type="text" class="form-controls" ng-model="$ctrl.truck.licensePlate" required>
+                                    <span class="red" ng-show="$ctrl.showMessage($ctrl.truckDetailForm.licensePlate)">This field is mandatory.</span></td>
+                            </tr>
+                            <tr>
+                                <td class="gap">Dealer Name<span class="red">*</span></td>
+                                <td class="gap2 gap3">
+                                    <input ng-disabled={{$ctrl.isDisabled}} type="text" class="form-controls" name="dealerName" ng-model="$ctrl.truck.dealerName" required>
+                                    <span class="red" ng-show="$ctrl.showMessage($ctrl.truckDetailForm.dealerName)">This field is mandatory.</span></td>
+                                <td class="gap gap4">Dealer Street Address<span class="red">*</span></td>
+                                <td class="gap2">
+                                    <input ng-disabled={{$ctrl.isDisabled}} type="text" class="form-controls" name="dealerStreetAddress" ng-model="$ctrl.truck.dealerStreetAddress" required>
+                                    <span class="red" ng-show="$ctrl.showMessage($ctrl.truckDetailForm.dealerStreetAddress)">This field is mandatory.</span></td>
+                            </tr>
+                            <tr>
+                                <td class="gap">Dealer City<span class="red">*</span></td>
+                                <td class="gap2 gap3">
+                                    <input ng-disabled={{$ctrl.isDisabled}} type="text" class="form-controls" name="dealerCity" ng-model="$ctrl.truck.dealerCity" required>
+                                    <span class="red" ng-show="$ctrl.showMessage($ctrl.truckDetailForm.dealerCity)">This field is mandatory.</span></td>
+                                <td class="gap gap4">Dealer Zip<span class="red">*</span></td>
+                                <td class="gap2">
+                                    <input ng-disabled={{$ctrl.isDisabled}} type="text" class="form-controls" name="dealerZip" ng-model="$ctrl.truck.dealerZip" required>
+                                    <span class="red" ng-show="$ctrl.showMessage($ctrl.truckDetailForm.dealerZip)">This field is mandatory.</span></td>
+                            </tr>
+                            <tr>
+                                <td class="gap">Dealer State<span class="red">*</span></td>
+                                <td class="gap2 gap3">
+                                    <input ng-disabled={{$ctrl.isDisabled}} type="text" class="form-controls" name="dealerState" ng-model="$ctrl.truck.dealerState" required>
+                                    <span class="red" ng-show="$ctrl.showMessage($ctrl.truckDetailForm.dealerState)">This field is mandatory.</span></td>
+                                <td class="gap gap4">Lease Expiration Date</td>
+                                <td class="gap2">
+                                    <input ng-disabled={{$ctrl.isDisabled}} type="text" class="form-controls" ng-model="$ctrl.truck.leaseExpirationDate">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="row">
+                        <div class="col-sm-2">
+                        </div>
+                        <div class="col-sm-2">
+                        </div>
+                        <div class="btn-main">
+                            <button type="button" ng-click="$ctrl.cancel()" class="btn btn-sm btn-default">Cancel</button>
+                            <button type="button" ng-disabled={{$ctrl.isDisabled}} ng-click="$ctrl.save()" class="btn btn-sm btn-success">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- \ profileComponent end /

@@ -1,0 +1,17 @@
+{
+  "name": "web_bathwaterkids",
+  "description": "A project for Bathwaterkids",
+  "version": "0.0.0",
+  "homepage": "https://github.com/angular/angular-phonecat",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular": "1.5.x",
+    "bootstrap": "3.3.x",
+    "angular-ui-router": "0.4.x",
+    "angular-google-gapi": "^1.0.1",
+    "angular-messages": "1.5.11",
+    "angular-bootstrap": "^2.5.0",
+    "angularjs-datepicker": "^2.1.12"
+  }
+}
