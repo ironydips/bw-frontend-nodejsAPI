@@ -9,7 +9,7 @@ function TimeslotShowAllModal($state, TimeslotService) {
 
          TimeslotService.getTimeslots()
                 .then(function(timeslotShowAllModal) {
-                    ctrl.alltimeslot = timeslotShowAllModal.data;
+                    ctrl.alltimeslot = timeslotShowAllModal.data.result.message;
                 })
                 .catch(function(err){
                     console.log('Error Timeslot detail');
