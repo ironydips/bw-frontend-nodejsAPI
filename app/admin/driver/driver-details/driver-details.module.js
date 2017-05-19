@@ -4,7 +4,8 @@
 angular.module('driverDetails',[
 	'ui.bootstrap',
 	'bathwaterApp.services',
-	'driverModal'
+	'driverModal',
+	'infinite-scroll'
 		]);
 
 })(window.angular);

@@ -3,9 +3,9 @@
 	
 	function DriverServiceHandler($http){
 
-		var getAllDrivers = function(){
+		var getAllDrivers = function(lastKey, limit){
 			return $http({
-			    url: '/api/admin/getDrivers',
+			    url: '/api/admin/getDrivers?lastKey=' + lastKey + "&limit=" + limit,
 			    method: "GET",
 			});
 		};

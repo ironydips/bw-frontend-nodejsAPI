@@ -5,7 +5,7 @@
 
 	<div class="component-bg">
 		
-	<ul>
+	<ul infinite-scroll="$ctrl.getTrucks($ctrl.lastKey, $ctrl.limit)">
 		<li><a href="" ng-click="$ctrl.addTruck()" class="drive">Add Trucks</a></li>
 		<li class="full" ng-repeat="truck in $ctrl.trucks" ng-click="$ctrl.showDetails(truck)">
 			<a href=""><img style="width: 209px; height: 207px" ng-src="{{truck.images && truck.images.length >0 ? truck.images[0].url : 'img/truck_image.jpg'}}"></a>

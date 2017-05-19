@@ -40,18 +40,15 @@ function openPopUp(details){
 
 function DriverDetailsController($state, $uibModal, DriverService) {
 	var ctrl = this;
-	ctrl.$uibModal = $uibModal;
-	ctrl.$state = $state;
+	
+	
 	ctrl.init = function(){
-		//get driver details.
-		DriverService.getAllDrivers()
-		.then(function(response){
-			ctrl.drivers = response.data.result.message;
-		})
-		.catch(function(err){
-			console.log('Error getting driver details:');
-			console.log(err);
-		})
+		ctrl.$uibModal = $uibModal;
+		ctrl.$state = $state;
+		ctrl.limit = 30;
+		ctrl.lastKey = null;
+		ctrl.lastEvaluatedKey = '1';
+		ctrl.drivers = [];
 	};
 
 	// Add Driver Modal
@@ -63,8 +60,28 @@ function DriverDetailsController($state, $uibModal, DriverService) {
 	ctrl.showDetails = function(driverDetails){
 		angular.bind(ctrl, openPopUp, transformData(driverDetails))();
 	}
+	 ctrl.getDrivers = function(lastKey, limit) {
 
-	ctrl.init();
+    	if(ctrl.lastEvaluatedKey != ctrl.lastKey && !(ctrl.lastKey == null && ctrl.drivers.length > 0)){
+			getDriverList(lastKey, limit);
+		}
+    	ctrl.lastEvaluatedKey = ctrl.lastKey;
+	 }
+
+	 ctrl.init();
+
+	 function getDriverList(lastKey, limit) {
+		DriverService.getAllDrivers(lastKey, limit)
+		.then(function(response){
+			lastKey == null? ctrl.drivers = response.data.result.message : ctrl.drivers = ctrl.drivers.concat(response.data.result.message) ;
+			ctrl.lastKey = response.data.result.lastKey && response.data.result.lastKey.driverID['S'] || null;
+			return ctrl.lastKey;
+		})
+		.catch(function(err){
+			console.log('Error getting driver details:');
+			console.log(err);
+		})
+	}
 }
 
 angular.module('driverDetails')

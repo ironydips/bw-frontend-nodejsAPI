@@ -3,9 +3,9 @@
 	
 	function TruckServiceHandler($http){
 
-		var getAllTrucks = function(){
+		var getAllTrucks = function(lastKey, limit){
 			return $http({	
-			    url: '/api/admin/getTrucks',
+			    url: '/api/admin/getTrucks?lastKey=' + lastKey + "&limit=" + limit,
 			    method: "GET",
 			});
 		};

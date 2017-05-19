@@ -40,19 +40,15 @@ function openPopUp(details){
 
 function TruckDetailsController($state, $uibModal, resizeService, TruckService) {
 	var ctrl = this;
-	ctrl.$uibModal = $uibModal;
-	ctrl.$state = $state;
+	
 
 	ctrl.init = function(){
-		//get truck details.
-			TruckService.getAllTrucks()
-				.then(function(response){
-					ctrl.trucks = response.data.result.message;
-				})
-				.catch(function(err){
-					console.log('Error getting truck details:');
-					console.log(err);
-				});
+		ctrl.$uibModal = $uibModal;
+		ctrl.$state = $state;
+		ctrl.limit = 30;
+		ctrl.lastKey = null;
+		ctrl.lastEvaluatedKey = '1';
+		ctrl.trucks = [];
 	};
 
 	//Add Truck Modal
@@ -64,7 +60,27 @@ function TruckDetailsController($state, $uibModal, resizeService, TruckService) 
 		angular.bind(ctrl, openPopUp, transformData(truckDetails))();
 	}
 
+	ctrl.getTrucks = function(lastKey, limit){
+    	if(ctrl.lastEvaluatedKey != ctrl.lastKey && !(ctrl.lastKey == null && ctrl.trucks.length > 0)){
+			getTruckList(lastKey, limit);
+		}
+		ctrl.lastEvaluatedKey = ctrl.lastKey;
+	}
+
 	ctrl.init();
+
+	function getTruckList(lastKey, limit) {
+		TruckService.getAllTrucks(lastKey, limit)
+		.then(function(response){
+			lastKey == null? ctrl.trucks = response.data.result.message : ctrl.trucks = ctrl.trucks.concat(response.data.result.message) ;
+			ctrl.lastKey = response.data.result.lastKey && response.data.result.lastKey.driverID['S'] || null;
+			return ctrl.lastKey;
+		})
+		.catch(function(err){
+			console.log('Error getting trucks details:');
+			console.log(err);
+		})
+	}
 }
 
 angular.module('truckDetails')

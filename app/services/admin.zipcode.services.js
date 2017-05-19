@@ -5,11 +5,8 @@
 
 		var getZipCodes = function(){
 			return $http({
-						    url: '/rest/getZipCodes',
+						    url: '/api/admin/getZipCodes',
 						    method: "GET",
-						    headers:{
-						    	"Authorization": 'Basic YWRtaW46YWRtaW4='
-						    }
 						});
 					};
 

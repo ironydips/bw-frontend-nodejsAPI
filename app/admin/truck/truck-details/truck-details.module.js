@@ -6,6 +6,7 @@ angular.module('truckDetails',[
 	'images-resizer',
 	'ui.bootstrap',
 	'bathwaterApp.services',
+	'infinite-scroll'
 	]);
 
 })(window.angular);
