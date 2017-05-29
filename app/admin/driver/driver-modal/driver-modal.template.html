@@ -6,9 +6,14 @@
             <h2>Driver Profile</h2>
             <div class="inner-adjust">
                 <h3>Image</h3>
+                    <div class="image">
+                        <img ng-src="{{$ctrl.imageUrl}}" alt="No Image Selected" style="width: 208px;height: 200px" />
+                    </div>
+                    <input style="margin-left:250px" ng-disabled={{$ctrl.isDisabled}} type="file" class="form-controls" name="imageUrl" ng-model="$ctrl.selectedImage" base-sixty-four-input accept="image/*" required>
+                <!-- <h3>Image</h3>
                 <div class="image">
                     <a href="" class="drive">Add License Image</a>
-                </div>
+                </div> -->
                 <h3>General Info</h3>
                 <form name="$ctrl.driverDetailForm" novalidate>
                 <!-- <div class="control-group" ng-class="{true: 'red'}[submitted && driverDetailForm.firstName.$invalid]"> -->
@@ -29,7 +34,7 @@
                             <tr>
                                 <td class="gap" for="licenceId">Driver License ID<span class="red">*</span></td>
                                 <td class="gap2 gap3">
-                                    <input ng-disabled={{$ctrl.isDisabled}} type="text" class="form-controls" name="driverLicense" ng-model="$ctrl.driver.licenseId" required>
+                                    <input ng-disabled={{$ctrl.isDisabled}} type="text" class="form-controls" name="driverLicense" ng-model="$ctrl.driver.licenseID" required>
                                     <span class="red" ng-show="$ctrl.showMessage($ctrl.driverDetailForm.driverLicense)">This field is mandatory.</span></td>
                                 <td class="gap gap4">Street Address<span class="red">*</span></td>
                                 <td class="gap2">
@@ -64,7 +69,7 @@
                                     <span class="red" ng-show="$ctrl.driverDetailForm.phoneNumber.$error.pattern">only Numbers Required</span> </td>
                                 <td class="gap gap4">Emergency Phone Number<span class="red">*</span></td>
                                 <td class="gap2">
-                                    <input ng-pattern="/^(\d)+$/" ng-disabled={{$ctrl.isDisabled}} type="text" class="form-controls" name="emergencyPhoneNumber" ng-model="$ctrl.driver.emergencyPhoneNumber" required>
+                                    <input ng-pattern="/^(\d)+$/" ng-disabled={{$ctrl.isDisabled}} type="text" class="form-controls" name="emergencyPhoneNumber" ng-model="$ctrl.driver.emergencyContactNumber" required>
                                     <span class="red" ng-show="$ctrl.showMessage($ctrl.driverDetailForm.emergencyPhoneNumber)">This field is mandatory.</span>
                                     <span class="red"  ng-show="$ctrl.driverDetailForm.emergencyPhoneNumber.$error.pattern">only Numbers Required</span></td>
                             </tr>

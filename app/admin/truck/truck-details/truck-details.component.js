@@ -57,7 +57,7 @@ function TruckDetailsController($state, $uibModal, resizeService, TruckService) 
 	};
 
 	ctrl.showDetails = function(truckDetails){
-		angular.bind(ctrl, openPopUp, transformData(truckDetails))();
+		angular.bind(ctrl, openPopUp, truckDetails)();
 	}
 
 	ctrl.getTrucks = function(lastKey, limit){

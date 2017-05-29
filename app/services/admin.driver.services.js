@@ -17,11 +17,19 @@
 			            data: driver,
 					});
 		}
+		var driverImageUpload = function(driverImage){
+			return $http({
+						url: '/api/admin/driverImageUpload',
+			            method: "POST",
+			            data: driverImage,
+			})
+		} 
 
 		//EXPORTED Object
 		return {
 			getAllDrivers,
-			addDriver
+			addDriver ,
+			driverImageUpload
 		}
 	}
 

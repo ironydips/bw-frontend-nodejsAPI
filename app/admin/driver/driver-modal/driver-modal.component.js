@@ -1,14 +1,27 @@
 (function(angular) {
     'use strict';
 
-    function DriverModalController($state, DriverService) {
+    function DriverModalController($state,$q,$scope, DriverService) {
     	var ctrl = this;
 
         ctrl.init = function() {
                 
                 ctrl.driver = (ctrl.resolve && ctrl.resolve.details) || {};
                 ctrl.isDisabled = Object.keys(ctrl.driver).length > 0;
+                ctrl.image = {};
             }
+        // if (ctrl.driver.images && ctrl.driver.images.length > 0) {
+        //     ctrl.imageUrl = ctrl.driver.images[0].url;
+        // }
+
+        // Watch the image change and show from base 64 value
+        // $scope is only used here for watch.
+        $scope.$watch(angular.bind(ctrl, function() {
+            return ctrl.selectedImage;
+        }), function(value) {
+            value ?
+                (ctrl.imageUrl = 'data:image/jpeg;base64, ' + value.base64, ctrl.image.driverImage = value.base64) : (ctrl.image.driverImage = '');
+        });
             //Add Driver
         ctrl.save = function() {
 
@@ -17,6 +30,14 @@
             });
             if (!ctrl.driverDetailForm.$invalid) {
 
+                // $q.all([DriverService.addDriver(ctrl.driver), DriverService.driverImageUpload(ctrl.image)])
+                //     .then(function(response){
+                //         ctrl.modalInstance.close({ action: 'update' });
+                //     })
+                //     .catch(function(err){
+                //         console.log('Error Adding Driver/Uploading driver Image');
+                //         console.log(err);
+                //     });
                 DriverService.addDriver(ctrl.driver)
                     .then(function(result) {
                         ctrl.modalInstance.close({ action: 'update' });
@@ -42,7 +63,7 @@
     angular.module('driverModal')
         .component('driverModal', {
             templateUrl: 'admin/driver/driver-modal/driver-modal.template.html',
-            controller: ['$state', 'DriverService', DriverModalController],
+            controller: ['$state','$q','$scope', 'DriverService', DriverModalController],
             bindings: {
                 modalInstance: '<',
                 resolve: '<'

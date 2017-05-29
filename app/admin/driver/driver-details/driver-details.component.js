@@ -49,6 +49,7 @@ function DriverDetailsController($state, $uibModal, DriverService) {
 		ctrl.lastKey = null;
 		ctrl.lastEvaluatedKey = '1';
 		ctrl.drivers = [];
+		ctrl.getDrivers(ctrl.lastKey, ctrl.limit);
 	};
 
 	// Add Driver Modal
@@ -58,10 +59,10 @@ function DriverDetailsController($state, $uibModal, DriverService) {
 
 	//Show Driver's Modal
 	ctrl.showDetails = function(driverDetails){
-		angular.bind(ctrl, openPopUp, transformData(driverDetails))();
+		console.log(driverDetails)
+		angular.bind(ctrl, openPopUp, driverDetails)();
 	}
 	 ctrl.getDrivers = function(lastKey, limit) {
-
     	if(ctrl.lastEvaluatedKey != ctrl.lastKey && !(ctrl.lastKey == null && ctrl.drivers.length > 0)){
 			getDriverList(lastKey, limit);
 		}
@@ -71,8 +72,10 @@ function DriverDetailsController($state, $uibModal, DriverService) {
 	 ctrl.init();
 
 	 function getDriverList(lastKey, limit) {
+
 		DriverService.getAllDrivers(lastKey, limit)
 		.then(function(response){
+			console.log(response)
 			lastKey == null? ctrl.drivers = response.data.result.message : ctrl.drivers = ctrl.drivers.concat(response.data.result.message) ;
 			ctrl.lastKey = response.data.result.lastKey && response.data.result.lastKey.driverID['S'] || null;
 			return ctrl.lastKey;

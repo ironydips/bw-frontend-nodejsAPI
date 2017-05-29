@@ -10,23 +10,19 @@
 			});
 		};
 
-		var addTruckwithImage = function(truck){
+		var addTruck = function(truck){
 			
 			return $http({
-							url: '/rest/addTruckwithImage',
+							url: '/api/admin/addTruck',
 				            method: "POST",
-				            data: angular.toJson(truck),
-				            headers: {
-				                'Authorization': "Basic YWRtaW46YWRtaW4=",
-				                'Content-Type': 'text/plain'
-				            }
+				            data: angular.toJson(truck)
 						});
 					}
 
 		//EXPORTED Object
 		return {
 			getAllTrucks,
-			addTruckwithImage
+			addTruck
 		}
 	}
 
