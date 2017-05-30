@@ -13,29 +13,16 @@
 		var addZipCode = function(zipcode){
 			
 			return $http({
-							url: '/rest/addZipCode',
+							url: '/api/admin/addZipCode',
 				            method: "POST",
 				            data: zipcode,
-				            transformRequest: function(obj) {
-						        var str = [];
-						        for(var p in obj)
-						        	str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-						        return str.join("&");
-						    },
-				            headers: {
-				                'Authorization': "Basic YWRtaW46YWRtaW4=",
-				                "Content-Type": "application/x-www-form-urlencoded"
-				            }
 						});
 					};
 
 		var deleteZipCode = function(zipcode){
 			return $http({
-						    url: '/rest/deleteZipCode/' + zipcode,
+						    url: '/api/admin/deleteZipCode?zipCode=' + zipcode,
 						    method: "GET",
-						    headers:{
-						    	"Authorization": 'Basic YWRtaW46YWRtaW4='
-						    }
 						});
 					};
 		//EXPORTED Object

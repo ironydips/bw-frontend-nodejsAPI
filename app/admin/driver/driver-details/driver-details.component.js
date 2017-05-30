@@ -59,7 +59,6 @@ function DriverDetailsController($state, $uibModal, DriverService) {
 
 	//Show Driver's Modal
 	ctrl.showDetails = function(driverDetails){
-		console.log(driverDetails)
 		angular.bind(ctrl, openPopUp, driverDetails)();
 	}
 	 ctrl.getDrivers = function(lastKey, limit) {
@@ -75,7 +74,6 @@ function DriverDetailsController($state, $uibModal, DriverService) {
 
 		DriverService.getAllDrivers(lastKey, limit)
 		.then(function(response){
-			console.log(response)
 			lastKey == null? ctrl.drivers = response.data.result.message : ctrl.drivers = ctrl.drivers.concat(response.data.result.message) ;
 			ctrl.lastKey = response.data.result.lastKey && response.data.result.lastKey.driverID['S'] || null;
 			return ctrl.lastKey;

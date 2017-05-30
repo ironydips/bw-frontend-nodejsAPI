@@ -36,7 +36,6 @@ function ZipCodeDetailsController($state, $uibModal, ZipcodeService) {
 		ZipcodeService.getZipCodes()
 		.then(function(response){
 			ctrl.zipCodes = response.data.result.message;
-			debugger;
 		})
 		.catch(function(err){
 			console.log('Error getting zipcode details:');
@@ -53,8 +52,10 @@ function ZipCodeDetailsController($state, $uibModal, ZipcodeService) {
 		//Show alert and then delete if Yes.
 
 		ZipcodeService.deleteZipCode(zipcode)
-		.then(function(zipCodes){
-			ctrl.init();
+		.then(function(response){
+			if(response.data.result.message == "success"){
+				ctrl.init();
+			}
 		})
 		.catch(function(err){
 			console.log('Error getting zipcode details:');

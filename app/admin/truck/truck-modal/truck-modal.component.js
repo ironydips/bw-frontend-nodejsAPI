@@ -4,7 +4,6 @@
     function TruckModalController($scope, $rootScope, $state, resizeService, TruckService) {
         var ctrl = this;
         ctrl.truck = (ctrl.resolve && ctrl.resolve.details) || {};
-        console.log(ctrl.truck)
         ctrl.isDisabled = Object.keys(ctrl.truck).length > 0;
         if (ctrl.truck.images && ctrl.truck.images.length > 0) {
             ctrl.imageUrl = ctrl.truck.images[0].url;

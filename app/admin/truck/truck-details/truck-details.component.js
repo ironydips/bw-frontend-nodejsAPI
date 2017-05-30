@@ -49,6 +49,7 @@ function TruckDetailsController($state, $uibModal, resizeService, TruckService) 
 		ctrl.lastKey = null;
 		ctrl.lastEvaluatedKey = '1';
 		ctrl.trucks = [];
+		ctrl.getTrucks(ctrl.lastKey, ctrl.limit);
 	};
 
 	//Add Truck Modal
