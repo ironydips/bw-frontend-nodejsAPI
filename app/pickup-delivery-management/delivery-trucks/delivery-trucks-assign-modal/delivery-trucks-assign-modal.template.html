@@ -1,39 +1,44 @@
 <!-- / profileComponent \ -->
 <div class="profileComponent">
-   <div class="container">
-      <div class="profileBg">
-         <h3>Assign Truck</h3>
-         <div class="inner-adjust">
-            <div class="row">
-               <div class="col-sm-4">
-                  <div class="col-sm-1">
-                     <label>Driver:</label>
-                  </div>
-                  <div class="col-sm-1"></div>
-                  <div class="col-sm-2">
-                     <select style="width: 200px;" class="form-control" ng-model="$ctrl.assign.driverid">
-                        <option value="">--Select Driver--</option>
-                        <option ng-repeat="driver in $ctrl.drivers" value="{{driver.driverID}}">{{driver.firstName}} {{driver.lastName}}</option>
-                     </select>
-                  </div>
-               </div>
-               <div class="col-sm-4">
-                  <div class="col-sm-1">
-                     <label>Truck:</label>
-                  </div>
-                  <div class="col-sm-1"></div>
-                  <div class="col-sm-2">
-                     <select style="width: 200px;" class="form-control" ng-model="$ctrl.assign.truckid">
-                        <option value="">--Select Truck--</option>
-                        <option ng-repeat="truck in $ctrl.trucks" value="{{truck.truckID}}">{{truck.licensePlate}}</option>
-                     </select>
-                  </div>
-               </div>
-               <div class="col-sm-4">
-                  <button type="button" ng-click = "$ctrl.assign($ctrl.assign.driverid,$ctrl.assign.truckid)" class="btn btn-sm btn-success">Assign</button>
-               </div>
-            </div>
-            <br>
+    <div class="container">
+        <div class="profileSm">
+            <h3>Assign Truck</h3>
+            <div class="inner-adjust">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="col-sm-3">
+                            <label>Select Driver:</label>
+                        </div>
+                        <div class="col-sm-5">
+                            <select style="width: 250px;" class="form-control" ng-model="$ctrl.assign.driverid">
+                                <option value="">--Select Driver--</option>
+                                <option ng-repeat="driver in $ctrl.drivers" value="{{driver.driverID}}">{{driver.firstName}} {{driver.lastName}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="col-sm-3">
+                            <label>Select Truck:</label>
+                        </div>
+                        <div class="col-sm-5">
+                            <select style="width: 250px;" class="form-control" ng-model="$ctrl.assign.truckid">
+                                <option value="">--Select Truck--</option>
+                                <option ng-repeat="truck in $ctrl.trucks" value="{{truck.truckID}}">{{truck.licensePlate}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <!-- <br>
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-4">
+                        <button type="button" ng-click="$ctrl.assign($ctrl.assign.driverid,$ctrl.assign.truckid)" class="btn btn-sm btn-success">Assign</button>
+                    </div>
+                </div> -->
+                <!-- <br>
             <h3>List Of Trucks</h3>
             <div class="row">
                <div style="height:350px;overflow:auto;">
@@ -54,20 +59,12 @@
                         </tr>
                      </table>
                </div> 
+            </div> -->
+                <div class="btn-main">
+                    <button type="button" ng-click="$ctrl.cancel()" class="btn btn-sm btn-default">Cancel</button>
+                    <button type="button" ng-click="$ctrl.assign($ctrl.assign.driverid,$ctrl.assign.truckid)" class="btn btn-sm btn-success">Assign</button>
+                </div>
             </div>
-            <form>
-               <div class="row">
-                  <div class="col-sm-2">
-                  </div>
-                  <div class="col-sm-2">
-                  </div>
-               </div>
-            </form>
-         </div>
-      </div>
-      <br>
-      <div class="" style="text-align:center;margin-bottom: 1cm;">
-         <input class="btn btn-lg btn-primary cancel" ng-click="$ctrl.cancel()" value="Cancel" type="button">
-      </div>
-   </div>
+        </div>
+    </div>
 </div>

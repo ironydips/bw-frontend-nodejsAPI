@@ -6,7 +6,7 @@
 		var popUpCtrl = this;
 		var modalInstance = popUpCtrl.$uibModal.open({
 			component: 'deliverytruckModal',
-			windowClass: 'app-modal-window-large',
+			windowClass: 'app-modal-window-small',
 			keyboard: false,
 			resolve:{
 				details: function(){
@@ -18,7 +18,7 @@
 
 		modalInstance.result.then(function(data){
 			//data passed when pop up closed.
-			//if(data == "update") popUpCtrl.$state.reload();
+			if(data == "update") popUpCtrl.init();
 			
 		}), function(err){
 			console.log('Error in assign trucks & driver Modal');
@@ -50,10 +50,21 @@
 
 	}
 
-	function trucksController($state,$uibModal){
+	function trucksController($state,$uibModal,PickupTruckService){
 		var ctrl = this;
 		ctrl.$uibModal = $uibModal;
 		ctrl.$state = $state;
+		ctrl.init = function(){
+		//get truck details.
+		 PickupTruckService.getAllDriverTruckHistory()
+			.then(function(response){
+				ctrl.trkhistories = response.data.result.message;
+			})
+			.catch(function(err){
+				console.log('Error getting truck histories details:');
+				console.log(err);
+			})
+		};
 
 		ctrl.assign = function(){
 			angular.bind(ctrl,openPopUpAssign,null)();
@@ -61,6 +72,7 @@
 		ctrl.history = function(){
 			angular.bind(ctrl,openPopUpHistory,null)();
 		};
+		ctrl.init();
 		
 
 	}
@@ -68,7 +80,7 @@
 	angular.module('deliveryTrucks')
 	.component('deliveryTrucks',{
 		templateUrl: 'pickup-delivery-management/delivery-trucks/delivery-trucks-details/delivery-trucks-details.template.html',
-		controller:['$state','$uibModal', trucksController]
+		controller:['$state','$uibModal','PickupTruckService', trucksController]
 	});
 
 })(window.angular);

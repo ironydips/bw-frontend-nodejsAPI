@@ -3,7 +3,8 @@
 	angular.module("deliveryTrucks",[
 	'ui.bootstrap',
 	'deliverytruckModal',
-	'historyModal'
+	'historyModal',
+	'bathwaterApp.services'
 		]);
 
 })(window.angular);

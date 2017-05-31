@@ -4,30 +4,47 @@
 	function PickupTruckServiceHandler($http){
 
 		var assignDriverToTruck = function(driverid,truckid){
+			var obj = {
+				"truckID": truckid,
+				"driverID": driverid
+			}
 			return $http({
-							url: '/rest/assignDriverToTruck/'+ truckid + '?driverID=' + driverid,
-				            method: "GET",
-				            headers: {
-				                'Authorization': "Basic YWRtaW46YWRtaW4="
-				                
-				            }
+							url: '/api/pickup/assignDriverToTruck',
+				            method: "POST",
+				            data: obj,
+				            // headers: {
+		              //           "Content-Type": "application/x-www-form-urlencoded"
+		              //       }
 						});
 					};
+
+		var getDriverlist = function(){
+			return $http({
+			    url: '/api/admin/getDrivers?drivers=' + "drivers",
+			    method: "GET",
+			});
+		};
+
+		var getTrucklist = function(){
+			return $http({
+				url: '/api/admin/getTrucks?trucks=' + "trucks",
+				method: "GET"
+			});
+		}
 					
 		var getAllDriverTruckHistory = function(){
 			return $http({
-				            url: '/rest/getAllDriverTruckHistory',
+				            url: '/api/pickup/getDriverTruckHistory',
 				            method: "GET",
-				            headers:{
-				            	"Authorization": 'Basic YWRtaW46YWRtaW4='
-				         }
 	        		});
 				};
 
 		//EXPORTED Object
 		return {
 			assignDriverToTruck,
-			getAllDriverTruckHistory	
+			getAllDriverTruckHistory,
+			getDriverlist,
+			getTrucklist	
 		}
 	}
 
