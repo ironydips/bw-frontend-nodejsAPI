@@ -4,10 +4,17 @@
 
 function TimeslotModalController($state, TimeslotService) {
 	var ctrl = this;
-	ctrl.timeslot = {days:{}, timeslots:{}, availables:{}};
+
+	ctrl.init = function(){
+		ctrl.timeslot = {days:{}, timeslots:{}, availables:{}};
+		ctrl.selectedDays = {};
+		// ctrl.timeslots = [
+		// 	s0: ""
+		// ];
+	}
 	
 	ctrl.save = function(){
-
+		console.log(ctrl.selectedTS)
 		dateCalculation(ctrl.startDate, ctrl.endDate);
 
 		// TimeslotService.createTimeSlotsRange(ctrl.timeslot)
@@ -25,60 +32,56 @@ function TimeslotModalController($state, TimeslotService) {
 		ctrl.modalInstance.close();
 	};
 
+	ctrl.init();
+
 	function dateCalculation(startDate, endDate){
+
+		ctrl.filteredDate = [];
+		ctrl.DateArr = [];
 		if(startDate == endDate){
 			ctrl.timeslot.date = ctrl.startDate;
 		}else{
 			var sDate = new Date(startDate);
 			var eDate = new Date(endDate);
-			dayCal(sDate, eDate);
-		}
-	}
+					
+			while(sDate <= eDate){
+				var weekday =new Array(7);
+				weekday[1]="Monday";
+				weekday[2]="Tuesday";
+				weekday[3]="Wednesday";
+				weekday[4]="Thursday";
+				weekday[5]="Friday";
+				weekday[6]="Saturday";
+				weekday[7]="Sunday";
 
-	function dayCal(sDate, eDate){
-		var day = sDate.getDay();
-		var weekday =new Array(7);
-				weekday[0]="Monday";
-				weekday[1]="Tuesday";
-				weekday[2]="Wednesday";
-				weekday[3]="Thursday";
-				weekday[4]="Friday";
-				weekday[5]="Saturday";
-				weekday[6]="Sunday";
+				var date = sDate.getDate();
+				var month = sDate.getMonth();
+				var year = sDate.getFullYear();
+				var day = weekday[sDate.getDay()];
+				if(date < 10) date = "0" + date;
+				if(month < 10) month = "0" + month; 
+				var obj = {
+					selectedDate : month + "." + date + "." + year,
+					weekday : day
+				}
+				ctrl.DateArr.push(obj);
+				sDate.setDate(sDate.getDate() + 1);
 
-		var count = 1;
-		var oneDay = 24*60*60*1000; 
-		var diffDays = Math.round(Math.abs((sDate.getTime() - eDate.getTime())/(oneDay)));
-		console.log(diffDays)
-		
-		// for (var i = 0; i <= diffDays; i++) {
-		// 	sDate.setDate(sDate.getDate() + 1);
-		// 	console.log(sDate);
-		// 	return sDate;
-		// }
-
-		setDate(sDate, eDate, diffDays);
-		
-   //          var sday = sDate.getDate();
-   //          var syear = sDate.getFullYear();
-   //          var emonth = (eDate.getMonth() + 1);
-   //          var eday = eDate.getDate();
-   //          var eyear = eDate.getFullYear();
-		 // if(smonth<=emonth && syear<=eyear){
-		 // 	//console.log(sday)
-		 // }
-		}
-
-		function setDate(sDate, eDate, diffDays){
-			if (!(count == diffDays)) {
-			sDate.setDate(sDate.getDate() + 1);
-			console.log(sDate); 
-			}else{
-				console.log("same date")
-				// var smonth = (sDate.getMonth() + 1);
 			}
+			
+				angular.forEach(ctrl.selectedDays, function(value, key){
+					for (var i = 0; i < ctrl.DateArr.length; i++) {
+						if(ctrl.DateArr[i].weekday == key){
+							ctrl.filteredDate.push(ctrl.DateArr[i]);
+						}
+					}
+				});
+
+
+							console.log(ctrl.filteredDate)
 		}
 	}
+}
 
 angular.module('timeslotModal')
 	.component('timeslotModal',{
