@@ -1,5 +1,6 @@
 
 <!-- / component4 \ -->
+
 <div class="component4">
 	<div class="container">
 
@@ -11,6 +12,19 @@
 			<a href=""><img style="width: 209px; height: 207px" ng-src="{{truck.images && truck.images.length >0 ? truck.images[0].url : 'img/truck_image.jpg'}}"></a>
 			
 			<h2><a href="">{{truck.truckType || 'No Name'}}</a></h2>
+		</li>
+		
+		<div class="loading" ng-hide="$ctrl.initLoader">
+           	Loading&#8230;
+        </div>
+
+		<!-- <div class="loader" ng-hide="!$ctrl.showLoader">
+			<h1>Loading...</h1>
+		</div> -->
+
+		<li style=" background-color: lightblue; width: 209px; height: 207px" class="full" ng-hide=		"!$ctrl.showLoader">
+			<div class="loader" ng-hide="!$ctrl.showLoader">
+			</div>
 		</li>
 	</ul>
 

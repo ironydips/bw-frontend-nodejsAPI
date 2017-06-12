@@ -50,6 +50,8 @@ function TruckDetailsController($state, $uibModal, resizeService, TruckService) 
 		ctrl.lastEvaluatedKey = '1';
 		ctrl.trucks = [];
 		ctrl.getTrucks(ctrl.lastKey, ctrl.limit);
+		ctrl.showLoader = false;
+		ctrl.initLoader = false;
 	};
 
 	//Add Truck Modal
@@ -66,6 +68,7 @@ function TruckDetailsController($state, $uibModal, resizeService, TruckService) 
 			getTruckList(lastKey, limit);
 		}
 		ctrl.lastEvaluatedKey = ctrl.lastKey;
+    	ctrl.showLoader = false;
 	}
 
 	ctrl.init();
@@ -75,6 +78,10 @@ function TruckDetailsController($state, $uibModal, resizeService, TruckService) 
 		.then(function(response){
 			lastKey == null? ctrl.trucks = response.data.result.message : ctrl.trucks = ctrl.trucks.concat(response.data.result.message) ;
 			ctrl.lastKey = response.data.result.lastKey && response.data.result.lastKey.driverID['S'] || null;
+			
+			ctrl.initLoader = true;
+			ctrl.showLoader = true;
+			
 			return ctrl.lastKey;
 		})
 		.catch(function(err){

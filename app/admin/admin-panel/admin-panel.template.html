@@ -19,10 +19,16 @@
                         <ul class="nav navbar-nav pull-right">
                             <!-- <li ng-if="$ctrl.userRights.SuperAdmin"  ng-class="{'active': $root.$state.includes('manageAdmin')}"><a href="" ui-sref="manageAdmin">Manage Rights</a></li> -->
                             <li ng-class="{'active': $root.$state.includes('admin')}"><a href="" ui-sref="adminLayout.drivers">Admin</a></li>
+
                             <li ng-class="{'active': $root.$state.includes('delivery')}"><a href="" ui-sref="deliveryLayout.trucks">Pickup/Delivery</a></li>
+
                             <li ng-class="{'active': $root.$state.includes('customers')}"><a href="" ui-sref="customers.user">Customers</a></li>
+
                             <li ng-class="{'active': $root.$state.includes('inventory')}"><a href="" ui-sref="inventory.inventoryIncoming">Inventory</a></li>
+
                             <li ng-class="{'active': $root.$state.includes('warehouse')}"><a href="" ui-sref="warehouse.truckItemIncomingWarehouse">Warehouse</a></li>
+
+                            <li ng-class="{'active': $root.$state.includes('test')}"><a href="" ui-sref="test.sampleData">Test</a></li>
                         </ul>
                     </div>
                     <!-- /.navbar-collapse -->
