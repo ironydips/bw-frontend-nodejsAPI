@@ -11,7 +11,7 @@
 		<li class="full" ng-repeat="truck in $ctrl.trucks" ng-click="$ctrl.showDetails(truck)">
 			<a href=""><img style="width: 209px; height: 207px" ng-src="{{truck.images && truck.images.length >0 ? truck.images[0].url : 'img/truck_image.jpg'}}"></a>
 			
-			<h2><a href="">{{truck.truckType || 'No Name'}}</a></h2>
+			<h2><a href="">{{truck.truckType || 'No Name' | myUpperCaseFilter}}</a></h2>
 		</li>
 		
 		<div class="loading" ng-hide="$ctrl.initLoader">

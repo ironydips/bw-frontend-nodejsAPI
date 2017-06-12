@@ -236,9 +236,8 @@ config(['$urlRouterProvider', '$stateProvider', '$httpProvider', 'ngToastProvide
                     }
                 }
             })
-            
-            .state('test', {
 
+            .state('test', {
                 url: '/test',
                 abstract: true,
                 views: {
@@ -249,17 +248,23 @@ config(['$urlRouterProvider', '$stateProvider', '$httpProvider', 'ngToastProvide
                         template: '<admin-panel></admin-panel>'
                     },
                     'adminSubPanel@test': {
-                        template: '<test-data></test-data>'
+                        template: '<test-sub-panel></test-sub-panel>'
                     }
                 }
             })
-            
-            .state('test.sampleData', {
-
-                url: '/sampleData',
+            .state('test.testDriverList', {
+                url: '/testDriverList',
                 views: {
                     'contentSection@test': {
-                        template: '<test-data></test-data>'
+                        template: '<test-driver-list></test-driver-list>'
+                    }
+                }
+            })
+            .state('test.testTruckList', {
+                url: '/testTruckList',
+                views: {
+                    'contentSection@test': {
+                        template: '<test-truck-list></test-truck-list>'
                     }
                 }
             })

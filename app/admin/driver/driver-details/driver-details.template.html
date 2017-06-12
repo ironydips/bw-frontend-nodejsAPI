@@ -12,7 +12,7 @@
 
 			<li class="full" ng-repeat="driver in $ctrl.drivers" ng-click="$ctrl.showDetails(driver)">
 				<a href=""><img style="width: 209px; height: 207px" src="img/list_img.jpg"></a>		
-				<h2><a href="">{{::driver.firstName || 'No Name'}}</a></h2>
+				<h2><a href="">{{::driver.firstName || 'No Name' | myUpperCaseFilter}}</a></h2>
 			</li>
 
 			<div class="loading" ng-hide="$ctrl.initLoader">
