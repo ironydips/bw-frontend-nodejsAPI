@@ -252,6 +252,7 @@ config(['$urlRouterProvider', '$stateProvider', '$httpProvider', 'ngToastProvide
                 }
             })*/
             .state('test', {
+                
                 url: '/test',
                 abstract: true,
                 views: {
@@ -268,6 +269,7 @@ config(['$urlRouterProvider', '$stateProvider', '$httpProvider', 'ngToastProvide
             })
             
             .state('test.sampleData', {
+
                 url: '/sampleData',
                 views: {
                     'contentSection@test': {
