@@ -236,23 +236,9 @@ config(['$urlRouterProvider', '$stateProvider', '$httpProvider', 'ngToastProvide
                     }
                 }
             })
-            /*.state('test', {
-                url: '/testData',
-                views: {
-                    '': {
-                        template: '<admin-layout></admin-layout>'
-                    },
-                    'adminPanel@test': {
-                        template: '<admin-panel></admin-panel>'
-                    },
-                    'adminSubPanel@test': {
-                        template: '<test-data></test-data>'
-                    }
-
-                }
-            })*/
+            
             .state('test', {
-                
+
                 url: '/test',
                 abstract: true,
                 views: {
