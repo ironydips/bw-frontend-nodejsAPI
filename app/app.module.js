@@ -48,5 +48,6 @@ angular.module('bathwaterApp', [
 	//Test Module
 	'testDriverListModule',
 	'testTruckListModule',
-	'testSubPanelModule'
+	'testSubPanelModule',
+	'testDriverListModalModule'
 ]);

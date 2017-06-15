@@ -10,6 +10,6 @@
 	.component('testTruckList',{
 		templateUrl: 'test/test-truck-list/test-truck-list.template.html',
 		controller: sampleData
-	});truck
+	});
 
 })(window.angular);

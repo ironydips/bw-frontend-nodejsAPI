@@ -1,87 +1,90 @@
-
 (function(angular){
 'use strict';
-
+//=========================================TimeSlot Controller Start============================================
 function TimeslotModalController($state, TimeslotService) {
 	var ctrl = this;
 
 	ctrl.init = function(){
-		ctrl.timeslot = {days:{}, timeslots:{}, availables:{}};
 		ctrl.selectedDays = {};
-		// ctrl.timeslots = [
-		// 	s0: ""
-		// ];
+		ctrl.selectedAC = {};
+		ctrl.weekDayArr = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+		ctrl.timeSlotArr = ['8am-10am', '10am-12pm', '12pm-2pm', '2pm-4pm', '4pm-6pm', '6pm-8pm'];
 	}
-	
-	ctrl.save = function(){
-		console.log(ctrl.selectedTS)
-		dateCalculation(ctrl.startDate, ctrl.endDate);
 
-		// TimeslotService.createTimeSlotsRange(ctrl.timeslot)
-		// 	.then(function(result){
-		// 		ctrl.modalInstance.close({action: "update"});
-		// 	})
-		// 	.catch(function(err){
-		// 		console.log('Error Timeslot detail');
-		// 		console.log(err);
-		// 	});
-			
-		};
+	ctrl.save = function() {
+	  createTimeSlot();	
+      /*TimeslotService.createTimeSlotsRange(ctrl.resultFinal)
+			.then(function(result){
+				ctrl.modalInstance.close({action: "update"});
+			})
+			.catch(function(err){
+				console.log('Error Timeslot detail');
+				console.log(err);
+			});	*/
+	}
 
 	ctrl.cancel = function(){
 		ctrl.modalInstance.close();
 	};
 
+	ctrl.endDateChecker = function(){
+		ctrl.minDate = ctrl.startDate;
+		ctrl.endDate = ctrl.startDate;
+	}
+
+	ctrl.changedTS = function(n){
+		if(ctrl.selectedTS[n]){ //If it is checked
+       		ctrl.selectedAC[n] = 0;
+   		}
+   		else{
+   			delete ctrl.selectedAC[n];
+   			delete ctrl.selectedTS[n];
+   		}
+	}
+	ctrl.changedSD = function(weekDay){
+		if(ctrl.selectedDays[weekDay]){
+   		}
+   		else{
+   			delete ctrl.selectedDays[weekDay];
+   		}
+	}
+
 	ctrl.init();
 
-	function dateCalculation(startDate, endDate){
+	// Creating Timeslot 
+	function createTimeSlot(){
+		ctrl.resultFinal=[];
+		ctrl.dateRange =[];
+		var weekDay = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+		
+		ctrl.startDatePicker = new Date(ctrl.startDate);
+		ctrl.endDatePicker = new Date(ctrl.endDate);
 
-		ctrl.filteredDate = [];
-		ctrl.DateArr = [];
-		if(startDate == endDate){
-			ctrl.timeslot.date = ctrl.startDate;
-		}else{
-			var sDate = new Date(startDate);
-			var eDate = new Date(endDate);
-					
-			while(sDate <= eDate){
-				var weekday =new Array(7);
-				weekday[1]="Monday";
-				weekday[2]="Tuesday";
-				weekday[3]="Wednesday";
-				weekday[4]="Thursday";
-				weekday[5]="Friday";
-				weekday[6]="Saturday";
-				weekday[7]="Sunday";
+		while (ctrl.startDatePicker <= ctrl.endDatePicker) {
+						var day = weekDay[ctrl.startDatePicker.getDay()];
+						var date =   ('0' + (ctrl.startDatePicker.getMonth()+1)).slice(-2) + '.'
+             					   + ('0' + ctrl.startDatePicker.getDate()).slice(-2) + '.'
+             					   + ctrl.startDatePicker.getFullYear();
+						ctrl.dateRange.push({date:date,day:day});
+                        ctrl.startDatePicker.setDate(ctrl.startDatePicker.getDate() + 1);
+        }
 
-				var date = sDate.getDate();
-				var month = sDate.getMonth();
-				var year = sDate.getFullYear();
-				var day = weekday[sDate.getDay()];
-				if(date < 10) date = "0" + date;
-				if(month < 10) month = "0" + month; 
-				var obj = {
-					selectedDate : month + "." + date + "." + year,
-					weekday : day
+        console.log(ctrl.dateRange);
+
+		for (var i = 0; i < ctrl.dateRange.length; i++) {
+         	angular.forEach(ctrl.selectedDays, function(value, key){
+				if(ctrl.dateRange[i].day == key){
+					angular.forEach(ctrl.selectedAC, function(value, key){
+						ctrl.resultFinal.push({availabilityCount:ctrl.selectedAC[key], date:ctrl.dateRange[i].date, timeslot:key});
+					});
 				}
-				ctrl.DateArr.push(obj);
-				sDate.setDate(sDate.getDate() + 1);
-
-			}
-			
-				angular.forEach(ctrl.selectedDays, function(value, key){
-					for (var i = 0; i < ctrl.DateArr.length; i++) {
-						if(ctrl.DateArr[i].weekday == key){
-							ctrl.filteredDate.push(ctrl.DateArr[i]);
-						}
-					}
-				});
-
-
-							console.log(ctrl.filteredDate)
+			});
 		}
+
+		console.log(ctrl.resultFinal);
 	}
 }
+//=========================================TimeSlot Controller End============================================
 
 angular.module('timeslotModal')
 	.component('timeslotModal',{

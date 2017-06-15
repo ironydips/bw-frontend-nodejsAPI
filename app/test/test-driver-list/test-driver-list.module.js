@@ -1,6 +1,9 @@
 (function(angular){
 	'use strict';
 	
-	angular.module("testDriverListModule",[]);
+angular.module("testDriverListModule",[
+	'ui.bootstrap',
+	'testDriverListModalModule'
+	]);
 
 })(window.angular);
