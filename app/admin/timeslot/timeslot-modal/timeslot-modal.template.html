@@ -1,14 +1,14 @@
 <div class="slotComponent">
    <div class="container">
       <div class="slotBg">
-         <h2>Create Timeslots</h2>
+         <h2> Create Timeslots </h2>
          <div class="inner-adjust">
             <form action="#" method="post">
                <div class="same">
-                  <h3>Start Date</h3>
-                  <datepicker date-format="MM.dd.yyyy" selector="form-control">
+                  <h3> Start Date </h3>
+                  <datepicker date-format="MM.dd.yyyy" selector="form-control" date-min-limit="{{$ctrl.currDate()}}">
                      <div class="input-group">
-                        <input ng-model="$ctrl.startDate" class="form-control" placeholder="Choose a date" ng-change="$ctrl.endDateChecker()">
+                        <input ng-model="$ctrl.startDate" class="form-control" placeholder="Choose Start Date" ng-change="$ctrl.endDateChecker()">
                         <span class="input-group-addon" style="cursor: pointer">
                         </span>
                         <!-- {{$ctrl.startDate}} -->
@@ -16,10 +16,10 @@
                   </datepicker>
                </div>
                <div class="same">
-                  <h3>End Date</h3>
+                  <h3> End Date </h3>
                   <datepicker date-format="MM.dd.yyyy" selector="form-control" date-min-limit="{{$ctrl.minDate}}">
                      <div class="input-group">
-                        <input ng-model="$ctrl.endDate" class="form-control" placeholder="Choose a date" ng-disabled="!$ctrl.startDate">
+                        <input ng-model="$ctrl.endDate" class="form-control" placeholder="Choose End Date" ng-disabled="!$ctrl.startDate">
                         <span class="input-group-addon" style="cursor: pointer">
                         </span>
                         <!-- {{$ctrl.endDate}} -->
@@ -28,43 +28,41 @@
                </div>
 
                <div class="same">
-               <h3>Days</h3>
+                  <h3> Days </h3>
                   <div ng-repeat="weekDay in $ctrl.weekDayArr">
                      <span class="month">
                         <input type="checkbox" class="check" name="chk" ng-model="$ctrl.selectedDays[weekDay]" ng-disabled="!$ctrl.endDate" ng-change="$ctrl.changedSD(weekDay)">
                         <label>{{weekDay}}</label>
                      </span>
                   </div>
-                  {{$ctrl.selectedDays}}
+                  <!-- {{$ctrl.selectedDays}} -->
                </div>
 
-               
                <div class="same">
-                  <h3>Timeslots</h3>
+                  <h3> Timeslots </h3>
                   <div ng-repeat="n in $ctrl.timeSlotArr">
                      <span class="month">
-                        <input type="checkbox" class="check" name="chk" ng-model="$ctrl.selectedTS[n]" ng-disabled="!$ctrl.endDate" ng-change="$ctrl.changedTS(n)">
+                        <input type="checkbox" class="check" name="chk" ng-model="$ctrl.selectedTS[n]" ng-disabled="!$ctrl.enableTS()" ng-change="$ctrl.changedTS(n)">
                         <label>{{n}}</label>
                      </span>
                   </div>
-                  {{$ctrl.selectedTS}}
+                  <!-- {{$ctrl.selectedTS}} -->
                </div>
 
                <div class="same last">
-                  <h3>Availability Count</h3>
+                  <h3> Availability Count </h3>
                   <div ng-repeat="n in $ctrl.timeSlotArr">
                      <span class="month">
                         <input type="number" class="form-control month" name="available" ng-model="$ctrl.selectedAC[n]" ng-disabled="!$ctrl.selectedTS[n]" placeholder=0 min=0 oninput="validity.valid ? this.save = value : value = this.save;">
                      </span>
                   </div>
-
-                  {{$ctrl.selectedAC}}
+                  <!-- {{$ctrl.selectedAC}} -->
                </div>
 
          </div>
          <div class="bottom-btn">			
          <input class="btn btn-primary cancel" style="margin-right: 15px;" ng-click ="$ctrl.cancel()" value="Cancel" type="button">
-         <input class="btn btn-primary save" style="margin-right: 15px;" ng-click ="$ctrl.save()" value="Save" type="button" ng-disabled="!$ctrl.endDate">
+         <input class="btn btn-primary save" style="margin-right: 15px;" ng-click ="$ctrl.save()" value="Save" type="button" ng-disabled="!$ctrl.enableSave()">
          </div>
          </form>		
       </div>
