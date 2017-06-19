@@ -9,7 +9,7 @@
                     <div class="image">
                         <img ng-src="{{$ctrl.imageUrl}}" alt="No Image Selected" style="width: 208px;height: 200px" />
                     </div>
-                    <input style="margin-left:250px" ng-disabled={{$ctrl.isDisabled}} type="file" class="form-controls" name="imageUrl" ng-model="$ctrl.selectedImage" base-sixty-four-input accept="image/*" required>
+                   <input style="margin-left:250px" ng-disabled={{$ctrl.isDisabled}} type="file" class="form-controls" name="imageUrl" ng-model="$ctrl.selectedImage" base-sixty-four-input accept="image/*" required><span class="red">*</span>
                 <!-- <h3>Image</h3>
                 <div class="image">
                     <a href="" class="drive">Add License Image</a>
@@ -58,18 +58,18 @@
                                     <span class="red"  ng-show="$ctrl.showMessage($ctrl.driverDetailForm.state)">This field is mandatory.</span></td>
                                 <td class="gap gap4">Zip<span class="red">*</span></td>
                                 <td class="gap2">
-                                    <input ng-disabled={{$ctrl.isDisabled}} type="text" class="form-controls" ng-model="$ctrl.driver.zipCode" name="zip" required>
+                                    <input ng-disabled={{$ctrl.isDisabled}} type="text" class="form-controls" ng-model="$ctrl.driver.zipCode" name="zip" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" required>
                                     <span class="red" ng-show="$ctrl.showMessage($ctrl.driverDetailForm.zip)">This field is mandatory.</span></td>
                             </tr>
                             <tr>
                                 <td class="gap">Phone Number<span class="red">*</span></td>
                                 <td class="gap2 gap3">
-                                    <input ng-pattern="/^(\d)+$/" ng-disabled={{$ctrl.isDisabled}} type="text" class="form-controls" name="phoneNumber" ng-model="$ctrl.driver.phoneNumber" required>
+                                    <input ng-pattern="/^(\d)+$/" ng-disabled={{$ctrl.isDisabled}} type="text" class="form-controls" name="phoneNumber" ng-model="$ctrl.driver.phoneNumber" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" required>
                                     <span class="red" ng-show="$ctrl.showMessage($ctrl.driverDetailForm.phoneNumber)">This field is mandatory.</span>
                                     <span class="red" ng-show="$ctrl.driverDetailForm.phoneNumber.$error.pattern">only Numbers Required</span> </td>
                                 <td class="gap gap4">Emergency Phone Number<span class="red">*</span></td>
                                 <td class="gap2">
-                                    <input ng-pattern="/^(\d)+$/" ng-disabled={{$ctrl.isDisabled}} type="text" class="form-controls" name="emergencyPhoneNumber" ng-model="$ctrl.driver.emergencyContactNumber" required>
+                                    <input ng-pattern="/^(\d)+$/" ng-disabled={{$ctrl.isDisabled}} type="text" class="form-controls" name="emergencyPhoneNumber" ng-model="$ctrl.driver.emergencyContactNumber" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" required>
                                     <span class="red" ng-show="$ctrl.showMessage($ctrl.driverDetailForm.emergencyPhoneNumber)">This field is mandatory.</span>
                                     <span class="red"  ng-show="$ctrl.driverDetailForm.emergencyPhoneNumber.$error.pattern">only Numbers Required</span></td>
                             </tr>

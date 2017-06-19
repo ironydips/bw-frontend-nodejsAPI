@@ -3,9 +3,10 @@
 function GoogleSignInController($state,$interval, GAuth, AdminManagerService, AdminRightsService){
 
 	var ctrl = this;
-    ctrl.isSuperAdmin = false;
+   // ctrl.isSuperAdmin = false;
     ctrl.profile ={};
     var rights = {
+        isSuperAdmin: false,
          Admin: false,
          Pickup: false,
          Customers: false,
@@ -77,7 +78,7 @@ function GoogleSignInController($state,$interval, GAuth, AdminManagerService, Ad
 
 
     ctrl.AssignSuperadmin = function(){
-                            ctrl.isSuperAdmin = true;
+                            rights.isSuperAdmin = true;
                             rights.Customers = true;
                             rights.Inventory = true;
                             rights.Warehouse = true;

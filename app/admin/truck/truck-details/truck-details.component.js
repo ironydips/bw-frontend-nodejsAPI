@@ -52,6 +52,7 @@ function TruckDetailsController($state, $uibModal, resizeService, TruckService) 
 		ctrl.getTrucks(ctrl.lastKey, ctrl.limit);
 		ctrl.showLoader = false;
 		ctrl.initLoader = false;
+		ctrl.noData = false;
 	};
 
 	//Add Truck Modal
@@ -78,10 +79,12 @@ function TruckDetailsController($state, $uibModal, resizeService, TruckService) 
 		.then(function(response){
 			lastKey == null? ctrl.trucks = response.data.result.message : ctrl.trucks = ctrl.trucks.concat(response.data.result.message) ;
 			ctrl.lastKey = response.data.result.lastKey && response.data.result.lastKey.driverID['S'] || null;
-			
-			ctrl.initLoader = true;
 			ctrl.showLoader = true;
-			
+			ctrl.initLoader = true;
+			if(ctrl.trucks.length == 0){
+				ctrl.noData = true;
+				ctrl.showLoader = false;
+			}
 			return ctrl.lastKey;
 		})
 		.catch(function(err){

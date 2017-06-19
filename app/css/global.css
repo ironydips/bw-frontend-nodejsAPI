@@ -92,6 +92,7 @@ header, section, footer, aside, nav, main, article, figure { display: block; }
 
 .app-modal-window-large .modal-dialog, .app-modal-window-semimid .modal-dialog {width:90%; max-width:1350px;}
 .app-modal-window-small .modal-dialog, .app-modal-window-semimid .modal-dialog {width:40%; max-width:1350px;}
+.btn-main { margin: auto;  width: 60%;  }
 .btn-main .btn-sm { padding: 8px 35px; margin-right: 15px; width:  100px; margin-top: 15px; margin-bottom: 15px; }
 .input-main .input-lg { padding: 8px 35px; margin-right: 15px; margin-top: 15px; margin-bottom: 15px; }
 

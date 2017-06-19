@@ -45,9 +45,4 @@ angular.module('bathwaterApp', [
 	'warehouseSubPanel',
 	'truckItemIncomingWarehouseDetails',
 	'truckItemOutgoingWarehouseDetails',
-	//Test Module
-	'testDriverListModule',
-	'testTruckListModule',
-	'testSubPanelModule',
-	'testDriverListModalModule'
 ]);

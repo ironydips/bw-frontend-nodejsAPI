@@ -2,7 +2,11 @@
 <div class="component1">
     <div class="menu-bg">
         <div class="container">
-            <a class="navbar-brand" href="/"><img src="img/logo.png" alt="Logo"></a>
+            <a class="navbar-brand" href="/"><img src="img/logo.png" alt="Logo"><br>
+            <div ng-if="$ctrl.isSuperAdmin">
+                Back
+            </div>
+            </a>
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
                     <!-- Brand and toggle get grouped for better mobile display -->
@@ -27,8 +31,6 @@
                             <li ng-class="{'active': $root.$state.includes('inventory')}"><a href="" ui-sref="inventory.inventoryIncoming">Inventory</a></li>
 
                             <li ng-class="{'active': $root.$state.includes('warehouse')}"><a href="" ui-sref="warehouse.truckItemIncomingWarehouse">Warehouse</a></li>
-
-                            <li ng-class="{'active': $root.$state.includes('test')}"><a href="" ui-sref="test.testDriverList">Test</a></li>
                         </ul>
                     </div>
                     <!-- /.navbar-collapse -->
