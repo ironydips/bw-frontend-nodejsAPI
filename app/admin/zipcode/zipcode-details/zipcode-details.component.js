@@ -1,31 +1,7 @@
 (function(angular) {
 'use strict';
 
-function openPopUp(details){
 
-	var popUpCtrl = this;
-	var modalInstance = popUpCtrl.$uibModal.open({
-			component: 'zipModal',
-			windowClass: 'app-modal-window-small',
-			keyboard: false,
-			resolve:{
-				details: function(){
-					return (details || {});
-				}
-			},
-			backdrop: 'static'
-		});
-
-		modalInstance.result.then(function(data){
-			//data passed when pop up closed.
-			if(data && data.action == "update") popUpCtrl.init();
-			
-		}),function(err){
-			console.log('Error in add-driver Modal');
-			console.log(err);
-		}
-		
-}
 
 function ZipCodeDetailsController($state, $uibModal, ZipcodeService) {
 	var ctrl = this;
@@ -45,7 +21,8 @@ function ZipCodeDetailsController($state, $uibModal, ZipcodeService) {
 
 	//Add ZipCode Modal
 	ctrl.addZipCode = function(){
-		angular.bind(ctrl, openPopUp, null)();
+		// angular.bind(ctrl, openPopUp, null)();
+		ctrl.openPopUp(null);
 	};
 
 	ctrl.deleteZipCode = function(zipcode){
@@ -64,6 +41,33 @@ function ZipCodeDetailsController($state, $uibModal, ZipcodeService) {
 	}
 
 	ctrl.init();
+
+//===========================POPUP IMPLEMENTATION START======================================
+
+	ctrl.openPopUp = function(details){
+
+		var modalInstance = ctrl.$uibModal.open({
+			component: 'zipModal',
+			windowClass: 'app-modal-window-small',
+			keyboard: false,
+			resolve:{
+				details: function(){
+					return (details || {});
+				}
+			},
+			backdrop: 'static'
+		});
+
+		modalInstance.result.then(function(data){
+			//data passed when pop up closed.
+			if(data && data.action == "update") ctrl.init();
+			
+		}),function(err){
+			console.log('Error in add-driver Modal');
+			console.log(err);
+		}
+	}
+//===========================POPUP IMPLEMENTATION END======================================
 }
 
 angular.module('zipcodeDetails')

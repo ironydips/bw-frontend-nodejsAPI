@@ -2,86 +2,6 @@
 
     'use strict';
 
-    function driverInfoPopup(details) {
-
-        var popUpCtrl = this;
-        var modalInstance = popUpCtrl.$uibModal.open({
-            component: 'driverInfoModal',
-            windowClass: 'app-modal-window-small',
-            resolve: {
-                details: function() {
-                    return (details || {});
-                }
-            },
-            keyboard: false,
-            backdrop: 'static'
-        });
-
-        modalInstance.result.then(function(data) {
-                //data passed when pop up closed.
-
-
-            }),
-            function(err) {
-                console.log('Error in driver-Info Modal');
-                console.log(err);
-            }
-
-    }
-
-    function viewItemPopup(details) {
-
-        var popUpCtrl = this;
-        var modalInstance = popUpCtrl.$uibModal.open({
-            component: 'viewOutgoingTruckItemModal',
-            windowClass: 'app-modal-window-large',
-            resolve: {
-                details: function() {
-                    return (details || {});
-                }
-            },
-            keyboard: false,
-            backdrop: 'static'
-        });
-
-        modalInstance.result.then(function(data) {
-                //data passed when pop up closed.
-
-
-            }),
-            function(err) {
-                console.log('Error while viewing outgoing item Modal');
-                console.log(err);
-            }
-
-    }
-
-    function outboundItemPopUp(details) {
-
-        var popUpCtrl = this;
-        var modalInstance = popUpCtrl.$uibModal.open({
-            component: 'outboundProductModal',
-            windowClass: 'app-modal-window-large',
-            resolve: {
-                details: function() {
-                    return (details || {});
-                }
-            },
-            keyboard: false,
-            backdrop: 'static'
-        });
-
-        modalInstance.result.then(function(data) {
-                //data passed when pop up closed.
-
-
-            }),
-            function(err) {
-                console.log('Error while viewing outgoing item Modal');
-                console.log(err);
-            }
-    }
-
     function TruckItemOutgoingController($state, $uibModal, warehouseMoveItemService) {
         var ctrl = this;
         ctrl.$uibModal = $uibModal;
@@ -108,11 +28,11 @@
         };
 
         ctrl.viewItems = function(item) {
-            angular.bind(ctrl, viewItemPopup, item)();
+            ctrl.viewItemPopup(item);
         };
 
         ctrl.viewDriverDetail = function(driverDetail) {
-            angular.bind(ctrl, driverInfoPopup, driverDetail)();
+            ctrl.driverInfoPopup(driverDetail);
         }
 
         ctrl.selectRow = function(rowIndex) {
@@ -146,11 +66,91 @@
                 });
         };
         ctrl.viewOutboundItems = function() {
-            angular.bind(ctrl, outboundItemPopUp, null)();
+            ctrl.outboundItemPopUp(null);
         };
 
         ctrl.init();
+
+//===========================POPUP IMPLEMENTATION START======================================
+
+    ctrl.driverInfoPopup = function(details) {
+
+        var modalInstance = ctrl.$uibModal.open({
+            component: 'driverInfoModal',
+            windowClass: 'app-modal-window-small',
+            resolve: {
+                details: function() {
+                    return (details || {});
+                }
+            },
+            keyboard: false,
+            backdrop: 'static'
+        });
+
+        modalInstance.result.then(function(data) {
+                //data passed when pop up closed.
+
+
+            }),
+            function(err) {
+                console.log('Error in driver-Info Modal');
+                console.log(err);
+            }
+
     }
+
+    ctrl.viewItemPopup = function(details) {
+
+        var modalInstance = ctrl.$uibModal.open({
+            component: 'viewOutgoingTruckItemModal',
+            windowClass: 'app-modal-window-large',
+            resolve: {
+                details: function() {
+                    return (details || {});
+                }
+            },
+            keyboard: false,
+            backdrop: 'static'
+        });
+
+        modalInstance.result.then(function(data) {
+                //data passed when pop up closed.
+
+
+            }),
+            function(err) {
+                console.log('Error while viewing outgoing item Modal');
+                console.log(err);
+            }
+
+    }
+
+    ctrl.outboundItemPopUp = function(details) {
+
+        var modalInstance = ctrl.$uibModal.open({
+            component: 'outboundProductModal',
+            windowClass: 'app-modal-window-large',
+            resolve: {
+                details: function() {
+                    return (details || {});
+                }
+            },
+            keyboard: false,
+            backdrop: 'static'
+        });
+
+        modalInstance.result.then(function(data) {
+                //data passed when pop up closed.
+
+
+            }),
+            function(err) {
+                console.log('Error while viewing outgoing item Modal');
+                console.log(err);
+            }
+    }
+//===========================POPUP IMPLEMENTATION END======================================
+}
 
     angular.module('truckItemOutgoingWarehouseDetails')
         .component('truckItemOutgoingWarehouseDetails', {

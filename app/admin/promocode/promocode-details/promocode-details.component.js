@@ -2,32 +2,6 @@
 
 'use strict';
 
-function openPopUpPromo(detailsofPromo){
-
-		var popUpCtrl = this;
-		var modalInstance = popUpCtrl.$uibModal.open({
-			component: 'promoModal',
-			windowClass: 'app-modal-window-small',
-			keyboard: false,
-			resolve:{
-				detailsofPromo: function(){
-					return (detailsofPromo || {});
-				}
-			},
-			backdrop: 'static'
-		});
-
-		modalInstance.result.then(function(data){
-			//data passed when pop up closed.
-			if(data && data.action == 'update') popUpCtrl.init();
-			
-		}),function(err){
-			console.log('Error in add-promo Modal');
-			console.log(err);
-		}
-		
-}
-
 function PromoCodeDetailsController($state,$uibModal, PromocodeService){
 	var ctrl = this;
 	ctrl.$uibModal = $uibModal;
@@ -47,7 +21,7 @@ function PromoCodeDetailsController($state,$uibModal, PromocodeService){
 
 	//Add Promo Modal
 	ctrl.addPromoCode = function(){
-		angular.bind(ctrl, openPopUpPromo, null)();
+		ctrl.openPopUpPromo(null);
 	};
 	ctrl.deletePromoCode = function(promocode){
 		//Show alert and then delete if Yes.
@@ -64,6 +38,32 @@ function PromoCodeDetailsController($state,$uibModal, PromocodeService){
 
 	ctrl.init();
 
+//===========================POPUP IMPLEMENTATION START======================================
+
+	ctrl.openPopUpPromo = function(detailsofPromo){
+
+		var modalInstance = ctrl.$uibModal.open({
+			component: 'promoModal',
+			windowClass: 'app-modal-window-small',
+			keyboard: false,
+			resolve:{
+				detailsofPromo: function(){
+					return (detailsofPromo || {});
+				}
+			},
+			backdrop: 'static'
+		});
+
+		modalInstance.result.then(function(data){
+			//data passed when pop up closed.
+			if(data && data.action == 'update') ctrl.init();
+			
+		}),function(err){
+			console.log('Error in add-promo Modal');
+			console.log(err);
+		}
+	}
+//===========================POPUP IMPLEMENTATION END======================================
 }
 
 
