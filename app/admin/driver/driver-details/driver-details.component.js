@@ -46,6 +46,9 @@ function DriverDetailsController($state, $uibModal, DriverService) {
 				ctrl.noData = true;
 				ctrl.showLoader = false;
 			}
+			if(ctrl.lastKey == null){
+				ctrl.showLoader = false;
+			}
 			return ctrl.lastKey;
 		})
 		.catch(function(err){

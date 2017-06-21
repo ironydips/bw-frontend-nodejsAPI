@@ -48,6 +48,9 @@ function TruckDetailsController($state, $uibModal, resizeService, TruckService) 
 				ctrl.noData = true;
 				ctrl.showLoader = false;
 			}
+			if(ctrl.lastKey == null){
+				ctrl.showLoader = false;
+			}
 			return ctrl.lastKey;
 		})
 		.catch(function(err){
