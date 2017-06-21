@@ -5,11 +5,8 @@
 
 		var getPromos = function(){
 			return $http({
-						    url: '/rest/getPromos',
+						    url: '/api/admin/getPromoCodes',
 						    method: "GET",
-						    headers:{
-						    	"Authorization": 'Basic YWRtaW46YWRtaW4='
-						    }
 						});
 					};
 
