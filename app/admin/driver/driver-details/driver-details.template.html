@@ -7,31 +7,38 @@
 
 		<div class="component-bg">
 				
-		<ul infinite-scroll="$ctrl.getDrivers($ctrl.lastKey, $ctrl.limit)">
-			<li><a href="" ng-click="$ctrl.addDriver()" class="drive">Add Drivers</a></li>
+			<ul infinite-scroll="$ctrl.getDrivers($ctrl.lastKey, $ctrl.limit)">
+				<li><a href="" ng-click="$ctrl.addDriver()" class="drive">Add Drivers</a></li>
 
-			<li class="full" ng-repeat="driver in $ctrl.drivers" ng-click="$ctrl.showDetails(driver)">
-				<a href=""><img style="width: 209px; height: 207px" src="img/list_img.jpg"></a>		
-				<h2><a href="">{{::driver.firstName || 'No Name'}}</a></h2>
-			</li>
+				<li class="full" ng-repeat="driver in $ctrl.drivers" ng-click="$ctrl.showDetails(driver)">
+					<a href=""><img style="width: 209px; height: 207px" src="img/list_img.jpg"></a>		
+					<h2><a href="">{{::driver.firstName || 'No Name' | myUpperCaseFilter}}</a></h2>
+				</li>
 
-			<div class="loading" ng-hide="$ctrl.initLoader">
-            	Loading&#8230;
-        	</div>
+				<div class="loading" ng-hide="$ctrl.initLoader">
+            		Loading&#8230;
+        		</div>
 
-			<!-- <div class="loader" ng-hide="!$ctrl.showLoader">
-			</div> -->
+        		<!-- <div class="loader" ng-hide="!$ctrl.showLoader">	
+        		</div> -->
 
-			<li style=" background-color: lightblue; width: 209px; height: 207px" class="full" ng-hide=		"!$ctrl.showLoader">
-				<div class="loader" ng-hide="!$ctrl.showLoader">
-				</div>
-			</li>
+				<li style=" background-color: lightblue; width: 209px; height: 207px" class="full" ng-hide="!$ctrl.showLoader">
+					<div class="loader" ng-hide="!$ctrl.showLoader">
+					</div>
+				</li>
 
-		</ul>
+				<li style=" background-color: lightblue; width: 209px; height: 207px" class="full" ng-hide="!$ctrl.noData">
+					<div ng-hide="!$ctrl.noData">
+						<h2>No Data</h2>
+					</div>
+				</li>
+			</ul>
 
-		<div class="clear"></div>
+			<div class="clear"></div>
 			      
 		</div>	
+
 	</div>
+	
 </div>
 <!-- \ component4 end / -->

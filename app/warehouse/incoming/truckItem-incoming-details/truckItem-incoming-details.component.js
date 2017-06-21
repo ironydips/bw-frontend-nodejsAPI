@@ -1,114 +1,5 @@
 (function(angular) {
-
     'use strict';
-
-    function driverInfoPopup(details) {
-
-        var popUpCtrl = this;
-        var modalInstance = popUpCtrl.$uibModal.open({
-            component: 'driverInfoModal',
-            windowClass: 'app-modal-window-small',
-            resolve: {
-                details: function() {
-                    return (details || {});
-                }
-            },
-            keyboard: false,
-            backdrop: 'static'
-        });
-
-        modalInstance.result.then(function(data) {
-                //data passed when pop up closed.
-
-
-            }),
-            function(err) {
-                console.log('Error in driver-Info Modal');
-                console.log(err);
-            }
-
-    }
-
-    function viewItemPopup(details) {
-
-        var popUpCtrl = this;
-        var modalInstance = popUpCtrl.$uibModal.open({
-            component: 'viewTruckItemModal',
-            windowClass: 'app-modal-window-large',
-            resolve: {
-                details: function() {
-                    return (details || {});
-                }
-            },
-            keyboard: false,
-            backdrop: 'static'
-        });
-
-        modalInstance.result.then(function(data) {
-                //data passed when pop up closed.
-
-                if (data && data.action == 'update') popUpCtrl.selectedDate(data.date);
-            }),
-            function(err) {
-                console.log('Error while viewing incoming item modal');
-                console.log(err);
-            }
-
-    }
-
-    function receiveIncomingProductPopup(details) {
-
-        var popUpCtrl = this;
-        var modalInstance = popUpCtrl.$uibModal.open({
-            component: 'receiveincomingProductModal',
-            windowClass: 'app-modal-window-large',
-            resolve: {
-                details: function() {
-                    return (details || {});
-                }
-            },
-            keyboard: false,
-            backdrop: 'static'
-        });
-
-        modalInstance.result.then(function(data) {
-                //data passed when pop up closed.
-
-            }),
-            function(err) {
-                console.log('Error while receiving incoming item modal');
-                console.log(err);
-            }
-
-    }
-
-    function storedIncomingProductPopup(details) {
-
-        var popUpCtrl = this;
-        var modalInstance = popUpCtrl.$uibModal.open({
-            component: 'storedProductModal',
-            windowClass: 'app-modal-window-large',
-            resolve: {
-                details: function() {
-                    return (details || {});
-                }
-            },
-            keyboard: false,
-            backdrop: 'static'
-        });
-
-        modalInstance.result.then(function(data) {
-                //data passed when pop up closed.
-
-
-            }),
-            function(err) {
-                console.log('Error while storing incoming item modal');
-                console.log(err);
-            }
-
-    }
-
 
     function TruckItemIncomingController($state, $uibModal, warehouseMoveItemService) {
         var ctrl = this;
@@ -132,19 +23,19 @@
         };
 
         ctrl.viewReceivedItems = function() {
-            angular.bind(ctrl, receiveIncomingProductPopup, null)();
+            ctrl.receiveIncomingProductPopup(null);
         };
 
         ctrl.viewStoredItems = function() {
-            angular.bind(ctrl, storedIncomingProductPopup, null)();
+            ctrl.storedIncomingProductPopup(null);
         };
 
         ctrl.viewItems = function(item) {
-            angular.bind(ctrl, viewItemPopup, item)();
+            ctrl.viewItemPopup(item);
         };
 
         ctrl.viewDriverDetail = function(driverInfo) {
-            angular.bind(ctrl, driverInfoPopup, driverInfo)();
+            ctrl.driverInfoPopup(driverInfo);
         }
 
         ctrl.selectRow = function(rowIndex) {
@@ -179,7 +70,111 @@
         }
 
         ctrl.init();
+
+//===========================POPUP IMPLEMENTATION START======================================
+
+    ctrl.driverInfoPopup = function(details) {
+
+        var modalInstance = ctrl.$uibModal.open({
+            component: 'driverInfoModal',
+            windowClass: 'app-modal-window-small',
+            resolve: {
+                details: function() {
+                    return (details || {});
+                }
+            },
+            keyboard: false,
+            backdrop: 'static'
+        });
+
+        modalInstance.result.then(function(data) {
+                //data passed when pop up closed.
+
+            }),
+            function(err) {
+                console.log('Error in driver-Info Modal');
+                console.log(err);
+            }
+
     }
+
+    ctrl.viewItemPopup = function(details) {
+
+        var modalInstance = ctrl.$uibModal.open({
+            component: 'viewTruckItemModal',
+            windowClass: 'app-modal-window-large',
+            resolve: {
+                details: function() {
+                    return (details || {});
+                }
+            },
+            keyboard: false,
+            backdrop: 'static'
+        });
+
+        modalInstance.result.then(function(data) {
+                //data passed when pop up closed.
+
+                if (data && data.action == 'update') ctrl.selectedDate(data.date);
+            }),
+            function(err) {
+                console.log('Error while viewing incoming item modal');
+                console.log(err);
+            }
+
+    }
+
+    ctrl.receiveIncomingProductPopup = function(details) {
+
+        var modalInstance = ctrl.$uibModal.open({
+            component: 'receiveincomingProductModal',
+            windowClass: 'app-modal-window-large',
+            resolve: {
+                details: function() {
+                    return (details || {});
+                }
+            },
+            keyboard: false,
+            backdrop: 'static'
+        });
+
+        modalInstance.result.then(function(data) {
+                //data passed when pop up closed.
+
+            }),
+            function(err) {
+                console.log('Error while receiving incoming item modal');
+                console.log(err);
+            }
+
+    }
+
+    ctrl.storedIncomingProductPopup = function(details) {
+
+        var modalInstance = ctrl.$uibModal.open({
+            component: 'storedProductModal',
+            windowClass: 'app-modal-window-large',
+            resolve: {
+                details: function() {
+                    return (details || {});
+                }
+            },
+            keyboard: false,
+            backdrop: 'static'
+        });
+
+        modalInstance.result.then(function(data) {
+                //data passed when pop up closed.
+
+            }),
+            function(err) {
+                console.log('Error while storing incoming item modal');
+                console.log(err);
+            }
+
+    }
+//===========================POPUP IMPLEMENTATION END======================================
+}
 
     angular.module('truckItemIncomingWarehouseDetails')
         .component('truckItemIncomingWarehouseDetails', {

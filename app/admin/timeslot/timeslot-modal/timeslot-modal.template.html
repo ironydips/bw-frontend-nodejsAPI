@@ -1,112 +1,68 @@
 <div class="slotComponent">
    <div class="container">
       <div class="slotBg">
-         <h2>Create Timeslots</h2>
+         <h2> Create Timeslots </h2>
          <div class="inner-adjust">
             <form action="#" method="post">
                <div class="same">
-                  <h3>Start Date</h3>
-                  <datepicker date-format="MM.dd.yyyy" selector="form-control">
+                  <h3> Start Date </h3>
+                  <datepicker date-format="MM.dd.yyyy" selector="form-control" date-min-limit="{{$ctrl.currDate()}}">
                      <div class="input-group">
-                        <input ng-model="$ctrl.startDate" class="form-control" placeholder="Choose a date"/>
+                        <input ng-model="$ctrl.startDate" class="form-control" placeholder="Choose Start Date" ng-change="$ctrl.endDateChecker()">
                         <span class="input-group-addon" style="cursor: pointer">
                         </span>
+                        <!-- {{$ctrl.startDate}} -->
                      </div>
                   </datepicker>
                </div>
                <div class="same">
-                  <h3>End Date</h3>
-                  <datepicker date-format="MM.dd.yyyy" selector="form-control">
+                  <h3> End Date </h3>
+                  <datepicker date-format="MM.dd.yyyy" selector="form-control" date-min-limit="{{$ctrl.minDate}}">
                      <div class="input-group">
-                        <input ng-model="$ctrl.endDate" class="form-control" placeholder="Choose a date"/>
+                        <input ng-model="$ctrl.endDate" class="form-control" placeholder="Choose End Date" ng-disabled="!$ctrl.startDate">
                         <span class="input-group-addon" style="cursor: pointer">
                         </span>
+                        <!-- {{$ctrl.endDate}} -->
                      </div>
                   </datepicker>
                </div>
+
                <div class="same">
-                  <h3>Days</h3>
-                  <span class="month">
-                  <input type="checkbox" class="check" name="chk" ng-model="$ctrl.selectedDays.Monday">
-                  <label>Monday</label>
-                  </span>
-                  <span class="month">
-                  <input type="checkbox" class="check" name="chk" ng-model="$ctrl.selectedDays.Tuesday">
-                  <label>Tuesday</label>
-                  </span>
-                  <span class="month">
-                  <input type="checkbox" class="check" name="chk" ng-model="$ctrl.selectedDays.Wednesday">
-                  <label>Wednesday</label>
-                  </span>
-                  <span class="month">
-                  <input type="checkbox" class="check" name="chk" ng-model="$ctrl.selectedDays.Thursday">
-                  <label>Thursday</label>
-                  </span>
-                  <span class="month">
-                  <input type="checkbox" class="check" name="chk" ng-model="$ctrl.selectedDays.Friday">
-                  <label>Friday</label>
-                  </span>
-                  <span class="month">
-                  <input type="checkbox" class="check" name="chk" ng-model="$ctrl.selectedDays.Saturday">
-                  <label>Saturday</label>
-                  </span>
-                  <span class="month">
-                  <input type="checkbox" class="check" name="chk" ng-model="$ctrl.selectedDays.Sun">
-                  <label>Sunday</label>
-                  </span>
+                  <h3> Days </h3>
+                  <div ng-repeat="weekDay in $ctrl.weekDayArr">
+                     <span class="month">
+                        <input type="checkbox" class="check" name="chk" ng-model="$ctrl.selectedDays[weekDay]" ng-disabled="!$ctrl.endDate" ng-change="$ctrl.changedSD(weekDay)">
+                        <label>{{weekDay}}</label>
+                     </span>
+                  </div>
+                  <!-- {{$ctrl.selectedDays}} -->
                </div>
+
                <div class="same">
-                  <h3>Timeslots</h3>
-                  <span class="month">
-                  <input type="checkbox" class="check" name="chk" ng-model="$ctrl.selectedTS.timing0">
-                  <label>8am - 10am</label>
-                  </span>
-                  <span class="month">
-                  <input type="checkbox" class="check" name="chk" ng-model="$ctrl.timeslot.timeslots.s1">
-                  <label>10am - 12pm</label>
-                  </span>
-                  <span class="month">
-                  <input type="checkbox" class="check" name="chk" ng-model="$ctrl.timeslot.timeslots.s2">
-                  <label>12pm - 2pm</label>
-                  </span>
-                  <span class="month">
-                  <input type="checkbox" class="check" name="chk" ng-model="$ctrl.timeslot.timeslots.s3">
-                  <label>2pm - 4pm</label>
-                  </span>
-                  <span class="month">
-                  <input type="checkbox" class="check" name="chk" ng-model="$ctrl.timeslot.timeslots.s4">
-                  <label>4pm - 6pm</label>
-                  </span>
-                  <span class="month">
-                  <input type="checkbox" class="check" name="chk" ng-model="$ctrl.timeslot.timeslots.s5">
-                  <label>6pm - 8pm</label>
-                  </span>
+                  <h3> Timeslots </h3>
+                  <div ng-repeat="n in $ctrl.timeSlotArr">
+                     <span class="month">
+                        <input type="checkbox" class="check" name="chk" ng-model="$ctrl.selectedTS[n]" ng-disabled="!$ctrl.enableTS()" ng-change="$ctrl.changedTS(n)">
+                        <label>{{n}}</label>
+                     </span>
+                  </div>
+                  <!-- {{$ctrl.selectedTS}} -->
                </div>
+
                <div class="same last">
-                  <h3>Availability Count</h3>
-                  <span >
-                  <input class="form-control month" type="number" name="available" placeholder="enter # of available timeslots" ng-model="$ctrl.timeslot.availables.s1">
-                  </span>
-                  <span class="month">
-                  <input class="form-control month" type="number" name="available" placeholder="enter # of available timeslots" ng-model="$ctrl.timeslot.availables.s2">
-                  </span>
-                  <span class="month">
-                  <input class="form-control month" type="number" name="available" placeholder="enter # of available timeslots" ng-model="$ctrl.timeslot.availables.s3">
-                  </span>
-                  <span class="month">
-                  <input class="form-control month" type="number" name="available" placeholder="enter # of available timeslots" ng-model="$ctrl.timeslot.availables.s4">
-                  </span>
-                  <span class="month">
-                  <input class="form-control month" type="number" name="available" placeholder="enter # of available timeslots" ng-model="$ctrl.timeslot.availables.s5">
-                  </span>
-                  <span class="month">
-                  <input class="form-control month" type="number" name="available" placeholder="enter # of available timeslots" ng-model="$ctrl.timeslot.availables.s6">
-                  </span>
+                  <h3> Availability Count </h3>
+                  <div ng-repeat="n in $ctrl.timeSlotArr">
+                     <span class="month">
+                        <input type="number" class="form-control month" name="available" ng-model="$ctrl.selectedAC[n]" ng-disabled="!$ctrl.selectedTS[n]" placeholder=0 min=0 onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;">
+                     </span>
+                  </div>
+                  <!-- {{$ctrl.selectedAC}} -->
                </div>
+
          </div>
          <div class="bottom-btn">			
          <input class="btn btn-primary cancel" style="margin-right: 15px;" ng-click ="$ctrl.cancel()" value="Cancel" type="button">
-         <input class="btn btn-primary save" style="margin-right: 15px;" ng-click ="$ctrl.save()" value="Save" type="button">
+         <input class="btn btn-primary save" style="margin-right: 15px;" ng-click ="$ctrl.save()" value="Save" type="button" ng-disabled="!$ctrl.enableSave()">
          </div>
          </form>		
       </div>
