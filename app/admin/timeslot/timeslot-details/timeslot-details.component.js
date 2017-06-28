@@ -1,8 +1,7 @@
 (function(angular) {
 
 'use strict';
-
-
+//===========================TimeslotController IMPLEMENTATION START======================================
 
 function TimeslotController($state, $uibModal, TimeslotService) {
 	var ctrl = this;
@@ -75,6 +74,7 @@ function TimeslotController($state, $uibModal, TimeslotService) {
 	}
 	//===========================POPUP IMPLEMENTATION END======================================
 }
+//===========================TimeslotController IMPLEMENTATION END======================================
 
 angular.module('timeslotDetails')
 	.component('timeslotDetails',{

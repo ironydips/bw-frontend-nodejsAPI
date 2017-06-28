@@ -1,6 +1,6 @@
 (function(angular) {
 'use strict';
-
+//===========================DriverDetailsController IMPLEMENTATION START======================================
 function DriverDetailsController($state, $uibModal, DriverService) {
 	var ctrl = this;
 	ctrl.init = function(){
@@ -46,6 +46,9 @@ function DriverDetailsController($state, $uibModal, DriverService) {
 				ctrl.noData = true;
 				ctrl.showLoader = false;
 			}
+			if(ctrl.lastKey == null){
+				ctrl.showLoader = false;
+			}
 			return ctrl.lastKey;
 		})
 		.catch(function(err){
@@ -81,7 +84,7 @@ ctrl.openPopUp = function(details){
 	}
 //===========================POPUP IMPLEMENTATION END======================================
 }
-
+//===========================DriverDetailsController IMPLEMENTATION END======================================
 angular.module('driverDetails')
 	.component('driverDetails',{
 		templateUrl: 'admin/driver/driver-details/driver-details.template.html',

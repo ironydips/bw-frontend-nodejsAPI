@@ -1,0 +1,12 @@
+describe('true',function(){
+var $componentController, controller;
+beforeEach(module('manageAdmin'));
+	beforeEach(inject(function($injector){
+		$componentController = $injector.get('$componentController');
+	controller = $componentController('manageAdmin', { $scope: {}});
+
+it('initial count 0', function(){
+	expect(controller.count).isEqual(0);
+});
+}));
+});

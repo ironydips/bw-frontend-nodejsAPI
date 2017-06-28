@@ -1,7 +1,7 @@
 (function(angular) {
 
 'use strict';
-
+//===========================PromoCodeDetailsController IMPLEMENTATION START======================================
 function PromoCodeDetailsController($state,$uibModal, PromocodeService){
 	var ctrl = this;
 	ctrl.$uibModal = $uibModal;
@@ -9,14 +9,14 @@ function PromoCodeDetailsController($state,$uibModal, PromocodeService){
 
 	ctrl.init = function(){
 		//get promocode details.
-		PromocodeService.getPromos()
+		/*PromocodeService.getPromos()
 		.then(function(promoCodes){
 			ctrl.promocode = promoCodes.data;
 		})
 		.catch(function(err){
 			console.log('Error getting promocode details:');
 			console.log(err);
-		})
+		})*/
 	};
 
 	//Add Promo Modal
@@ -65,6 +65,7 @@ function PromoCodeDetailsController($state,$uibModal, PromocodeService){
 	}
 //===========================POPUP IMPLEMENTATION END======================================
 }
+//===========================PromoCodeDetailsController IMPLEMENTATION START======================================
 
 
 

@@ -15,8 +15,16 @@
 				            // headers: {
 		              //           "Content-Type": "application/x-www-form-urlencoded"
 		              //       }
-						});
-					};
+					});
+		};
+
+		var unAssignDriverToTruck = function(historyID){
+			return $http({
+				url: '/api/pickup/unassignDriverToTruck',
+				method: "POST",
+				data: {"historyID": historyID}
+			});
+		};
 
 		var getDriverlist = function(){
 			return $http({
@@ -42,6 +50,7 @@
 		//EXPORTED Object
 		return {
 			assignDriverToTruck,
+			unAssignDriverToTruck,
 			getAllDriverTruckHistory,
 			getDriverlist,
 			getTrucklist	

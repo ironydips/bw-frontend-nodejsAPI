@@ -1,5 +1,6 @@
 (function(angular) {
 'use strict';
+//===========================TruckDetailsController IMPLEMENTATION START======================================
 
 function TruckDetailsController($state, $uibModal, resizeService, TruckService) {
 	var ctrl = this;
@@ -48,6 +49,9 @@ function TruckDetailsController($state, $uibModal, resizeService, TruckService) 
 				ctrl.noData = true;
 				ctrl.showLoader = false;
 			}
+			if(ctrl.lastKey == null){
+				ctrl.showLoader = false;
+			}
 			return ctrl.lastKey;
 		})
 		.catch(function(err){
@@ -83,6 +87,8 @@ ctrl.openPopUp = function(details){
 	}
 //===========================POPUP IMPLEMENTATION END======================================
 }
+//===========================TruckDetailsController IMPLEMENTATION END======================================
+
 angular.module('truckDetails')
 	.component('truckDetails',{
 		templateUrl: 'admin/truck/truck-details/truck-details.template.html',

@@ -1,151 +1,6 @@
 (function(angular) {
     'use strict';
-
-
-    function openPopUpCompleted(details) {
-
-        var popUpCtrl = this;
-        var modalInstance = popUpCtrl.$uibModal.open({
-            component: 'userRequestCompleteModal',
-            windowClass: 'app-modal-window-large',
-            keyboard: false,
-            resolve: {
-                details: function() {
-                    return (details || {});
-                }
-            },
-            backdrop: 'static'
-        });
-
-        modalInstance.result.then(function(data) {
-                //data passed when pop up closed.
-                //if(data == "update") this.$state.reload();
-
-            }),
-            function(err) {
-                console.log('Error in user-request-completed Modal');
-                console.log(err);
-            }
-    };
-
-    function openPopUpnotstarted(details, drivers) {
-
-        var popUpCtrl = this;
-
-        var modalInstance = popUpCtrl.$uibModal.open({
-            component: 'userRequestNotStartedModal',
-            windowClass: 'app-modal-window-large',
-            keyboard: false,
-            resolve: {
-                details: function() {
-                    return (details || {});
-
-                },
-                drivers: function() {
-                    return (drivers || {})
-                }
-            },
-            backdrop: 'static'
-        });
-
-        modalInstance.result.then(function(data) {
-                //popUpCtrl.loader = false;
-                //data passed when pop up closed.
-                //if(data == "update") this.$state.reload();
-
-            }),
-            function(err) {
-                console.log('Error in user-request-notStarted Modal');
-                console.log(err);
-            }
-    };
-
-    function openPopUpinProgress(details) {
-
-        var popUpCtrl = this;
-        var modalInstance = popUpCtrl.$uibModal.open({
-            component: 'userRequestInProgressModal',
-            windowClass: 'app-modal-window-large',
-            keyboard: false,
-            resolve: {
-                details: function() {
-                    return (details || {});
-                }
-            },
-            backdrop: 'static'
-        });
-
-        modalInstance.result.then(function(data) {
-                //data passed when pop up closed.
-                //if(data == "update") this.$state.reload();
-
-            }),
-            function(err) {
-                console.log('Error in user-request-inProgress Modal');
-                console.log(err);
-            }
-    };
-
-    function assignDriverPopUp(details, userDetail) {
-
-        var popUpCtrl = this;
-        var modalInstance = popUpCtrl.$uibModal.open({
-            component: 'assignDriverModal',
-            windowClass: 'app-modal-window-small',
-            resolve: {
-                details: function() {
-                    return (details || {});
-                },
-                userDetail: function() {
-                    return (userDetail || {});
-                }
-            },
-            keyboard: false,
-            backdrop: 'static'
-        });
-
-        modalInstance.result.then(function(data) {
-                //data passed when pop up closed.
-                if (data && data.action == 'update') {
-
-                    userDetail.driver = userDetail.driver || {};
-                    userDetail.driver.firstName = data.userRequestDetail.firstName;
-                    userDetail.driver.lastName = data.userRequestDetail.lastName;
-                }
-
-
-            }),
-            function(err) {
-                console.log('Error in assign Driver Modal');
-                console.log(err);
-            }
-
-    }
-      function userDetailPopUp(details) {
-
-        var popUpCtrl = this;
-        var modalInstance = popUpCtrl.$uibModal.open({
-            component: 'viewUserDetailModal',
-            windowClass: 'app-modal-window-large',
-            keyboard: false,
-            resolve: {
-                details: function() {
-                    return (details || {});
-                }
-            },
-            backdrop: 'static'
-        });
-
-        modalInstance.result.then(function(data) {
-                //data passed when pop up closed.
-                //if (data && data.action == "update");
-
-            }),
-            function(err) {
-                console.log('Error in user detail Modal of Incoming Warehouse');
-                console.log(err);
-            }
-    }
+//===========================UserRequestController IMPLEMENTATION START======================================
 
     function UserRequestController($state, $uibModal, UserRequestService, DriverService, $q) {
         var ctrl = this;
@@ -227,7 +82,150 @@
         };
 
         ctrl.init();
+//===========================POPUP IMPLEMENTATION START======================================
+
+        ctrl.openPopUpCompleted = function(details) {
+
+        var modalInstance = ctrl.$uibModal.open({
+            component: 'userRequestCompleteModal',
+            windowClass: 'app-modal-window-large',
+            keyboard: false,
+            resolve: {
+                details: function() {
+                    return (details || {});
+                }
+            },
+            backdrop: 'static'
+        });
+
+        modalInstance.result.then(function(data) {
+                //data passed when pop up closed.
+                //if(data == "update") this.$state.reload();
+
+            }),
+            function(err) {
+                console.log('Error in user-request-completed Modal');
+                console.log(err);
+            }
+    };
+
+    ctrl.openPopUpnotstarted = function(details, drivers) {
+
+        var modalInstance = ctrl.$uibModal.open({
+            component: 'userRequestNotStartedModal',
+            windowClass: 'app-modal-window-large',
+            keyboard: false,
+            resolve: {
+                details: function() {
+                    return (details || {});
+
+                },
+                drivers: function() {
+                    return (drivers || {})
+                }
+            },
+            backdrop: 'static'
+        });
+
+        modalInstance.result.then(function(data) {
+                //ctrl.loader = false;
+                //data passed when pop up closed.
+                //if(data == "update") this.$state.reload();
+
+            }),
+            function(err) {
+                console.log('Error in user-request-notStarted Modal');
+                console.log(err);
+            }
+    };
+
+    ctrl.openPopUpinProgress = function(details) {
+
+        var modalInstance = ctrl.$uibModal.open({
+            component: 'userRequestInProgressModal',
+            windowClass: 'app-modal-window-large',
+            keyboard: false,
+            resolve: {
+                details: function() {
+                    return (details || {});
+                }
+            },
+            backdrop: 'static'
+        });
+
+        modalInstance.result.then(function(data) {
+                //data passed when pop up closed.
+                //if(data == "update") this.$state.reload();
+
+            }),
+            function(err) {
+                console.log('Error in user-request-inProgress Modal');
+                console.log(err);
+            }
+    };
+
+    ctrl.assignDriverPopUp = function(details, userDetail) {
+
+        var modalInstance = ctrl.$uibModal.open({
+            component: 'assignDriverModal',
+            windowClass: 'app-modal-window-small',
+            resolve: {
+                details: function() {
+                    return (details || {});
+                },
+                userDetail: function() {
+                    return (userDetail || {});
+                }
+            },
+            keyboard: false,
+            backdrop: 'static'
+        });
+
+        modalInstance.result.then(function(data) {
+                //data passed when pop up closed.
+                if (data && data.action == 'update') {
+
+                    userDetail.driver = userDetail.driver || {};
+                    userDetail.driver.firstName = data.userRequestDetail.firstName;
+                    userDetail.driver.lastName = data.userRequestDetail.lastName;
+                }
+
+
+            }),
+            function(err) {
+                console.log('Error in assign Driver Modal');
+                console.log(err);
+            }
+
     }
+      ctrl.userDetailPopUp = function(details) {
+
+        var modalInstance = ctrl.$uibModal.open({
+            component: 'viewUserDetailModal',
+            windowClass: 'app-modal-window-large',
+            keyboard: false,
+            resolve: {
+                details: function() {
+                    return (details || {});
+                }
+            },
+            backdrop: 'static'
+        });
+
+        modalInstance.result.then(function(data) {
+                //data passed when pop up closed.
+                //if (data && data.action == "update");
+
+            }),
+            function(err) {
+                console.log('Error in user detail Modal of Incoming Warehouse');
+                console.log(err);
+            }
+    }
+//===========================POPUP IMPLEMENTATION END======================================
+
+}
+//===========================UserRequestController IMPLEMENTATION END======================================
 
     angular.module('userRequest')
         .component('userRequest', {

@@ -1,6 +1,7 @@
 (function(angular) {
 
     'use strict';
+//===========================TruckItemOutgoingController IMPLEMENTATION START======================================
 
     function TruckItemOutgoingController($state, $uibModal, warehouseMoveItemService) {
         var ctrl = this;
@@ -151,6 +152,7 @@
     }
 //===========================POPUP IMPLEMENTATION END======================================
 }
+//===========================TruckItemOutgoingController IMPLEMENTATION END======================================
 
     angular.module('truckItemOutgoingWarehouseDetails')
         .component('truckItemOutgoingWarehouseDetails', {

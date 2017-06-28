@@ -2,9 +2,9 @@
 <div class="component1">
     <div class="menu-bg">
         <div class="container">
-            <a class="navbar-brand" href="/"><img src="img/logo.png" alt="Logo"><br>
-            <div ng-if="$ctrl.isSuperAdmin">
-                Back
+            <a class="navbar-brand" ui-sref="manageAdmin"><img src="img/logo.png" alt="Logo"><br>
+            <div ng-if="$ctrl.userRights.isSuperAdmin ">
+               <u style="font-size: 15px;"> Back To Manage Admin </u>
             </div>
             </a>
             <nav class="navbar navbar-default">

@@ -3,6 +3,7 @@
 	angular.module("deliveryTrucks",[
 	'ui.bootstrap',
 	'deliverytruckModal',
+	'unAssignDriverToTruck',
 	'historyModal',
 	'bathwaterApp.services'
 		]);
