@@ -27,15 +27,7 @@
 					</div>
 				</li>
 
-<<<<<<< HEAD
-				<li style=" background-color: lightblue; width: 209px; height: 207px" class="full" ng-hide="!$ctrl.noData">
-					<div ng-hide="!$ctrl.noData">
-						<h2>No Data</h2>
-					</div>
-				</li>
-=======
 				
->>>>>>> d46a2304e43c5d84cbbd98582582ed9ecd19975c
 			</ul>
 
 			<div class="clear"></div>
