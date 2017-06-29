@@ -1,7 +1,7 @@
 (function(angular) {
 'use strict';
 
-
+//===========================ZipCodeDetailsController IMPLEMENTATION START======================================
 
 function ZipCodeDetailsController($state, $uibModal, ZipcodeService) {
 	var ctrl = this;
@@ -69,6 +69,7 @@ function ZipCodeDetailsController($state, $uibModal, ZipcodeService) {
 	}
 //===========================POPUP IMPLEMENTATION END======================================
 }
+//===========================ZipCodeDetailsController IMPLEMENTATION END======================================
 
 angular.module('zipcodeDetails')
 	.component('zipcodeDetails',{

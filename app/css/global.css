@@ -167,7 +167,7 @@ header, section, footer, aside, nav, main, article, figure { display: block; }
     box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) 0 1.5em 0 0, rgba(0, 0, 0, 0.75) -1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) -1.5em 0 0 0, rgba(0, 0, 0, 0.75) -1.1em -1.1em 0 0, rgba(0, 0, 0, 0.75) 0 -1.5em 0 0, rgba(0, 0, 0, 0.75) 1.1em -1.1em 0 0;
 }
 
-    @-webkit-keyframes spinner {
+@-webkit-keyframes spinner {
     0% {
         -webkit-transform: rotate(0deg);
         -moz-transform: rotate(0deg);

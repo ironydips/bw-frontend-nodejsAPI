@@ -5,7 +5,6 @@
 function AdminPanelController($state, AdminRightsService) {
 	var ctrl = this;
 	ctrl.userRights = AdminRightsService.getRights();
-	//ctrl.isSuperAdmin = userRights.isSuperAdmin;
 }
 
 angular.module('adminPanel')

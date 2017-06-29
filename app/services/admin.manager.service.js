@@ -45,12 +45,15 @@
 
 		var addAdmin = function(params){
 
-           // key = AdminRightsService.getProfile().key;
+            key = AdminRightsService.getProfile().key;
         
 			return $http({
-                    url: '/api/superAdmin/addAdmin',
+                    url: '/rest/admin/addAdmin',
                     method: "POST",
                     data: params,
+                    headers: {
+                        "Authorization": key
+                    }
                 })
 		}
 

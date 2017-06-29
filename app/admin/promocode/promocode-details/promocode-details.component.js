@@ -1,7 +1,7 @@
 (function(angular) {
 
 'use strict';
-
+//===========================PromoCodeDetailsController IMPLEMENTATION START======================================
 function PromoCodeDetailsController($state,$uibModal, PromocodeService){
 	var ctrl = this;
 	ctrl.$uibModal = $uibModal;
@@ -65,6 +65,7 @@ function PromoCodeDetailsController($state,$uibModal, PromocodeService){
 	}
 //===========================POPUP IMPLEMENTATION END======================================
 }
+//===========================PromoCodeDetailsController IMPLEMENTATION START======================================
 
 
 

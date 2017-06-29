@@ -1,5 +1,6 @@
 (function(angular) {
 'use strict';
+//===========================TruckDetailsController IMPLEMENTATION START======================================
 
 function TruckDetailsController($state, $uibModal, resizeService, TruckService) {
 	var ctrl = this;
@@ -86,6 +87,8 @@ ctrl.openPopUp = function(details){
 	}
 //===========================POPUP IMPLEMENTATION END======================================
 }
+//===========================TruckDetailsController IMPLEMENTATION END======================================
+
 angular.module('truckDetails')
 	.component('truckDetails',{
 		templateUrl: 'admin/truck/truck-details/truck-details.template.html',

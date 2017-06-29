@@ -36,9 +36,9 @@
        // Add Admin
         ctrl.saveAdmin = function() {  
 
-            //ctrl.params = ctrl.roleAndrights(); 
+            ctrl.params = ctrl.roleAndrights(); 
 
-            AdminManagerService.addAdmin(ctrl.admin)
+            AdminManagerService.addAdmin(ctrl.params)
                 .then(function(response) {
                     if (response && response.data) {
                         ctrl.modalInstance.close({action: 'update'});

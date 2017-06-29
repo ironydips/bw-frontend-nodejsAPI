@@ -41,7 +41,7 @@ function GoogleSignInController($state,$interval, GAuth, AdminManagerService, Ad
                 .then(function(response) {
                     if (response && response.data.result.message) {
                         ctrl.profile.role = response.data.result.message.role;
-                        ctrl.profile.key = response.data.result.message.key;
+                       // ctrl.profile.key = response.data.result.message.key;
 
                         switch(profile.role){
                             case "0":
