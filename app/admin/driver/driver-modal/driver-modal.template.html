@@ -9,7 +9,7 @@
                     <div class="image">
                         <img ng-src="{{$ctrl.imageUrl}}" alt="No Image Selected" style="width: 208px;height: 200px" />
                     </div>
-                   <input style="margin-left:250px" ng-disabled={{$ctrl.isDisabled}} type="file" class="form-controls" name="imageUrl" ng-model="$ctrl.selectedImage" base-sixty-four-input accept="image/*" required>
+                   <input style="margin-left:250px" ng-disabled={{$ctrl.isDisabled}} type="file" class="form-controls" name="imageUrl" ng-model="$ctrl.selectedImage" base-sixty-four-input accept="image/*" required><span class="red">*</span>
                 <!-- <h3>Image</h3>
                 <div class="image">
                     <a href="" class="drive">Add License Image</a>
