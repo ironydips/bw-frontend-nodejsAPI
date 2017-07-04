@@ -8,20 +8,119 @@
          <thead>
             <tr>
                <th>Time/Date</th>
-               <th ng-repeat="timeslot in $ctrl.timeslots.dateMap.entry">
-                  {{timeslot.key}} <br/> {{timeslot.value}}
+               <th ng-repeat="date in $ctrl.weekDate">
+               {{date}}
                </th>
             </tr>
          </thead>
+
          <tbody>
-            <tr ng-repeat="ts in $ctrl.timeslots.timeslots">
+
+         <tr>
+            <th>8am-10am</th>
+            <td ng-repeat="d in $ctrl.weekDate">
+               <div ng-repeat="timeslot in $ctrl.timeslots">
+                  <div ng-if="timeslot.timeslot=='8am-10am'">
+                     <div ng-if="timeslot.date==d">
+                     {{timeslot.availabilityCount}}
+                     </div>
+                  </div>
+               </div>
+               <div ng-if="timeslot.date!=d">
+                     0
+               </div>
+            </td>
+         </tr>
+
+         <tr>
+            <th>10am-12pm</th>
+            <td ng-repeat="d in $ctrl.weekDate">
+               <div ng-repeat="timeslot in $ctrl.timeslots">
+                  <div ng-if="timeslot.timeslot=='10am-12pm'">
+                     <div ng-if="timeslot.date==d">
+                     {{timeslot.availabilityCount}}
+                     </div>
+                  </div>
+               </div>
+               <div ng-if="timeslot.date!=d">
+                     0
+               </div>
+            </td>
+         </tr>
+
+         <tr>
+            <th>12pm-2pm</th>
+            <td ng-repeat="d in $ctrl.weekDate">
+               <div ng-repeat="timeslot in $ctrl.timeslots">
+                  <div ng-if="timeslot.timeslot=='12pm-2pm'">
+                     <div ng-if="timeslot.date==d">
+                     {{timeslot.availabilityCount}}
+                     </div>
+                  </div>
+               </div>
+               <div ng-if="timeslot.date!=d">
+                     0
+               </div>
+            </td>
+         </tr>
+
+         <tr>
+            <th>2pm-4pm</th>
+            <td ng-repeat="d in $ctrl.weekDate">
+               <div ng-repeat="timeslot in $ctrl.timeslots">
+                  <div ng-if="timeslot.timeslot=='2pm-4pm'">
+                     <div ng-if="timeslot.date==d">
+                     {{timeslot.availabilityCount}}
+                     </div>
+                  </div>
+               </div>
+               <div ng-if="timeslot.date!=d">
+                     0
+               </div>
+            </td>
+         </tr>
+
+         <tr>
+            <th>4pm-6pm</th>
+            <td ng-repeat="d in $ctrl.weekDate">
+               <div ng-repeat="timeslot in $ctrl.timeslots">
+                  <div ng-if="timeslot.timeslot=='4pm-6pm'">
+                     <div ng-if="timeslot.date==d">
+                     {{timeslot.availabilityCount}}
+                     </div>
+                  </div>
+               </div>
+               <div ng-if="timeslot.date!=d">
+                     0
+               </div>
+               </div>
+            </td>
+         </tr>
+
+         <tr>
+            <th>6pm-8pm</th>
+            <td ng-repeat="d in $ctrl.weekDate">
+               <div ng-repeat="timeslot in $ctrl.timeslots">
+                  <div ng-if="timeslot.timeslot=='6pm-8pm'">
+                     <div ng-if="timeslot.date==d">
+                     {{timeslot.availabilityCount}}
+                     </div>
+                  </div>
+               </div>
+               <div ng-if="timeslot.date!=d">
+                     0
+               </div>
+            </td>
+         </tr>
+
+            <!-- <tr ng-repeat="ts in $ctrl.timeslots">
                <td class="text-center">{{ts.time}}</td>
                <td class="text-center" ng-repeat="count in ts.counts">
                   <span>Available: {{count.availabilityCount}} </span> 
                   <hr>
                   Booked: {{count.bookedCount}}
                </td>
-            </tr>
+            </tr> -->
          </tbody>
       </table>
    </div>

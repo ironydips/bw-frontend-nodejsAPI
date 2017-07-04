@@ -5,11 +5,8 @@
 
         var getTimeslotsForTheWeek = function() {
             return $http({
-                url: '/rest/getTimeslotsForTheWeek',
+                url: '/api/admin/getTimeslotsForTheWeek',
                 method: "GET",
-                headers: {
-                    "Authorization": 'Basic YWRtaW46YWRtaW4='
-                }
             });
         };
 

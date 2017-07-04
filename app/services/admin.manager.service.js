@@ -23,10 +23,10 @@
 
 		var deleteAdmin = function(params){
 
+			var obj = angular.fromJson(params);
 			return $http({
-                    url: '/api/superAdmin/deleteAdmin',
-                    method: "POST",
-                    data: params,
+                    url: '/api/superAdmin/deleteAdmin?email='+ obj.email,
+                    method: "GET",
                 })
 		}
 
@@ -41,12 +41,15 @@
 
         var editAdmin = function(params){
 
+        	var obj = angular.fromJson(params);
             return $http({
-                    url: '/api/superAdmin/editAdmin',
-                    method: "POST",
-                    data: params,
+                    url: '/api/superAdmin/editAdmin?email='+ obj.email + "&role="+ obj.role,
+                    method: "GET",
                 })
         }
+
+
+   
 
         //EXPORTED Object
         
