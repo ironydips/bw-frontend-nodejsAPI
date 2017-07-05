@@ -25,11 +25,19 @@
 			})
 		} 
 
+		var searchDrivers = function(driver){
+			return $http({
+			    url: '/api/admin/searchRecord?firstName='+driver,
+			    method: "GET",
+			});
+		};
+
 		//EXPORTED Object
 		return {
 			getAllDrivers,
 			addDriver ,
-			driverImageUpload
+			driverImageUpload,
+			searchDrivers
 		}
 	}
 

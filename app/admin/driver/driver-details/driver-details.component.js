@@ -23,14 +23,34 @@ function DriverDetailsController($state, $uibModal, DriverService) {
 
 	//Show Driver's Modal
 	ctrl.showDetails = function(driverDetails){
+		debugger;
 		ctrl.openPopUp(driverDetails);
 	}
+
 	ctrl.getDrivers = function(lastKey, limit) {
+		debugger;
     	if(ctrl.lastEvaluatedKey != ctrl.lastKey && !(ctrl.lastKey == null && ctrl.drivers.length > 0)){
 			getDriverList(lastKey, limit);
 		}
     	ctrl.lastEvaluatedKey = ctrl.lastKey;
     	ctrl.showLoader = false;	
+	}
+
+	ctrl.search = function(driver){
+		DriverService.searchDrivers(driver)
+		.then(function(response){
+			if(driver){
+				ctrl.drivers = response.data.result.message;
+			}
+			else{
+			ctrl.init();
+			}
+			
+		})
+		.catch(function(err){
+			console.log('Error getting driver details:');
+			console.log(err);
+		})
 	}
 
 	ctrl.init();

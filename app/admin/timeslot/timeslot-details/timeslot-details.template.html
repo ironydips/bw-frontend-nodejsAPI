@@ -4,19 +4,47 @@
       <a ng-click="$ctrl.addTimeslot()" class="btn btn-sm btn-success">Add Timeslot</a>
       <a ng-click="$ctrl.showallTimeslot()" class="btn btn-sm btn-success">Show All</a>
       <br><br>
+       <input type="hidden" value="$ctrl.newvalue={{timeslot.availabilityCount}}"/>
       <table class="table table-striped">
          <thead>
             <tr>
-               <th>Time/Date</th>
-               <th ng-repeat="date in $ctrl.weekDate">
-               {{date}}
+               <th>Date/Time</th>
+               <th ng-repeat="time in $ctrl.slotTime">
+               {{time}}
                </th>
             </tr>
          </thead>
 
          <tbody>
+         <tr ng-repeat="weekDate in $ctrl.weekDate">
+            <th>{{weekDate}}</th>
+            <td ng-repeat="time in $ctrl.slotTime">
 
-         <tr>
+               <div ng-repeat="timeslot in $ctrl.timeslots">
+                  <div ng-if="timeslot.date==weekDate">
+
+                     <div ng-if="timeslot.timeslot==time">
+                        {{timeslot.availabilityCount}}
+                     </div>
+                     <!-- <div ng-if="timeslot.timeslot!=time">
+                           0
+                     </div> -->
+                  </div>
+               </div>
+
+
+               <div ng-repeat="remDate in $ctrl.diffArr">
+                  <div ng-if="remDate==weekDate">
+                     0
+                  </div>
+               </div>
+
+            </td>
+         </tr>
+
+
+
+        <!--  <tr>
             <th>8am-10am</th>
             <td ng-repeat="d in $ctrl.weekDate">
                <div ng-repeat="timeslot in $ctrl.timeslots">
@@ -36,14 +64,19 @@
             <th>10am-12pm</th>
             <td ng-repeat="d in $ctrl.weekDate">
                <div ng-repeat="timeslot in $ctrl.timeslots">
-                  <div ng-if="timeslot.timeslot=='10am-12pm'">
-                     <div ng-if="timeslot.date==d">
-                     {{timeslot.availabilityCount}}
+                  <div ng-if="timeslot.date==d">
+                     <div ng-if="timeslot.timeslot=='10am-12pm'">
+                        {{timeslot.availabilityCount}}
+                     </div>
+                     <div ng-if="timeslot.timeslot!='10am-12pm'">
+                        0
                      </div>
                   </div>
                </div>
-               <div ng-if="timeslot.date!=d">
+               <div ng-repeat="remDate in $ctrl.diffArr">
+                  <div ng-if="remDate==d">
                      0
+                  </div>
                </div>
             </td>
          </tr>
@@ -51,16 +84,24 @@
          <tr>
             <th>12pm-2pm</th>
             <td ng-repeat="d in $ctrl.weekDate">
+
                <div ng-repeat="timeslot in $ctrl.timeslots">
-                  <div ng-if="timeslot.timeslot=='12pm-2pm'">
-                     <div ng-if="timeslot.date==d">
-                     {{timeslot.availabilityCount}}
+                  <div ng-if="timeslot.date==d">
+                     <div ng-if="timeslot.timeslot=='12pm-2pm'">
+                        {{timeslot.availabilityCount}}
+                     </div>
+                     <div ng-if="timeslot.timeslot!='12pm-2pm'">
+                        0
                      </div>
                   </div>
                </div>
-               <div ng-if="timeslot.date!=d">
+
+               <div ng-repeat="remDate in $ctrl.diffArr">
+                  <div ng-if="remDate==d">
                      0
+                  </div>
                </div>
+
             </td>
          </tr>
 
@@ -111,7 +152,7 @@
                      0
                </div>
             </td>
-         </tr>
+         </tr> -->
 
             <!-- <tr ng-repeat="ts in $ctrl.timeslots">
                <td class="text-center">{{ts.time}}</td>
