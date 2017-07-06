@@ -315,4 +315,17 @@ header, section, footer, aside, nav, main, article, figure { display: block; }
     box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.2), 1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2), 2.5em 0em 0 0em rgba(255, 255, 255, 0.2), 1.75em 1.75em 0 0em rgba(255, 255, 255, 0.2), 0em 2.5em 0 0em rgba(255, 255, 255, 0.2), -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.5), -2.6em 0em 0 0em rgba(255, 255, 255, 0.7), -1.8em -1.8em 0 0em #324768;
   }
 }
+
+.col-lg-1
+{
+  width:3%;
+}
+.col-lg-10{
+  width:94%;
+  padding-right: 0;
+}
+.
 /* End of Driver & Truck List Loader CSS*/
+
+
+

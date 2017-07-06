@@ -30,14 +30,9 @@
             });
             if (!ctrl.driverDetailForm.$invalid) {
 
-                // $q.all([DriverService.addDriver(ctrl.driver), DriverService.driverImageUpload(ctrl.image)])
-                //     .then(function(response){
-                //         ctrl.modalInstance.close({ action: 'update' });
-                //     })
-                //     .catch(function(err){
-                //         console.log('Error Adding Driver/Uploading driver Image');
-                //         console.log(err);
-                //     });
+                for(var i in ctrl.driver){
+                    ctrl.driver[i]= ctrl.driver[i].toLowerCase();
+                }
                 DriverService.addDriver(ctrl.driver)
                     .then(function(result) {
                         ctrl.modalInstance.close({ action: 'update' });

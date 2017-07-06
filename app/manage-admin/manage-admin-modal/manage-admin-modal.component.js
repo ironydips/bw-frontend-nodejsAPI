@@ -40,9 +40,9 @@
 
             AdminManagerService.addAdmin(ctrl.params)
                 .then(function(response) {
-                    if (response && response.data) {
+                    //if (response && response.data) {
                         ctrl.modalInstance.close({action: 'update'});
-                    }
+                    //}
                 })
                 .catch(function(err) {
                     console.log('Error getting Admin lists:');

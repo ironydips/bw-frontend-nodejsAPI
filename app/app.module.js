@@ -16,6 +16,8 @@ angular.module('bathwaterApp', [
 	'ngToast',
 	//LightBox Library used as Image Viewer.
 	'bootstrapLightbox',
+	//for using moment.js
+	'angularMoment',
 	//Infinite Scroll 
 	'infinite-scroll',
 	'manageAdmin',

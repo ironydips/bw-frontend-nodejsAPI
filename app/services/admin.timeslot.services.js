@@ -3,13 +3,10 @@
 
     function TimeslotServiceHandler($http) {
 
-        var getTimeslotsForTheWeek = function() {
+        var getTimeslotsForTheWeek = function(date) {
             return $http({
-                url: '/rest/getTimeslotsForTheWeek',
+                url: '/api/admin/getTimeslotsForTheWeek?date='+date,
                 method: "GET",
-                headers: {
-                    "Authorization": 'Basic YWRtaW46YWRtaW4='
-                }
             });
         };
 

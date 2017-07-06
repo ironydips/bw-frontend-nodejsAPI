@@ -13,16 +13,24 @@
 		var addTruck = function(truck){
 			
 			return $http({
-							url: '/api/admin/addTruck',
-				            method: "POST",
-				            data: angular.toJson(truck)
-						});
-					}
+						url: '/api/admin/addTruck',
+			            method: "POST",
+			            data: angular.toJson(truck)
+			});
+		}
+
+		var searchTrucks = function(truck){
+			return $http({
+			    url: '/api/admin/searchRecord?firstName='+truck,
+			    method: "GET",
+			});
+		};
 
 		//EXPORTED Object
 		return {
 			getAllTrucks,
-			addTruck
+			addTruck,
+			searchTrucks
 		}
 	}
 

@@ -36,6 +36,24 @@ function TruckDetailsController($state, $uibModal, resizeService, TruckService) 
     	ctrl.showLoader = false;
 	}
 
+	ctrl.search = function(truck){
+		truck = truck.toLowerCase();
+		TruckService.searchTrucks(truck)
+		.then(function(response){
+			if(truck){
+				ctrl.trucks = response.data.result.message;
+			}
+			else{
+			ctrl.init();
+			}
+			
+		})
+		.catch(function(err){
+			console.log('Error getting truck details:');
+			console.log(err);
+		})
+	}
+
 	ctrl.init();
 
 	function getTruckList(lastKey, limit) {

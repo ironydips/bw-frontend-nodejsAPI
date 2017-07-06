@@ -10,62 +10,46 @@
 			return $http({
                     url: '/api/superAdmin/gloginsuccess?email='+ email,
                     method: "GET",
-                    headers: {
-                        "Authorization": 'Basic YWRtaW46YWRtaW4='
-                    }
                 });
 			}
 
 		var listofAdmin = function(){
 
-            key = AdminRightsService.getProfile().key;
-            params = JSON.stringify({
-                          email: AdminRightsService.getProfile().email
-                        });
-
 			return $http({
                     url: '/api/superAdmin/listOfAdmins',
                     method: "GET",
-                    // headers: {
-                    //     "Authorization": 'Basic YWRtaW46YWRtaW4='
-                    // }
                 })
 		}
 
 		var deleteAdmin = function(params){
 
-            key = AdminRightsService.getProfile().key;
-
+			var obj = angular.fromJson(params);
 			return $http({
-                    url: '/api/superAdmin/deleteAdmin',
-                    method: "POST",
-                    data: params,
+                    url: '/api/superAdmin/deleteAdmin?email='+ obj.email,
+                    method: "GET",
                 })
 		}
 
 		var addAdmin = function(params){
 
-            key = AdminRightsService.getProfile().key;
-        
 			return $http({
-                    url: '/rest/admin/addAdmin',
+                    url: '/api/superAdmin/addAdmin',
                     method: "POST",
                     data: params,
-                    headers: {
-                        "Authorization": key
-                    }
                 })
 		}
 
         var editAdmin = function(params){
 
-            key = AdminRightsService.getProfile().key;
+        	var obj = angular.fromJson(params);
             return $http({
-                    url: '/api/superAdmin/editAdmin',
-                    method: "POST",
-                    data: params,
+                    url: '/api/superAdmin/editAdmin?email='+ obj.email + "&role="+ obj.role,
+                    method: "GET",
                 })
         }
+
+
+   
 
         //EXPORTED Object
         
