@@ -6,7 +6,7 @@
 
       <div class="row-fluid">
          <div class="span12 text-center">
-            <h4><b>{{$ctrl.weekDate[0]}} To {{$ctrl.weekDate[5]}}</b></h4><br>
+            <h4>{{$ctrl.weekDate[0]}} &nbsp To &nbsp {{$ctrl.weekDate[5]}}</h4><br>
          </div>
       </div>
 
@@ -21,7 +21,7 @@
                         <th ng-repeat="time in $ctrl.slotTime">{{time}}</th>
                      </tr>
                   </thead>
-                  <tbody ng-if="!$ctrl.noResponse">
+                  <tbody >
                      <tr ng-repeat="weekDate in $ctrl.weekDate">
                      <th style="padding:20px 0 20px 0px;">{{$ctrl.weekDay[$index]}}</th>
                         <th style="padding:20px 0 20px 0px;">{{weekDate}}</th>
@@ -34,7 +34,7 @@
             </div>
 
             <div ng-if="$ctrl.noResponse">
-               <h3>No Record Found</h3>
+               <h4 style="margin:-20% 0 30% 3%;">No Record Found</h4>
             </div>
 
             <a class="left carousel-control" ng-click="$ctrl.prevTimeslot()" style="margin:30% 0 30% 3%;width: 50px">

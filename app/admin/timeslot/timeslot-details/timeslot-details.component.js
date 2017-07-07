@@ -26,14 +26,14 @@ function TimeslotController($state, $uibModal,moment, TimeslotService) {
 		ctrl.weekDate = [];
 		ctrl.weekDay = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 		ctrl.slotTime = ['8am-10am','10am-12pm','12pm-2pm','2pm-4pm','4pm-6pm','6pm-8pm'];
-		var startDate = new Date();
-		ctrl.mDate = ctrl.getMonday(startDate);
+		
+		ctrl.i = 1;
 
-		console.log(ctrl.mDate);
-		console.log(moment().day(1));
-		console.log(moment().day(7).format())
-		// console.log(moment().day(1).format('MM.DD.YYYY'));
-
+		// var startDate = new Date();
+		// ctrl.mDate = ctrl.getMonday(startDate);
+		// console.log(ctrl.mDate);
+		
+		ctrl.mDate = moment().day(ctrl.i).format('MM.DD.YYYY');
 		ctrl.getTimeslotsForTheWeek(ctrl.mDate);
 	};
 
@@ -44,12 +44,10 @@ function TimeslotController($state, $uibModal,moment, TimeslotService) {
 				if(timeslotDetails.data.result.message.length == 0){
 					ctrl.noResponse = true;
 					ctrl.getWeekDateArr(mDate);
-					debugger;
 				}else{
 					ctrl.noResponse = false;
 					ctrl.timeslots = timeslotDetails.data.result.message;	
 					calculateDates(ctrl.timeslots);
-					debugger;	
 				}
 				
 			})
@@ -99,18 +97,22 @@ function TimeslotController($state, $uibModal,moment, TimeslotService) {
 		ctrl.rDateData = [];
 		ctrl.weekDate = [];
         ctrl.objInit();
-        ctrl.mDate.setDate(ctrl.mDate.getDate() + 7);
+        // ctrl.mDate.setDate(ctrl.mDate.getDate() + 7);
+        ctrl.i = ctrl.i + 7;
+		ctrl.mDate = moment().day(ctrl.i).format('MM.DD.YYYY');
+		console.log(ctrl.mDate);
 		ctrl.getTimeslotsForTheWeek(ctrl.mDate);
-		debugger;
 	}
 
 	ctrl.prevTimeslot = function(){
         ctrl.rDateData = [];
 		ctrl.weekDate = [];
 		ctrl.objInit();
-        ctrl.mDate.setDate(ctrl.mDate.getDate() - 7);
+        // ctrl.mDate.setDate(ctrl.mDate.getDate() - 7);
+        ctrl.i = ctrl.i - 7;
+		ctrl.mDate = moment().day(ctrl.i).format('MM.DD.YYYY');
+		console.log(ctrl.mDate);
 		ctrl.getTimeslotsForTheWeek(ctrl.mDate);
-		debugger;
 	}
 
 	//Add Timeslot
@@ -125,32 +127,23 @@ function TimeslotController($state, $uibModal,moment, TimeslotService) {
 		ctrl.showTimeslotPopup(null);
 	};
 
-	
-
-	ctrl.formateDate = function(date){
-		var date =	('0' + (date.getMonth()+1)).slice(-2) + '.'
-             		+ ('0' + date.getDate()).slice(-2) + '.'
-             		+ date.getFullYear();
-    	return date;
-	}
-	
-
-	ctrl.getMonday = function(d){
+	/*ctrl.getMonday = function(d){
 		var d = new Date(d);
   		var day = d.getDay(),
       	diff = d.getDate() - day + (day == 0 ? -6:1);
   		return new Date(d.setDate(diff));
-	}
+	}*/
 
 	ctrl.getWeekDateArr = function(mDate){
 		var startDate = new Date(mDate);
-		var fDate = ctrl.getMonday(startDate);
-		ctrl.startDatePicker = new Date(fDate);
+		// var fDate = ctrl.getMonday(startDate);
+		ctrl.startDatePicker = new Date(startDate);
 		var i = 0;
 		while (i < 6) {
-			var date = ctrl.formateDate(ctrl.startDatePicker);
+			var date = moment(ctrl.startDatePicker).format('MM.DD.YYYY')
 			ctrl.weekDate.push(date);
-		    ctrl.startDatePicker.setDate(ctrl.startDatePicker.getDate() + 1);
+		    // ctrl.startDatePicker.setDate(ctrl.startDatePicker.getDate() + 1);
+		    ctrl.startDatePicker = moment(ctrl.startDatePicker).add(1, 'd');
 		    i++;
 		}
 	}
