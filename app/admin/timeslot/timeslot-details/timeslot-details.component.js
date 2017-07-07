@@ -43,6 +43,7 @@ function TimeslotController($state, $uibModal,moment, TimeslotService) {
 			.then(function(timeslotDetails){
 				if(timeslotDetails.data.result.message.length == 0){
 					ctrl.noResponse = true;
+					ctrl.getWeekDateArr(mDate);
 					debugger;
 				}else{
 					ctrl.noResponse = false;
@@ -55,7 +56,7 @@ function TimeslotController($state, $uibModal,moment, TimeslotService) {
 			.catch(function(err){
 				console.log('Error getting timeslot details:');
 				console.log(err);
-		})
+			})
 
 		// ctrl.timeslots = [
 		// 				{
@@ -65,13 +66,13 @@ function TimeslotController($state, $uibModal,moment, TimeslotService) {
 		// 					timeslotID:"06aed535-6866-4c72-b9b7-f16e9e34c2a7"
 		// 				 },
 		// 				{
-		// 					availabilityCount:"5",
+		// 					availabilityCount:"522",
 		// 					date:"07.10.2017",
 		// 					timeslot:"4pm-6pm",
 		// 					timeslotID:"e0411162-5332-4c43-b683-75ca79606d0d"
 		// 				 },
 		// 				{
-		// 					availabilityCount:"2",
+		// 					availabilityCount:"2555",
 		// 					date:"07.11.2017",
 		// 					timeslot:"12pm-2pm",
 		// 					timeslotID:"06aed535-6866-4c72-b9b7-f16e9e34c2a7"
@@ -141,22 +142,24 @@ function TimeslotController($state, $uibModal,moment, TimeslotService) {
   		return new Date(d.setDate(diff));
 	}
 
+	ctrl.getWeekDateArr = function(mDate){
+		var startDate = new Date(mDate);
+		var fDate = ctrl.getMonday(startDate);
+		ctrl.startDatePicker = new Date(fDate);
+		var i = 0;
+		while (i < 6) {
+			var date = ctrl.formateDate(ctrl.startDatePicker);
+			ctrl.weekDate.push(date);
+		    ctrl.startDatePicker.setDate(ctrl.startDatePicker.getDate() + 1);
+		    i++;
+		}
+	}
+
 	ctrl.init(); 
 
 	function calculateDates(timesltArr){
 
-		var startDate = new Date(timesltArr[0].date);
-
-		var fDate = ctrl.getMonday(startDate);
-
-		ctrl.startDatePicker = new Date(fDate);
-		var i = 0;
-		while (i < 6) {
-						var date = ctrl.formateDate(ctrl.startDatePicker);
-						ctrl.weekDate.push(date);
-                        ctrl.startDatePicker.setDate(ctrl.startDatePicker.getDate() + 1);
-                        i++;
-        }
+        ctrl.getWeekDateArr(timesltArr[0].date);
 
     	for(var x = 0; x< ctrl.weekDate.length; x++){
     	    for(var i = 0; i< ctrl.slotTime.length; i++){					
@@ -177,17 +180,10 @@ function TimeslotController($state, $uibModal,moment, TimeslotService) {
     	    	}				
     	    }		
     	    ctrl.rDateData.push(ctrl.slotTimeObj);
-    		ctrl.timeslotFilter = [];
-    		ctrl.slotTimeObj = [
-								{"timeslot": '8am-10am', "availabilityCount": 0},
-								{"timeslot": '10am-12pm', "availabilityCount": 0},
-								{"timeslot": '12pm-2pm', "availabilityCount": 0},
-								{"timeslot": '2pm-4pm', "availabilityCount": 0},
-								{"timeslot": '4pm-6pm', "availabilityCount": 0},
-								{"timeslot": '6pm-8pm', "availabilityCount": 0}
-							];
+    		ctrl.objInit();
 		}
 	}
+
 //===========================POPUP IMPLEMENTATION START======================================
 
 	ctrl.addTimeslotPopUp = function(details){

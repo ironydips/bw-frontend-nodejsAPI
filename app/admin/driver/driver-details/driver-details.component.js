@@ -1,11 +1,15 @@
 (function(angular) {
 'use strict';
 //===========================DriverDetailsController IMPLEMENTATION START======================================
-function DriverDetailsController($state, $uibModal, DriverService) {
+function DriverDetailsController($state, $uibModal, $anchorScroll, $location, DriverService, ScrollService) {
 	var ctrl = this;
 	ctrl.init = function(){
 		ctrl.$uibModal = $uibModal;
 		ctrl.$state = $state;
+
+		ctrl.$anchorScroll = $anchorScroll;
+		ctrl.$location = $location;
+
 		ctrl.limit = 30;
 		ctrl.lastKey = null;
 		ctrl.lastEvaluatedKey = '1';
@@ -15,8 +19,8 @@ function DriverDetailsController($state, $uibModal, DriverService) {
 		ctrl.initLoader = false;
 		ctrl.noData = false;
 	};
-
-	// Add Driver Modal
+    
+	//Add Driver Modal
 	ctrl.addDriver = function(){
 		ctrl.openPopUp(null);
 	};
@@ -41,9 +45,12 @@ function DriverDetailsController($state, $uibModal, DriverService) {
 		.then(function(response){
 			if(driver){
 				ctrl.drivers = response.data.result.message;
+				ctrl.showLoader = false;
 			}
 			else{
-			ctrl.init();
+				// ctrl.init();
+				ctrl.drivers = ctrl.tempDrivers;
+				debugger;
 			}
 			
 		})
@@ -53,12 +60,21 @@ function DriverDetailsController($state, $uibModal, DriverService) {
 		})
 	}
 
+	ctrl.gotoTop = function(loc) {
+      	ctrl.$location.hash('top');
+      	ctrl.$anchorScroll();
+      	// ScrollService.getTopScroll(loc);
+    };
+
 	ctrl.init();
 
 	function getDriverList(lastKey, limit) {
 		DriverService.getAllDrivers(lastKey, limit)
 		.then(function(response){
 			lastKey == null? ctrl.drivers = response.data.result.message : ctrl.drivers = ctrl.drivers.concat(response.data.result.message) ;
+			
+			ctrl.tempDrivers = ctrl.drivers;
+
 			ctrl.lastKey = response.data.result.lastKey && response.data.result.lastKey.driverID['S'] || null;
 			ctrl.showLoader = true;
 			ctrl.initLoader = true;
@@ -108,6 +124,6 @@ ctrl.openPopUp = function(details){
 angular.module('driverDetails')
 	.component('driverDetails',{
 		templateUrl: 'admin/driver/driver-details/driver-details.template.html',
-		controller:['$state', '$uibModal','DriverService', DriverDetailsController]
+		controller:['$state', '$uibModal','$anchorScroll','$location','DriverService','ScrollService', DriverDetailsController]
 	});
 })(window.angular);

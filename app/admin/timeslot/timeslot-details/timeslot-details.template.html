@@ -1,115 +1,50 @@
 <div class="timeslotComponent">
    <div class="container">
-      <br>
+
       <a ng-click="$ctrl.addTimeslot()" class="btn btn-sm btn-success">Add Timeslot</a>
       <a ng-click="$ctrl.showallTimeslot()" class="btn btn-sm btn-success">Show All</a>
-      <br><br>
 
-      <!-- <div class="row-fluid">
+      <div class="row-fluid">
          <div class="span12 text-center">
-            <div class="pull-left">
-               <a ng-click="$ctrl.prevTimeslot()" class="btn btn-default btn-sm">
-                  <span class="glyphicon glyphicon-fast-backward"></span> Prev.
-               </a>
-            </div>
-               {{$ctrl.weekDate[0]}} To {{$ctrl.weekDate[5]}}
-            <div class="pull-right">
-               <a ng-click="$ctrl.nextTimeslot()" class="btn btn-default btn-sm">
-               <span class="glyphicon glyphicon-fast-forward"></span> Next
-               </a>
-            </div>
+            <h4><b>{{$ctrl.weekDate[0]}} To {{$ctrl.weekDate[5]}}</b></h4><br>
          </div>
       </div>
-      <br>
-   -->
 
-
-
-   <div class="row-fluid">
-      <div class="span12 text-center">
-         <h3>{{$ctrl.weekDate[0]}} To {{$ctrl.weekDate[5]}}</h3>
-      </div>
-   </div>
-
-
-
-   <div class="container-fluid">
-      <div class="row">
-         <div class="col-lg-12" > 
-            <div class="col-lg-1 row-log-" style="margin-top:10%;">
-               <a ng-click="$ctrl.prevTimeslot()" class="btn btn-default btn-sm">
-                  <span class="glyphicon glyphicon-fast-backward"></span>
-               </a>
+      <div class="container-fluid">
+         <div class="row"> 
+            <div >
+               <table class="table table-striped">
+                  <thead>
+                     <tr>
+                        <th style="width:9%;">Day</th>
+                        <th style="width:9%;">Date\Time</th>
+                        <th ng-repeat="time in $ctrl.slotTime">{{time}}</th>
+                     </tr>
+                  </thead>
+                  <tbody ng-if="!$ctrl.noResponse">
+                     <tr ng-repeat="weekDate in $ctrl.weekDate">
+                     <th style="padding:20px 0 20px 0px;">{{$ctrl.weekDay[$index]}}</th>
+                        <th style="padding:20px 0 20px 0px;">{{weekDate}}</th>
+                        <td ng-repeat="timeslot in $ctrl.rDateData[$index]"  style="padding: 20px 0 20px 20px;">
+                           Availability Count:<b>{{timeslot.availabilityCount}}</b>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
             </div>
-            <div class="col-lg-10">
-               <div ng-if="!$ctrl.noResponse">
-                  <table class="table table-striped">
-                     <thead>
-                        <tr>
-                           <th>Day</th>
-                           <th>Date\Time</th>
-                           <th ng-repeat="time in $ctrl.slotTime">
-                              {{time}}
-                           </th>
-                        </tr>
-                     </thead>
-                     <tbody>
-                        <tr ng-repeat="weekDate in $ctrl.weekDate">
-                           <th>{{$ctrl.weekDay[$index]}}</th>
-                           <th>{{weekDate}}</th>
-                           <td ng-repeat="timeslot in $ctrl.rDateData[$index]" style="padding: 8px 4px;">
-                              Availability Count: {{timeslot.availabilityCount}}
-                           </td>
-                        </tr>
-                     </tbody>
-                  </table>
-               </div>
 
-               <div ng-if="$ctrl.noResponse">
-                  <h3>.......No Record Found.......</h3>
-               </div>
+            <div ng-if="$ctrl.noResponse">
+               <h3>No Record Found</h3>
             </div>
-            <div class="col-lg-1"  style="margin-top:10%;">
-               <a ng-click="$ctrl.nextTimeslot()" class="btn btn-default btn-sm">
-                  <span class="glyphicon glyphicon-fast-forward"></span>
-               </a>
-            </div>
+
+            <a class="left carousel-control" ng-click="$ctrl.prevTimeslot()" style="margin:30% 0 30% 3%;width: 50px">
+            <span class="glyphicon glyphicon-chevron-left" style="color: blue; cursor:pointer;"></span>
+            </a>
+            <a class="right carousel-control" ng-click="$ctrl.nextTimeslot()" style="margin:30% 4% 30% 0;width: 50px">
+            <span class="glyphicon glyphicon-chevron-right" style="color: blue; cursor:pointer;"></span>
+            </a>
+
          </div>
       </div>
-   </div>
-
-
-
-
-
-
-
-      <!-- <div ng-if="!$ctrl.noResponse">
-         <table class="table table-striped">
-            <thead>
-               <tr>
-                  <th>Day</th>
-                  <th>Date\Time</th>
-                  <th ng-repeat="time in $ctrl.slotTime">
-                     {{time}}
-                  </th>
-               </tr>
-            </thead>
-            <tbody>
-               <tr ng-repeat="weekDate in $ctrl.weekDate">
-                  <th>{{$ctrl.weekDay[$index]}}</th>
-                  <th>{{weekDate}}</th>
-                  <td ng-repeat="timeslot in $ctrl.rDateData[$index]">
-                     Availability Count: {{timeslot.availabilityCount}}
-                  </td>
-               </tr>
-            </tbody>
-         </table>
-      </div>
-
-      <div ng-if="$ctrl.noResponse">
-         <h3>.......No Record Found.......</h3>
-      </div> -->
-
    </div>
 </div>

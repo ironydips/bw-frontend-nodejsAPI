@@ -21,7 +21,7 @@
 
 		var deleteZipCode = function(zipcode){
 			return $http({
-						    url: '/api/admin/deleteZipCode?zipCode=' + zipcode,
+						    url: '/api/admin/deleteZipCode?zipcode=' + zipcode,
 						    method: "GET",
 						});
 					};

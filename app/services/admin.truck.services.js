@@ -21,7 +21,7 @@
 
 		var searchTrucks = function(truck){
 			return $http({
-			    url: '/api/admin/searchRecord?firstName='+truck,
+			    url: '/api/admin/searchTruck?truckType='+truck,
 			    method: "GET",
 			});
 		};

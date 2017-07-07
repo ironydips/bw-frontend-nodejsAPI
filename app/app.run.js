@@ -8,6 +8,7 @@ angular.
     });
     
     //when page reload then by default state
-    $state.go('gSignIn');
+    // $state.go('gSignIn');
+    $state.go('adminLayout.drivers');
     
   }]);

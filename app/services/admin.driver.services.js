@@ -27,7 +27,7 @@
 
 		var searchDrivers = function(driver){
 			return $http({
-			    url: '/api/admin/searchRecord?firstName='+driver,
+			    url: '/api/admin/searchDriver?firstName='+driver,
 			    method: "GET",
 			});
 		};

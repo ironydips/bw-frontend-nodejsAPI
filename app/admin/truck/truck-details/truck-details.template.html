@@ -1,12 +1,13 @@
 
 <!-- / component4 \ -->
 
+<a id="top" style="position:absolute;margin-top:-200px "></a>
+
 <div class="component4">
 
 	<div class="container">
 		<br>
         <input type="text" class="form-control pull-right" ng-model="$ctrl.searchTruck" placeholder="Search Trucks..." ng-keyup="$ctrl.search($ctrl.searchTruck)">
-        {{$ctrl.searchTruck}}
         <br><br><br>
 		<div class="component-bg">
 		
@@ -26,8 +27,7 @@
 					<div class="loader">
 					</div>
 				</li>
-
-				
+		
 			</ul>
 
 			<div class="clear"></div>
@@ -38,3 +38,10 @@
 
 </div>
 <!-- \ component4 end / -->
+
+
+<!-- BackToTop Script & Button  START-->
+<div>
+	<a ng-click="$ctrl.gotoTop()" class="scrollToTop">Go to top<span></span></a>
+</div>
+<!-- BackToTop Script & Button  END-->

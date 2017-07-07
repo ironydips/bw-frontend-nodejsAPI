@@ -1,12 +1,15 @@
 (function(angular) {
 'use strict';
 //===========================TruckDetailsController IMPLEMENTATION START======================================
-
-function TruckDetailsController($state, $uibModal, resizeService, TruckService) {
+function TruckDetailsController($state, $uibModal, $anchorScroll, $location, resizeService, TruckService) {
 	var ctrl = this;
 	ctrl.init = function(){
 		ctrl.$uibModal = $uibModal;
 		ctrl.$state = $state;
+
+		ctrl.$anchorScroll = $anchorScroll;
+		ctrl.$location = $location;
+
 		ctrl.limit = 30;
 		ctrl.lastKey = null;
 		ctrl.lastEvaluatedKey = '1';
@@ -42,9 +45,11 @@ function TruckDetailsController($state, $uibModal, resizeService, TruckService) 
 		.then(function(response){
 			if(truck){
 				ctrl.trucks = response.data.result.message;
+				ctrl.showLoader = false;
 			}
 			else{
-			ctrl.init();
+				// ctrl.init();
+				ctrl.trucks = ctrl.tempTrucks;
 			}
 			
 		})
@@ -54,6 +59,11 @@ function TruckDetailsController($state, $uibModal, resizeService, TruckService) 
 		})
 	}
 
+	ctrl.gotoTop = function(loc) {
+      	ctrl.$location.hash('top');
+      	ctrl.$anchorScroll();
+    };
+
 	ctrl.init();
 
 	function getTruckList(lastKey, limit) {
@@ -61,6 +71,9 @@ function TruckDetailsController($state, $uibModal, resizeService, TruckService) 
 		.then(function(response){
 			lastKey == null? ctrl.trucks = response.data.result.message : ctrl.trucks = ctrl.trucks.concat(response.data.result.message) ;
 			ctrl.lastKey = response.data.result.lastKey && response.data.result.lastKey.driverID['S'] || null;
+			
+			ctrl.tempTrucks = ctrl.trucks;
+
 			ctrl.showLoader = true;
 			ctrl.initLoader = true;
 			if(ctrl.trucks.length == 0){
@@ -110,6 +123,6 @@ ctrl.openPopUp = function(details){
 angular.module('truckDetails')
 	.component('truckDetails',{
 		templateUrl: 'admin/truck/truck-details/truck-details.template.html',
-		controller:['$state', '$uibModal', 'resizeService','TruckService', TruckDetailsController]
+		controller:['$state', '$uibModal','$anchorScroll','$location', 'resizeService','TruckService', TruckDetailsController]
 	});
 })(window.angular);

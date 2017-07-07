@@ -1,26 +1,29 @@
 
 <!-- / component4 \ -->
 
+<a id="top" style="position:absolute;margin-top:-200px "></a>
+
 <div class="component4">
 
 	<div class="container">
 		<br>
         <input type="text" class="form-control pull-right" ng-model="$ctrl.searchUser" placeholder="Search Drivers..." ng-keyup="$ctrl.search($ctrl.searchUser)">
-        {{$ctrl.searchUser}}
         <br><br><br>
 		<div class="component-bg">
-		
+
 			<ul infinite-scroll="$ctrl.getDrivers($ctrl.lastKey, $ctrl.limit)">
 				<li><a href="" ng-click="$ctrl.addDriver()" class="drive">Add Drivers</a></li>
+
+					
 
 				<li class="full" ng-repeat="driver in $ctrl.drivers | orderBy:'firstName'" ng-click="$ctrl.showDetails(driver)">
 					<a href=""><img style="width: 209px; height: 207px" src="img/list_img.jpg"></a>		
 					<h2><a href="">{{::driver.firstName || 'No Name' | myUpperCaseFilter}}</a></h2>
 				</li>
-
+<!-- 
 				<div class="loading" ng-hide="$ctrl.initLoader">
             		Loading&#8230;
-        		</div>
+        		</div> -->
 
         		<!-- <div class="loader" ng-hide="!$ctrl.showLoader">	
         		</div> -->
@@ -41,3 +44,28 @@
 	
 </div>
 <!-- \ component4 end / -->
+
+
+<!-- BackToTop Script & Button  START-->
+<div>
+	<a ng-click="$ctrl.gotoTop('top')" class="scrollToTop">Go to top<span></span></a>
+</div>
+<!-- <div>
+	<script type='text/javascript'>
+		$(document).ready(function(){ 
+		    $(window).scroll(function(){ 
+		        if ($(this).scrollTop() > 100) { 
+		            $('#scroll').fadeIn(); 
+		        } else { 
+		            $('#scroll').fadeOut(); 
+		        } 
+		    }); 
+		    $('#scroll').click(function(){ 
+		        $("html, body").animate({ scrollTop: 0 }, 600); 
+		        return false; 
+		    }); 
+		});
+	</script>
+	<a href="javascript:void(0);" id="scroll" class="scrollToTop" title="Scroll to Top">Top<span></span></a>
+</div> -->
+<!-- BackToTop Script & Button  END-->
