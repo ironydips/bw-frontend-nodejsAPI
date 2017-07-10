@@ -1,8 +1,8 @@
 (function(angular) {
-'use strict';
+	'use strict';
 
-angular.module('driverModal',[
-	'bathwaterApp.services',
-	]);
+	angular.module('driverModal',[
+		'bathwaterApp.services',
+		]);
 
 })(window.angular);

@@ -1,12 +1,12 @@
 (function(angular) {
-'use strict';
+	'use strict';
 
-angular.module('truckDetails',[
-	'truckModal',
-	'images-resizer',
-	'ui.bootstrap',
-	'bathwaterApp.services',
-	'infinite-scroll'
-	]);
+	angular.module('truckDetails',[
+		'truckModal',
+		'images-resizer',
+		'ui.bootstrap',
+		'bathwaterApp.services',
+		'infinite-scroll'
+		]);
 
 })(window.angular);

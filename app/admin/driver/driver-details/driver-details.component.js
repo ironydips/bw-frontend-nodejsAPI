@@ -1,127 +1,150 @@
 (function(angular) {
-'use strict';
+	'use strict';
 //===========================DriverDetailsController IMPLEMENTATION START======================================
-function DriverDetailsController($state, $uibModal, $anchorScroll, $location, DriverService, ScrollService) {
-	var ctrl = this;
-	ctrl.init = function(){
-		ctrl.$uibModal = $uibModal;
-		ctrl.$state = $state;
+	function DriverDetailsController($state, $uibModal, $anchorScroll, $location, DriverService, ScrollService) {
+		var ctrl = this;
+		ctrl.init = function(){
+			ctrl.$uibModal = $uibModal;
+			ctrl.$state = $state;
 
-		ctrl.$anchorScroll = $anchorScroll;
-		ctrl.$location = $location;
+			ctrl.$anchorScroll = $anchorScroll;
+			ctrl.$location = $location;
 
-		ctrl.limit = 30;
-		ctrl.lastKey = null;
-		ctrl.lastEvaluatedKey = '1';
-		ctrl.drivers = [];
-		ctrl.getDrivers(ctrl.lastKey, ctrl.limit);
-		ctrl.showLoader = false;
-		ctrl.initLoader = false;
-		ctrl.noData = false;
-	};
-    
-	//Add Driver Modal
-	ctrl.addDriver = function(){
-		ctrl.openPopUp(null);
-	};
+			ctrl.limit = 30;
+			ctrl.lastKey = null;
+			ctrl.lastEvaluatedKey = '1';
+			ctrl.drivers = [];
+			ctrl.getDrivers(ctrl.lastKey, ctrl.limit);
+			ctrl.showLoader = false;
+			ctrl.initLoader = false;
+			ctrl.noData = false;
 
-	//Show Driver's Modal
-	ctrl.showDetails = function(driverDetails){
-		debugger;
-		ctrl.openPopUp(driverDetails);
-	}
+			ctrl.gotoTopButton = false;
+			ctrl.gotoTopButtonStatus = 0;
+		};
 
-	ctrl.getDrivers = function(lastKey, limit) {
-    	if(ctrl.lastEvaluatedKey != ctrl.lastKey && !(ctrl.lastKey == null && ctrl.drivers.length > 0)){
-			getDriverList(lastKey, limit);
+
+
+
+		// ctrl.increment = function() {
+		// 	ctrl.gotoTopButtonStatus = 2;
+		// 	console.log(ctrl.gotoTopButtonStatus);
+		// 	debugger;
+		// };
+		// ctrl.decrement = function() {
+		// 	ctrl.gotoTopButtonStatus = 0;
+		// 	debugger;
+		// }
+
+
+
+		//Add Driver Modal
+		ctrl.addDriver = function(){
+			ctrl.openPopUp(null);
+		};
+
+		//Show Driver's Modal
+		ctrl.showDetails = function(driverDetails){
+			debugger;
+			ctrl.openPopUp(driverDetails);
 		}
-    	ctrl.lastEvaluatedKey = ctrl.lastKey;
-    	ctrl.showLoader = false;	
-	}
 
-	ctrl.search = function(driver){
-		driver = driver.toLowerCase();
-		DriverService.searchDrivers(driver)
-		.then(function(response){
-			if(driver){
-				ctrl.drivers = response.data.result.message;
-				ctrl.showLoader = false;
+		ctrl.getDrivers = function(lastKey, limit) {
+			if(ctrl.lastEvaluatedKey != ctrl.lastKey && !(ctrl.lastKey == null && ctrl.drivers.length > 0)){
+				getDriverList(lastKey, limit);
 			}
-			else{
-				// ctrl.init();
-				ctrl.drivers = ctrl.tempDrivers;
-				debugger;
-			}
-			
-		})
-		.catch(function(err){
-			console.log('Error getting driver details:');
-			console.log(err);
-		})
-	}
+			ctrl.lastEvaluatedKey = ctrl.lastKey;
+			ctrl.showLoader = false;	
+		}
 
-	ctrl.gotoTop = function(loc) {
-      	ctrl.$location.hash('top');
-      	ctrl.$anchorScroll();
-      	// ScrollService.getTopScroll(loc);
-    };
-
-	ctrl.init();
-
-	function getDriverList(lastKey, limit) {
-		DriverService.getAllDrivers(lastKey, limit)
-		.then(function(response){
-			lastKey == null? ctrl.drivers = response.data.result.message : ctrl.drivers = ctrl.drivers.concat(response.data.result.message) ;
-			
-			ctrl.tempDrivers = ctrl.drivers;
-
-			ctrl.lastKey = response.data.result.lastKey && response.data.result.lastKey.driverID['S'] || null;
-			ctrl.showLoader = true;
-			ctrl.initLoader = true;
-			if(ctrl.drivers.length == 0){
-				ctrl.noData = true;
-				ctrl.showLoader = false;
-			}
-			if(ctrl.lastKey == null){
-				ctrl.showLoader = false;
-			}
-			return ctrl.lastKey;
-		})
-		.catch(function(err){
-			console.log('Error getting driver details:');
-			console.log(err);
-		})
-	}
-
-//===========================POPUP IMPLEMENTATION START======================================
-
-ctrl.openPopUp = function(details){
-	
-	var modalInstance = ctrl.$uibModal.open({
-			component: 'driverModal',
-			windowClass: 'app-modal-window-large',
-			keyboard: false,
-			resolve:{
-				details: function(){
-					return (details || {});
+		ctrl.search = function(driver){
+			driver = driver.toLowerCase();
+			DriverService.searchDrivers(driver)
+			.then(function(response){
+				if(driver){
+					ctrl.drivers = response.data.result.message;
+					ctrl.showLoader = false;
 				}
-			},
-			backdrop: 'static'
-		});
+				else{
+					// ctrl.init();
+					ctrl.drivers = ctrl.tempDrivers;
+					debugger;
+				}
+				
+			})
+			.catch(function(err){
+				console.log('Error getting driver details:');
+				console.log(err);
+			})
+		}
 
-		modalInstance.result.then(function(data){
-			//data passed when pop up closed.
-			if(data && data.action == "update") ctrl.init();
+		ctrl.gotoTop = function(loc) {
+			ctrl.$location.hash('top');
+			ctrl.$anchorScroll();
+	      	// ScrollService.getTopScroll(loc);
+	     };
+
+		ctrl.init();
+
+		function getDriverList(lastKey, limit) {
+			DriverService.getAllDrivers(lastKey, limit)
+			.then(function(response){
+				lastKey == null? ctrl.drivers = response.data.result.message : ctrl.drivers = ctrl.drivers.concat(response.data.result.message) ;
+
+				ctrl.tempDrivers = ctrl.drivers;
+				ctrl.gotoTopButtonStatus++;
+
+				ctrl.lastKey = response.data.result.lastKey && response.data.result.lastKey.driverID['S'] || null;
+				ctrl.showLoader = true;
+				ctrl.initLoader = true;
+				if(ctrl.drivers.length == 0){
+					ctrl.noData = true;
+					ctrl.showLoader = false;
+				}
+				if(ctrl.lastKey == null){
+					ctrl.showLoader = false;
+				}
+				if(ctrl.gotoTopButtonStatus>1){
+					ctrl.gotoTopButton = true;
+				}
+
+				return ctrl.lastKey;
+			})
+			.catch(function(err){
+				console.log('Error getting driver details:');
+				console.log(err);
+			})
+		}
+
+		//===========================POPUP IMPLEMENTATION START======================================
+
+		ctrl.openPopUp = function(details){
 			
-		}, function(err){
-			console.log('Error in add-driver Modal');
-			console.log(err);
-		})
+			var modalInstance = ctrl.$uibModal.open({
+				component: 'driverModal',
+				windowClass: 'app-modal-window-large',
+				keyboard: false,
+				resolve:{
+					details: function(){
+						return (details || {});
+					}
+				},
+				backdrop: 'static'
+			});
+
+			modalInstance.result.then(function(data){
+					//data passed when pop up closed.
+				if(data && data.action == "update") ctrl.init();
+					
+			}, function(err){
+				console.log('Error in add-driver Modal');
+				console.log(err);
+			})
+		}
+		//===========================POPUP IMPLEMENTATION END======================================
 	}
-//===========================POPUP IMPLEMENTATION END======================================
-}
-//===========================DriverDetailsController IMPLEMENTATION END======================================
-angular.module('driverDetails')
+	//===========================DriverDetailsController IMPLEMENTATION END======================================
+	angular.module('driverDetails')
 	.component('driverDetails',{
 		templateUrl: 'admin/driver/driver-details/driver-details.template.html',
 		controller:['$state', '$uibModal','$anchorScroll','$location','DriverService','ScrollService', DriverDetailsController]

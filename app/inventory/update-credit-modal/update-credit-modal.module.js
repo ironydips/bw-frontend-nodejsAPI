@@ -1,6 +1,6 @@
 (function(angular) {
-'use strict';
+	'use strict';
 
-angular.module('updateCreditModal',['bathwaterApp.services']);
+	angular.module('updateCreditModal',['bathwaterApp.services']);
 
 })(window.angular);

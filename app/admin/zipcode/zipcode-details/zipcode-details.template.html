@@ -1,22 +1,20 @@
 
 <!-- / component4 \ -->
 <div class="zipCodeComponent">
+	<div class="container">
+		<div class="component-bg-small">
 
-		<div class="container">
+			<ul>
+				<li class="full"><a href="" ng-click="$ctrl.addZipCode()">Add Zip</a></li>
+				<li class="active full" ng-repeat="code in $ctrl.zipCodes">
+					<a href=""><span style="float:left">{{code.zipcode}}</span>
+						<img ng-click="$ctrl.deleteZipCode(code.zipcode)" style="width: 20px; height: 20px;float: left; margin-left:1px; margin-top: 3px" src="img/DeleteIcon.png"> </a>
+				</li>
+			</ul>
 
-				<div class="component-bg-small">
-					
-						<ul>
-							<li class="full"><a href="" ng-click="$ctrl.addZipCode()">Add Zip</a></li>
-							<li class="active full" ng-repeat="code in $ctrl.zipCodes">
-								<a href=""><span style="float:left">{{code.zipcode}}</span>
-								<img ng-click="$ctrl.deleteZipCode(code.zipcode)" style="width: 20px; height: 20px;float: left; margin-left:1px; margin-top: 3px" src="img/DeleteIcon.png"></a>
-							</li>
-						</ul>
-				      
-				<div class="clear"></div>
+			<div class="clear"></div>
 
-				</div>	 
-		</div>
+		</div>	 
+	</div>
 </div>
 <!-- \ component4 end / -->

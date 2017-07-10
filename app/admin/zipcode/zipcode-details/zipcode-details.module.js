@@ -1,10 +1,10 @@
 (function(angular) {
-'use strict';
+	'use strict';
 
-angular.module('zipcodeDetails',[
-	'ui.bootstrap',
-	'bathwaterApp.services',
-	'zipModal'
-	]);
+	angular.module('zipcodeDetails',[
+		'ui.bootstrap',
+		'bathwaterApp.services',
+		'zipModal'
+		]);
 
 })(window.angular);

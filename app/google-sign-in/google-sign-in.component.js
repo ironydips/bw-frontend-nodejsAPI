@@ -40,9 +40,8 @@ function GoogleSignInController($state,$interval, GAuth, AdminManagerService, Ad
             AdminManagerService.loginAdmin(ctrl.profile.email)
                 .then(function(response) {
                     if (response && response.data.result.message) {
+                        
                         ctrl.profile.role = response.data.result.message.role;
-                       // ctrl.profile.key = response.data.result.message.key;
-
                         switch(profile.role){
                             case "0":
                                 rights.Pickup = true;
@@ -76,7 +75,6 @@ function GoogleSignInController($state,$interval, GAuth, AdminManagerService, Ad
                 });
     };
 
-
     ctrl.AssignSuperadmin = function(){
                             rights.isSuperAdmin = true;
                             rights.Customers = true;
@@ -88,17 +86,17 @@ function GoogleSignInController($state,$interval, GAuth, AdminManagerService, Ad
                             $state.go('manageAdmin');
                     };
 
-     ctrl.AssignAdmin = function(){
+    ctrl.AssignAdmin = function(){
                             AdminRightsService.saveProfile(ctrl.profile);
                             AdminRightsService.addRights(rights);
                             $state.go('index');
                     };
-     ctrl.init();
+    ctrl.init();
 
-        }
+    }
 
-angular.module('googleSignIn')
-.component('gSign',{
-	templateUrl: 'google-sign-in/google-sign-in.template.html',
-	controller: ['$state','$interval','GAuth','AdminManagerService','AdminRightsService', GoogleSignInController]
+    angular.module('googleSignIn')
+    .component('gSign',{
+    	templateUrl: 'google-sign-in/google-sign-in.template.html',
+    	controller: ['$state','$interval','GAuth','AdminManagerService','AdminRightsService', GoogleSignInController]
 });

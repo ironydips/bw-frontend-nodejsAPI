@@ -1,9 +1,9 @@
 (function(angular) {
 
-'use strict';
+	'use strict';
 
-angular.module('adminPanel',[
-	'bathwaterApp.common'
-	]);
+	angular.module('adminPanel',[
+		'bathwaterApp.common'
+		]);
 
 })(window.angular);

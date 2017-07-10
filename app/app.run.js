@@ -8,7 +8,6 @@ angular.
     });
     
     //when page reload then by default state
-    $state.go('gSignIn');
-    // $state.go('adminLayout.timeslot');
+    // $state.go('gSignIn');
     
   }]);

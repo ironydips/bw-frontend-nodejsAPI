@@ -93,9 +93,9 @@ function TruckDetailsController($state, $uibModal, $anchorScroll, $location, res
 
 //===========================POPUP IMPLEMENTATION START======================================
 
-ctrl.openPopUp = function(details){
+	ctrl.openPopUp = function(details){
 
-	var modalInstance = ctrl.$uibModal.open({
+		var modalInstance = ctrl.$uibModal.open({
 			component: 'truckModal',
 			windowClass: 'app-modal-window-large',
 			keyboard: false,
@@ -108,10 +108,10 @@ ctrl.openPopUp = function(details){
 		});
 
 		modalInstance.result.then(function(data){
-			//data passed when pop up closed.
-			if(data && data.action == "update") ctrl.init();
-			
-		}),function(err){
+		//data passed when pop up closed.
+		if(data && data.action == "update") ctrl.init();
+
+	}),function(err){
 			console.log('Error in add-truck Modal');
 			console.log(err);
 		}		

@@ -1,6 +1,6 @@
 (function(angular) {
-'use strict';
+	'use strict';
 
-angular.module('customerSubscribeModal',[]);
+	angular.module('customerSubscribeModal',[]);
 
 })(window.angular);

@@ -5,11 +5,11 @@
     	var ctrl = this;
 
         ctrl.init = function() {
-                
-                ctrl.driver = (ctrl.resolve && ctrl.resolve.details) || {};
-                ctrl.isDisabled = Object.keys(ctrl.driver).length > 0;
-                ctrl.image = {};
-            }
+
+            ctrl.driver = (ctrl.resolve && ctrl.resolve.details) || {};
+            ctrl.isDisabled = Object.keys(ctrl.driver).length > 0;
+            ctrl.image = {};
+        }
         // if (ctrl.driver.images && ctrl.driver.images.length > 0) {
         //     ctrl.imageUrl = ctrl.driver.images[0].url;
         // }
@@ -20,7 +20,7 @@
             return ctrl.selectedImage;
         }), function(value) {
             value ?
-                (ctrl.imageUrl = 'data:image/jpeg;base64, ' + value.base64, ctrl.image.driverImage = value.base64) : (ctrl.image.driverImage = '');
+            (ctrl.imageUrl = 'data:image/jpeg;base64, ' + value.base64, ctrl.image.driverImage = value.base64) : (ctrl.image.driverImage = '');
         });
             //Add Driver
         ctrl.save = function() {
@@ -34,13 +34,13 @@
                     ctrl.driver[i]= ctrl.driver[i].toLowerCase();
                 }
                 DriverService.addDriver(ctrl.driver)
-                    .then(function(result) {
-                        ctrl.modalInstance.close({ action: 'update' });
-                    })
-                    .catch(function(err) {
-                        console.log('Error Adding Driver');
-                        console.log(err);
-                    });
+                .then(function(result) {
+                    ctrl.modalInstance.close({ action: 'update' });
+                })
+                .catch(function(err) {
+                    console.log('Error Adding Driver');
+                    console.log(err);
+                });
             }
         };
 
@@ -48,6 +48,7 @@
             var show = input.$invalid && (input.$dirty || input.$touched);
             return show;
         };
+
         ctrl.cancel = function() {
             ctrl.modalInstance.close();
         };
@@ -56,12 +57,12 @@
     }
 
     angular.module('driverModal')
-        .component('driverModal', {
-            templateUrl: 'admin/driver/driver-modal/driver-modal.template.html',
-            controller: ['$state','$q','$scope', 'DriverService', DriverModalController],
-            bindings: {
-                modalInstance: '<',
-                resolve: '<'
-            }
-        });
+    .component('driverModal', {
+        templateUrl: 'admin/driver/driver-modal/driver-modal.template.html',
+        controller: ['$state','$q','$scope', 'DriverService', DriverModalController],
+        bindings: {
+            modalInstance: '<',
+            resolve: '<'
+        }
+    });
 })(window.angular);

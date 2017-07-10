@@ -6,12 +6,11 @@
     function AssignDriverModalController($state, DriverService, UserRequestService) {
         var ctrl = this;
         ctrl.userRequestDetail = (ctrl.resolve && ctrl.resolve.userDetail) || {};
-        ctrl.setDriver = {};
 
         ctrl.init = function() {
             DriverService.getAllDrivers()
                 .then(function(response) {
-                    ctrl.drivers = response.data;
+                    ctrl.drivers = response.data.result.message;
                 })
                 .catch(function(err) {
                     console.log("Error while calling DriverService:" + err);

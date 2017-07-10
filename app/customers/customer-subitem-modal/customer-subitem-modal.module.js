@@ -1,8 +1,8 @@
 (function(angular) {
-'use strict';
+	'use strict';
 
-angular.module('customerSubItemModal',[
+	angular.module('customerSubItemModal',[
 		'ui.bootstrap'
-	]);
+		]);
 
 })(window.angular);

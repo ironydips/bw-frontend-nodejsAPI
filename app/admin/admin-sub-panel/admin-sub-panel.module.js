@@ -1,7 +1,7 @@
 (function(angular) {
 
-'use strict';
+	'use strict';
 
-angular.module('adminSubPanel',[]);
+	angular.module('adminSubPanel',[]);
 
 })(window.angular);

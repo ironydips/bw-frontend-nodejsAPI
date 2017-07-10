@@ -1,10 +1,10 @@
 (function(angular) {
-'use strict';
+	'use strict';
 
-angular.module('customerUserReqModal',[
-	'bathwaterApp.services',
-	'bootstrapLightbox',
-	'customerSubItemModal'
-	]);
+	angular.module('customerUserReqModal',[
+		'bathwaterApp.services',
+		'bootstrapLightbox',
+		'customerSubItemModal'
+		]);
 
 })(window.angular);

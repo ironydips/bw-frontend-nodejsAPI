@@ -1,9 +1,9 @@
 (function(){
-'use strict';
+	'use strict';
 
-angular.module('timeslotModal',[
+	angular.module('timeslotModal',[
 		'720kb.datepicker',
 		'bathwaterApp.services'
-	]);
+		]);
 
 })(window.angular)

@@ -1,11 +1,11 @@
 (function(angular) {
 
-'use strict';
+	'use strict';
 
-angular.module("promocodeDetails",[
-	'ui.bootstrap',
-	'bathwaterApp.services',
-	'promoModal'
-	]);
+	angular.module("promocodeDetails",[
+		'ui.bootstrap',
+		'bathwaterApp.services',
+		'promoModal'
+		]);
 
 })(window.angular);
