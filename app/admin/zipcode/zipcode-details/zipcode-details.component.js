@@ -26,19 +26,23 @@ function ZipCodeDetailsController($state, $uibModal, ZipcodeService) {
 	};
 
 	ctrl.deleteZipCode = function(zipcode){
-		//Show alert and then delete if Yes.
+		ctrl.openDeletPopUp(zipcode);
+	};
 
-		ZipcodeService.deleteZipCode(zipcode)
-		.then(function(response){
-			if(response.data.result.message == "success"){
-				ctrl.init();
-			}
-		})
-		.catch(function(err){
-			console.log('Error getting zipcode details:');
-			console.log(err);
-		})
-	}
+	// ctrl.deleteZipCode = function(zipcode){
+	// 	//Show alert and then delete if Yes.
+
+	// 	ZipcodeService.deleteZipCode(zipcode)
+	// 	.then(function(response){
+	// 		if(response.data.result.message == "success"){
+	// 			ctrl.init();
+	// 		}
+	// 	})
+	// 	.catch(function(err){
+	// 		console.log('Error getting zipcode details:');
+	// 		console.log(err);
+	// 	})
+	// }
 
 	ctrl.init();
 
@@ -64,6 +68,30 @@ function ZipCodeDetailsController($state, $uibModal, ZipcodeService) {
 			
 		}),function(err){
 			console.log('Error in add-driver Modal');
+			console.log(err);
+		}
+	}
+
+	ctrl.openDeletPopUp = function(details){
+
+		var modalInstance = ctrl.$uibModal.open({
+			component: 'deleteZipcodeModal',
+			windowClass: 'app-modal-window-small',
+			keyboard: false,
+			resolve:{
+				details: function(){
+					return (details || {});
+				}
+			},
+			backdrop: 'static'
+		});
+
+		modalInstance.result.then(function(data){
+			//data passed when pop up closed.
+			if(data && data.action == "update") ctrl.init();
+			
+		}),function(err){
+			console.log('Error in deleteZipcodeModal Modal');
 			console.log(err);
 		}
 	}

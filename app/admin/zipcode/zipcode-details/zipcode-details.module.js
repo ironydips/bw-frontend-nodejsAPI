@@ -4,7 +4,8 @@
 	angular.module('zipcodeDetails',[
 		'ui.bootstrap',
 		'bathwaterApp.services',
-		'zipModal'
+		'zipModal',
+		'deleteZipcodeModal'
 		]);
 
 })(window.angular);

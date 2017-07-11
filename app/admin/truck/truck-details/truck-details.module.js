@@ -6,7 +6,8 @@
 		'images-resizer',
 		'ui.bootstrap',
 		'bathwaterApp.services',
-		'infinite-scroll'
+		'infinite-scroll',
+		'deleteTruckModal'
 		]);
 
 })(window.angular);

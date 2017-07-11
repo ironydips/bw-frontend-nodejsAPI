@@ -5,6 +5,7 @@
          <h2 ng-hide="$ctrl.isEdited">Add Admin</h2>
          <h2 ng-show="$ctrl.isEdited">Edit Admin</h2>
 
+         <form name="$ctrl.manageAdminForm">
           <div class="inner-adjust">
             <h3>Details</h3>
             <div class="row">
@@ -13,7 +14,16 @@
                      <label>Email</label>
                   </div>
                   <div class="col-sm-4">
-                     <input type="text" style="width:270px;" class="form-control" ng-model="$ctrl.admin.email">
+                     <input type="email" name="email" style="width:270px;" class="form-control" ng-model="$ctrl.admin.email" ng-disabled="$ctrl.isEdited" ng-keyup="$ctrl.checkAdminEmail()" required>
+                     
+                     <span ng-if="$ctrl.isRegister" class="red">
+                        **Already Registered
+                     </span>
+
+                     <span class="red" class="error"  ng-show="$ctrl.manageAdminForm.email.$error.email">
+                        *Not valid email!
+                     </span>
+
                   </div>
                </div>
             </div>
@@ -22,7 +32,7 @@
             <div class="row">
                <div class="col-sm-6">
                   <div class="col-sm-3">
-                     <label>Is Super Admin</label>
+                     <label>Super Admin</label>
                   </div>
                   <div class="col-sm-4">
                      <input type="checkbox" ng-model="$ctrl.admin.SuperAdmin" ng-checked="$ctrl.admin.SuperAdmin">
@@ -81,12 +91,14 @@
                </div>
                <div class="btn-main">
                   <button type="button"  ng-click = "$ctrl.cancel()" class="btn btn-sm btn-default">Cancel</button>
-                  <button ng-hide="$ctrl.isEdited" type="button"  ng-click = "$ctrl.saveAdmin()" class="btn btn-sm btn-success">Save</button>
+                  <button ng-hide="$ctrl.isEdited" type="button"  ng-click = "$ctrl.saveAdmin()" class="btn btn-sm btn-success" ng-disabled="$ctrl.isRegister">Save</button>
                   <button ng-show="$ctrl.isEdited" type="button"  ng-click = "$ctrl.updateAdmin()" class="btn btn-sm btn-success">Update</button>
                   
                </div>
             </div>
          </div>
+         </form>
+
       </div>
    </div>
 </div>

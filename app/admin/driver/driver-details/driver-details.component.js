@@ -45,7 +45,6 @@
 
 		//Show Driver's Modal
 		ctrl.showDetails = function(driverDetails){
-			debugger;
 			ctrl.openPopUp(driverDetails);
 		}
 
@@ -77,12 +76,32 @@
 				console.log(err);
 			})
 		}
+		
+		ctrl.resetOnBlank = function(driver){
+			if(!driver){
+				ctrl.drivers = ctrl.tempDrivers;
+			}
+		}
 
 		ctrl.gotoTop = function(loc) {
 			ctrl.$location.hash('top');
 			ctrl.$anchorScroll();
 	      	// ScrollService.getTopScroll(loc);
 	     };
+
+	    ctrl.delete = function(driverID){
+	  //   	DriverService.deleteDriver(driverID)
+			// .then(function(response){
+			// 	if(response.data.result.message == "success"){
+   //                  ctrl.init();
+   //              }	
+			// })
+			// .catch(function(err){
+			// 	console.log('Error deleting driver:');
+			// 	console.log(err);
+			// })
+			ctrl.openDeletePopUp(driverID);
+	    }
 
 		ctrl.init();
 
@@ -141,6 +160,31 @@
 				console.log(err);
 			})
 		}
+
+		ctrl.openDeletePopUp = function(details){
+			
+			var modalInstance = ctrl.$uibModal.open({
+				component: 'deleteDriverModal',
+				windowClass: 'app-modal-window-small',
+				keyboard: false,
+				resolve:{
+					details: function(){
+						return (details || {});
+					}
+				},
+				backdrop: 'static'
+			});
+
+			modalInstance.result.then(function(data){
+					//data passed when pop up closed.
+				if(data && data.action == "update") ctrl.init();
+					
+			}, function(err){
+				console.log('Error in add-driver Modal');
+				console.log(err);
+			})
+		}
+
 		//===========================POPUP IMPLEMENTATION END======================================
 	}
 	//===========================DriverDetailsController IMPLEMENTATION END======================================

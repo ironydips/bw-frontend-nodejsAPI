@@ -11,15 +11,29 @@
 
 	<div class="container">
 		<br>
-		<input type="text" class="form-control pull-right" ng-model="$ctrl.searchUser" placeholder="Search Drivers..." ng-keyup="$ctrl.search($ctrl.searchUser)">
+		<input type="text" class="form-control pull-left" ng-model="$ctrl.searchUser" placeholder="Search Drivers..." ng-keyup="$ctrl.resetOnBlank($ctrl.searchUser)" style="width:89%">
+		&nbsp
+		<button type="button" class="btn btn-sm btn-success" ng-click="$ctrl.search($ctrl.searchUser)">Search</button>
+		<button type="button" class="btn btn-sm btn-success" ng-click="$ctrl.init()">Reset</button>
+
 		<br><br><br>
 		<div class="component-bg">
 
 			<ul infinite-scroll="$ctrl.getDrivers($ctrl.lastKey, $ctrl.limit)">
 				<li><a href="" ng-click="$ctrl.addDriver()" class="drive">Add Drivers</a></li>
-				<li class="full" ng-repeat="driver in $ctrl.drivers | orderBy:'firstName'" ng-click="$ctrl.showDetails(driver)">
-					<a href=""><img style="width: 209px; height: 207px" src="img/list_img.jpg"></a>		
-					<h2><a href="">{{::driver.firstName || 'No Name' | myUpperCaseFilter}}</a></h2>
+				<li class="full" ng-repeat="driver in $ctrl.drivers | orderBy:'firstName'">
+
+					<div style="position: absolute;top: 0;right: 0;">
+						<button ng-click="$ctrl.delete(driver)" type="button" class="close" aria-label="Close">
+  							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+
+					<div ng-click="$ctrl.showDetails(driver)">
+						<a href=""><img style="width: 209px; height: 207px" src="img/list_img.jpg"></a>		
+						<h2><a href="">{{::driver.firstName || 'No Name' | myUpperCaseFilter}}</a></h2>
+					</div>
+					
 				</li>
 				
 				<!-- 

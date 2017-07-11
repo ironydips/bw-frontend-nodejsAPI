@@ -59,10 +59,30 @@ function TruckDetailsController($state, $uibModal, $anchorScroll, $location, res
 		})
 	}
 
+	ctrl.resetOnBlank = function(truck){
+			if(!truck){
+				ctrl.trucks = ctrl.tempTrucks;
+			}
+		}
+
 	ctrl.gotoTop = function(loc) {
       	ctrl.$location.hash('top');
       	ctrl.$anchorScroll();
     };
+
+    ctrl.delete = function(truckID){
+	  //   	TruckService.deleteTruck(truckID)
+			// .then(function(response){
+			// 	if(response.data.result.message == "success"){
+   //                  ctrl.init();
+   //              }	
+			// })
+			// .catch(function(err){
+			// 	console.log('Error deleting truck:');
+			// 	console.log(err);
+			// })
+		ctrl.openDeletePopUp(truckID);
+	}
 
 	ctrl.init();
 
@@ -115,6 +135,30 @@ function TruckDetailsController($state, $uibModal, $anchorScroll, $location, res
 			console.log('Error in add-truck Modal');
 			console.log(err);
 		}		
+	}
+
+	ctrl.openDeletePopUp = function(details){
+			
+		var modalInstance = ctrl.$uibModal.open({
+			component: 'deleteTruckModal',
+			windowClass: 'app-modal-window-small',
+			keyboard: false,
+			resolve:{
+				details: function(){
+					return (details || {});
+				}
+			},
+			backdrop: 'static'
+		});
+
+		modalInstance.result.then(function(data){
+				//data passed when pop up closed.
+			if(data && data.action == "update") ctrl.init();
+				
+		}, function(err){
+			console.log('Error in add-driver Modal');
+			console.log(err);
+		})
 	}
 //===========================POPUP IMPLEMENTATION END======================================
 }

@@ -8,13 +8,19 @@
          <br/>
       </div>
    </div>
+   <div class="container">
+   <br>
+    <input type="text" class="form-control pull-right" ng-model="$ctrl.searchUser" placeholder="Search Drivers...">
+    <br><br>
    <br>
    <div class="table table-border text-center">
        <div style="height:500px;overflow:auto;">
-              <table class="table table-border">
+              <table class="table table-border table-fixed">
+                 <!-- <nav class="navbar navbar-fixed-top"> -->
+                 <thead> 
                  <tr>
                     <th style="font-size: 13px;" class="col-md-1">Email</th>
-                    <th style="font-size: 13px;" class="col-md-1">Is Super Admin</th>
+                    <th style="font-size: 13px;" class="col-md-2">Super Admin</th>
                     <th style="font-size: 13px;" class="col-md-1">Admin</th>
                     <th style="font-size: 13px;" class="col-md-1">Pickup/Delivery</th>
                     <th style="font-size: 13px;" class="col-md-1">Customers</th>
@@ -22,7 +28,10 @@
                     <th style="font-size: 13px;" class="col-md-1">Warehouse</th>
                     <th style="font-size: 13px;" class="col-md-3">Action</th>
                  </tr>
-                 <tr ng-repeat="ad in $ctrl.adminList track by $index" ng-click="$ctrl.selectRow($index)" ng-class="{'highlight': $index == $ctrl.selectedRow}">
+                 </thead>
+                 <!-- </nav> -->
+                 <tbody>
+                 <tr ng-repeat="ad in $ctrl.adminList | filter: $ctrl.searchUser" ng-click="$ctrl.selectRow($index)" ng-class="{'highlight': $index == $ctrl.selectedRow}">
                     <!-- <td>{{$index}}</td>     -->
                     <td>{{ad.email}}</td>
                     <td>{{ad.role == 10 | YesNo}}</td>
@@ -33,7 +42,9 @@
                     <td>{{ad.role == 3 | YesNo}}</td>
                     <td><button type="button" ng-click = "$ctrl.edit(ad, $index)" class="btn btn-sm btn-primary">Edit</button>&nbsp;&nbsp;&nbsp;<button type="button" ng-click = "$ctrl.delete(ad.email)" class="btn btn-sm btn-danger">Delete</button> </td>
                  </tr>
+                 </tbody>
               </table>
         </div>
+   </div>
    </div>
 </div>

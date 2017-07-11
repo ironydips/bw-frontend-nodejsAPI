@@ -26,11 +26,19 @@
 			});
 		};
 
+		var deleteTruck = function(truckID){
+			return $http({
+			    url: '/api/admin/deleteTruck?truckID='+truckID,
+			    method: "GET",
+			});
+		};
+
 		//EXPORTED Object
 		return {
 			getAllTrucks,
 			addTruck,
-			searchTrucks
+			searchTrucks,
+			deleteTruck
 		}
 	}
 

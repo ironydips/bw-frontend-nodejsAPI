@@ -5,7 +5,8 @@
 		'ui.bootstrap',
 		'bathwaterApp.services',
 		'driverModal',
-		'infinite-scroll'
+		'infinite-scroll',
+		'deleteDriverModal'
 		]);
 
 })(window.angular);
