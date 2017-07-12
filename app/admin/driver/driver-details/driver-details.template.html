@@ -23,7 +23,7 @@
 				<li><a href="" ng-click="$ctrl.addDriver()" class="drive">Add Drivers</a></li>
 				<li class="full" ng-repeat="driver in $ctrl.drivers | orderBy:'firstName'">
 
-					<div style="position: absolute;top: 0;right: 0;">
+					<div style="position: absolute;top: 0;right: 3px;">
 						<button ng-click="$ctrl.delete(driver)" type="button" class="close" aria-label="Close">
   							<span aria-hidden="true">&times;</span>
 						</button>

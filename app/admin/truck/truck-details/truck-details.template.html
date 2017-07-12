@@ -18,7 +18,7 @@
 				<li><a href="" ng-click="$ctrl.addTruck()" class="drive">Add Trucks</a></li>
 				<li class="full" ng-repeat="truck in $ctrl.trucks | orderBy:'truckType'" >
 					
-					<div style="position: absolute;top: 0;right: 0;">
+					<div style="position: absolute;top: 0;right: 3px;">
 						<button ng-click="$ctrl.delete(truck.truckID)" type="button" class="close" aria-label="Close">
   							<span aria-hidden="true">&times;</span>
 						</button>

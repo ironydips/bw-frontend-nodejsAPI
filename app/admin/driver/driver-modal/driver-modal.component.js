@@ -1,7 +1,7 @@
 (function(angular) {
     'use strict';
 
-    function DriverModalController($state,$q,$scope, DriverService) {
+    function DriverModalController($state,$q,$scope,ngToast, DriverService) {
     	var ctrl = this;
 
         ctrl.init = function() {
@@ -24,7 +24,8 @@
         });
             //Add Driver
         ctrl.save = function() {
-
+                    ctrl.openNotice();
+                    debugger;
             angular.forEach(ctrl.driverDetailForm.$error.required, function(field) {
                 field.$setDirty();
             });
@@ -36,6 +37,7 @@
                 DriverService.addDriver(ctrl.driver)
                 .then(function(result) {
                     ctrl.modalInstance.close({ action: 'update' });
+
                 })
                 .catch(function(err) {
                     console.log('Error Adding Driver');
@@ -52,6 +54,13 @@
         ctrl.cancel = function() {
             ctrl.modalInstance.close();
         };
+        ctrl.openNotice = function () {
+            ngToast.create({
+                content: '<div class="">Driver Successfully Added...</div>',
+                className: 'info',
+                timeout: 800,
+            });
+        };
 
         ctrl.init();
     }
@@ -59,7 +68,7 @@
     angular.module('driverModal')
     .component('driverModal', {
         templateUrl: 'admin/driver/driver-modal/driver-modal.template.html',
-        controller: ['$state','$q','$scope', 'DriverService', DriverModalController],
+        controller: ['$state','$q','$scope','ngToast', 'DriverService', DriverModalController],
         bindings: {
             modalInstance: '<',
             resolve: '<'

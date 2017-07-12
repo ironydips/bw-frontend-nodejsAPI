@@ -18,6 +18,7 @@ function TruckDetailsController($state, $uibModal, $anchorScroll, $location, res
 		ctrl.showLoader = false;
 		ctrl.initLoader = false;
 		ctrl.noData = false;
+		ctrl.searchTruck = "";
 	};
 
 	//Add Truck Modal

@@ -1,12 +1,24 @@
 <div class="timeslotComponent">
    <div class="container">
-
-      <a ng-click="$ctrl.addTimeslot()" class="btn btn-sm btn-success">Add Timeslot</a>
-      <a ng-click="$ctrl.showallTimeslot()" class="btn btn-sm btn-success">Show All</a>
+      <br>
+      <div class="pull-left" style="margin-left: 0;margin-right: 60%;">
+            <a ng-click="$ctrl.addTimeslot()" class="btn btn-sm btn-success">Add Timeslot</a>
+            <a ng-click="$ctrl.showallTimeslot()" class="btn btn-sm btn-success">Show All</a>
+      </div>
+      
+      <div class="col-sm-3">
+         <datepicker date-format="MM.dd.yyyy" selector="form-control">
+            <div class="input-group">
+                  <input ng-model="$ctrl.selectedDate" class="form-control" placeholder="Choose a date" />
+                  <span class="input-group-addon" ng-click="$ctrl.getTimeslotsByDate($ctrl.selectedDate)" style="cursor: pointer">Go
+                  </span>
+            </div>
+         </datepicker>
+      </div>
 
       <div class="row-fluid">
          <div class="span12 text-center">
-            <h4 style="font-size: 15px;font-weight: bold;text-decoration: underline;">{{$ctrl.weekDate[0]}} &nbsp To &nbsp {{$ctrl.weekDate[5]}}</h4><br>
+            <h4 style="font-size: 15px;font-weight: bold;text-decoration: underline;">{{$ctrl.weekDate[0]}} &nbsp; To &nbsp; {{$ctrl.weekDate[5]}}</h4><br>
          </div>
       </div>
 
@@ -34,13 +46,13 @@
             </div>
 
             <div ng-if="$ctrl.noResponse">
-               <h4 style="margin:-20% 0 30% 3%;">No Record Found</h4>
+               <h4 style="margin:-25% 0 30% 3%;">No Record Found</h4>
             </div>
 
-            <a class="left carousel-control" ng-click="$ctrl.prevTimeslot()" style="margin:30% 0 30% 3%;width: 50px">
+            <a class="left carousel-control" ng-click="$ctrl.prevTimeslot()" style="margin:30% 0 30% 2%;width: 50px">
             <span class="glyphicon glyphicon-chevron-left" style="color: blue; cursor:pointer;"></span>
             </a>
-            <a class="right carousel-control" ng-click="$ctrl.nextTimeslot()" style="margin:30% 4% 30% 0;width: 50px">
+            <a class="right carousel-control" ng-click="$ctrl.nextTimeslot()" style="margin:30% 3% 30% 0;width: 50px">
             <span class="glyphicon glyphicon-chevron-right" style="color: blue; cursor:pointer;"></span>
             </a>
 

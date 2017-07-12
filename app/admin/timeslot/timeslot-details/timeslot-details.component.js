@@ -25,15 +25,8 @@ function TimeslotController($state, $uibModal,moment, TimeslotService) {
 		ctrl.rDateData = [];
 		ctrl.weekDate = [];
 		ctrl.weekDay = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-		ctrl.slotTime = ['8am-10am','10am-12pm','12pm-2pm','2pm-4pm','4pm-6pm','6pm-8pm'];
-		
-		ctrl.i = 1;
-
-		// var startDate = new Date();
-		// ctrl.mDate = ctrl.getMonday(startDate);
-		// console.log(ctrl.mDate);
-		
-		ctrl.mDate = moment().day(ctrl.i).format('MM.DD.YYYY');
+		ctrl.slotTime = ['8am-10am','10am-12pm','12pm-2pm','2pm-4pm','4pm-6pm','6pm-8pm'];	
+		ctrl.mDate = moment().day(1).format('MM.DD.YYYY');
 		ctrl.getTimeslotsForTheWeek(ctrl.mDate);
 	};
 
@@ -94,23 +87,31 @@ function TimeslotController($state, $uibModal,moment, TimeslotService) {
 	}
 
 	ctrl.nextTimeslot = function(){
+		ctrl.selectedDate = "";
 		ctrl.rDateData = [];
 		ctrl.weekDate = [];
         ctrl.objInit();
-        ctrl.i = ctrl.i + 7;
-		ctrl.mDate = moment().day(ctrl.i).format('MM.DD.YYYY');
-		console.log(ctrl.mDate);
+		var mDate = moment(ctrl.mDate);
+		ctrl.mDate = mDate.add(7, 'days').format("MM.DD.YYYY");
 		ctrl.getTimeslotsForTheWeek(ctrl.mDate);
+		debugger;
 	}
 
 	ctrl.prevTimeslot = function(){
+		ctrl.selectedDate = "";
         ctrl.rDateData = [];
 		ctrl.weekDate = [];
-		ctrl.objInit();
-        ctrl.i = ctrl.i - 7;
-		ctrl.mDate = moment().day(ctrl.i).format('MM.DD.YYYY');
-		console.log(ctrl.mDate);
+        ctrl.objInit();
+		var mDate = moment(ctrl.mDate);
+		ctrl.mDate = mDate.add(-7, 'days').format("MM.DD.YYYY");
 		ctrl.getTimeslotsForTheWeek(ctrl.mDate);
+	}
+	ctrl.getTimeslotsByDate = function(mDate){
+		ctrl.rDateData = [];
+		ctrl.weekDate = [];
+        ctrl.objInit();
+        ctrl.mDate = mDate;
+		ctrl.getTimeslotsForTheWeek(mDate);
 	}
 
 	//Add Timeslot
@@ -130,7 +131,7 @@ function TimeslotController($state, $uibModal,moment, TimeslotService) {
 		ctrl.startDatePicker = new Date(startDate);
 		var i = 0;
 		while (i < 6) {
-			var date = moment(ctrl.startDatePicker).format('MM.DD.YYYY')
+			var date = moment(ctrl.startDatePicker).format('MM.DD.YYYY');
 			ctrl.weekDate.push(date);
 		    ctrl.startDatePicker = moment(ctrl.startDatePicker).add(1, 'd');
 		    i++;

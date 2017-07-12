@@ -2,34 +2,25 @@
 	'use strict';
 //===========================trucksController IMPLEMENTATION START======================================
 
-	function trucksController($state,$q,$uibModal,PickupTruckService){
+	function trucksController($state,$q,$uibModal,moment,PickupTruckService){
 		var ctrl = this;
 		ctrl.$uibModal = $uibModal;
 		ctrl.$state = $state;
-		ctrl.init = function(){
-		ctrl.initLoader = false;
 		
-		//get truck & driver details for PopUp.
-		$q.all([PickupTruckService.getTrucklist(), PickupTruckService.getDriverlist()])
+		ctrl.init = function(){
+			ctrl.initLoader = false;
+
+			$q.all([PickupTruckService.getTrucklist(), PickupTruckService.getDriverlist(), PickupTruckService.getAllDriverTruckHistory()])
 			.then(function(response){
 				ctrl.trucks = response[0].data.result.message;
 				ctrl.drivers = response[1].data.result.message;
+				ctrl.trkhistories = response[2].data.result.message;
 				ctrl.initLoader = true;
 			})
 			.catch(function(err){
 				console.log('Error getting driver list details:/Error getting truck details:');
 	 			console.log(err);
 			});
-
-		//get truck details.
-		 PickupTruckService.getAllDriverTruckHistory()
-			.then(function(response){
-				ctrl.trkhistories = response.data.result.message;
-			})
-			.catch(function(err){
-				console.log('Error getting truck histories details:');
-				console.log(err);
-			})
 		};
 
 		ctrl.assign = function(){
@@ -60,6 +51,9 @@
 				},
 				trucks: function(){
 					return ctrl.trucks;
+				},
+				trkhistories: function(){
+					return ctrl.trkhistories;
 				}
 			},
 			backdrop: 'static'
@@ -127,7 +121,7 @@
 	angular.module('deliveryTrucks')
 	.component('deliveryTrucks',{
 		templateUrl: 'pickup-delivery-management/delivery-trucks/delivery-trucks-details/delivery-trucks-details.template.html',
-		controller:['$state','$q','$uibModal','PickupTruckService', trucksController]
+		controller:['$state','$q','$uibModal','moment','PickupTruckService', trucksController]
 	});
 
 })(window.angular);

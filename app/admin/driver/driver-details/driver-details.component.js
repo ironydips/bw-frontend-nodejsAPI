@@ -21,6 +21,7 @@
 
 			ctrl.gotoTopButton = false;
 			ctrl.gotoTopButtonStatus = 0;
+			ctrl.searchUser = "";
 		};
 
 
