@@ -12,16 +12,10 @@ function deliverytruckModalController($state,TruckService,DriverService,PickupTr
 		ctrl.drivers = ctrl.resolve.drivers;
 		ctrl.trkhistories = ctrl.resolve.trkhistories;
 		ctrl.isAvail = true;
+		ctrl.enableAssign = false;
 		}
 
 	ctrl.assign = function(driverid,truckid){
-		ctrl.isAvail = true;
-		for (var i = 0; i < ctrl.trkhistories.length; i++) {							
-    		if((ctrl.trkhistories[i].date == ctrl.todayDate) && (ctrl.trkhistories[i].driverID == driverid) && (ctrl.trkhistories[i].truckID == truckid)){							
-    			ctrl.isAvail = false;
-    		}	
-    	}
-
     	if(ctrl.isAvail){
 			PickupTruckService.assignDriverToTruck(driverid,truckid)
 			.then(function(result){
@@ -37,8 +31,18 @@ function deliverytruckModalController($state,TruckService,DriverService,PickupTr
 	ctrl.cancel = function(){
 		ctrl.modalInstance.close();
 	}
-	ctrl.chaeckAvail = function(){
-		debugger
+
+	ctrl.checkAvail = function(){
+		if((ctrl.assign.driverid) && (ctrl.assign.truckid)){
+			ctrl.isAvail = true;
+			ctrl.enableAssign = true;
+			for (var i = 0; i < ctrl.trkhistories.length; i++) {							
+				if((ctrl.trkhistories[i].date == ctrl.todayDate) && (ctrl.trkhistories[i].driverID == ctrl.assign.driverid) && (ctrl.trkhistories[i].truckID == ctrl.assign.truckid)){							
+					ctrl.isAvail = false;
+					ctrl.enableAssign = false;
+				}
+			}
+		}
 	}
 
 	ctrl.init();

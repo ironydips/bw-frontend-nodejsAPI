@@ -3,29 +3,31 @@
 <div class="slotComponent">
    <div class="container">
         <div class="slotBg">
-            <h2> All Timeslots </h2>
+            <h2> Timeslots </h2>
             <div class="table-responsive">
-                <div style="height:470px;overflow:auto;">
+                <table class="table table-striped text-center" style="margin:0">
+                    <thead>
+                        <tr>
+                            <th class="col-md-4">Time/Date </th>
+                            <th class="col-md-4">Time Slot </th>
+                            <th class="col-md-4">Availability </th>
+                        </tr>
+                    </thead> 
+                </table>
+                <div style="height:430px;overflow:auto;">
                     <table class="table table-striped text-center">
-                        <thead>
-                            <tr>
-                                <th> <br><h3>Time/Date</h3></th>
-                                <th> <br><h3>Time Slot</h3> </th>
-                                <th> <br><h3>Availability</h3></th>
-                            </tr>
-                        </thead>   
                         <tbody>
                             <tr ng-repeat="ts in $ctrl.alltimeslot | orderBy: 'date'">
-                                <td>{{ts.date}}</td>
-                                <td>{{ts.timeslot}}</td>
-                                <td>{{ts.availabilityCount}}</td>
+                                <td class="col-md-4">{{ts.date}}</td>
+                                <td class="col-md-4">{{ts.timeslot}}</td>
+                                <td class="col-md-4">{{ts.availabilityCount}}</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-            <div class="" style="text-align:center;margin-bottom: 1cm;">
-                <input class="btn btn-lg btn-primary cancel" ng-click="$ctrl.cancelshowall()" value="Cancel" type="button">
+            <div  <div class="bottom-btn">
+                <input class="btn btn-primary cancel" ng-click="$ctrl.cancelshowall()" value="Cancel" type="button">
             </div>
         </div>
     </div>

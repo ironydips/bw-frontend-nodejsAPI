@@ -2,21 +2,23 @@
 <!-- / component4 \ -->
 
 <a id="top" style="position:absolute;margin-top:-200px "></a>
-<!-- <input type="text" 
-  ng-model="$ctrl.gotoTopButtonStatus" 
-  ng-scroll-up="$ctrl.increment()" 
-  ng-scroll-down="$ctrl.decrement()" />
- -->
+
 <div class="component4">
 
-	<div class="container">
-		<br>
-		<input type="text" class="form-control pull-left" ng-model="$ctrl.searchUser" placeholder="Search Drivers..." ng-keyup="$ctrl.resetOnBlank($ctrl.searchUser)" style="width:89%">
-		&nbsp
-		<button type="button" class="btn btn-sm btn-success" ng-click="$ctrl.search($ctrl.searchUser)">Search</button>
-		<button type="button" class="btn btn-sm btn-success" ng-click="$ctrl.init()">Reset</button>
+	<div class="container"><br>
 
-		<br><br><br>
+		<div class="input-group">
+			<div class="form-group has-feedback has-clear">
+				<input type="text" class="form-control pull-left" ng-model="$ctrl.searchUser" placeholder="Search Drivers..." ng-keyup="$ctrl.resetOnBlank($ctrl.searchUser)">
+				<span class="form-control-clear glyphicon glyphicon-remove form-control-feedback " ng-if="$ctrl.searchUser" ng-click="$ctrl.resetOnBlank()" style="z-index: 10;
+				pointer-events: auto;
+				cursor: pointer;"></span>
+			</div>
+			<span class="input-group-btn">
+				<button type="button" class="btn btn-primary" ng-click="$ctrl.search($ctrl.searchUser)">Search</button>
+			</span>
+		</div><br>
+
 		<div class="component-bg">
 
 			<ul infinite-scroll="$ctrl.getDrivers($ctrl.lastKey, $ctrl.limit)">
@@ -61,28 +63,12 @@
 </div>
 <!-- \ component4 end / -->
 
-
-<!-- BackToTop Script & Button  START-->
-<div ng-hide="!$ctrl.gotoTopButton">
-	<a ng-click="$ctrl.gotoTop('top')" class="scrollToTop">Go to top<span></span></a>
+<div>
+	<a ng-click="$ctrl.gotoTop()" class="scrollToTop">Go to top<span></span></a>
 </div>
 
-<!-- <div>
-	<script type='text/javascript'>
-		$(document).ready(function(){ 
-		    $(window).scroll(function(){ 
-		        if ($(this).scrollTop() > 100) { 
-		            $('#scroll').fadeIn(); 
-		        } else { 
-		            $('#scroll').fadeOut(); 
-		        } 
-		    }); 
-		    $('#scroll').click(function(){ 
-		        $("html, body").animate({ scrollTop: 0 }, 600); 
-		        return false; 
-		    }); 
-		});
-	</script>
-	<a href="javascript:void(0);" id="scroll" class="scrollToTop" title="Scroll to Top">Top<span></span></a>
-</div> -->
-<!-- BackToTop Script & Button  END-->
+<!-- BackToTop Button  START-->
+
+<!-- <div class="scrollToTop" style="display:none;" ng-click="$ctrl.goToTop('top')">Go to top<span></span></div> -->
+
+<!-- BackToTop Button  END-->

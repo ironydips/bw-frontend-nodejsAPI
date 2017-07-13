@@ -55,7 +55,6 @@
         ctrl.cancel = function() {
             ctrl.modalInstance.close();
         };
-
                 
         ctrl.updateAdmin = function() {
             //Edit Admin
@@ -108,6 +107,15 @@
                         ctrl.isRegister  = true;
                      }           
                 } 
+            }
+        }
+
+        ctrl.enableSave = function(){
+            if((ctrl.manageAdminForm.email.$error.email) || ctrl.isRegister || !ctrl.admin.email){
+                return false;
+            }
+            else{
+                return true;
             }
         }
 

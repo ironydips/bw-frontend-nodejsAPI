@@ -17,7 +17,7 @@
 
                <div class="btn-main">
                   <button type="button" ng-click = "$ctrl.cancel()" class="btn btn-sm btn-default">Cancel</button>
-                  <button type="button" ng-click = "$ctrl.save()" class="btn btn-sm btn-success">Save</button>
+                  <button type="button" ng-click = "$ctrl.save()" ng-disabled="!$ctrl.zip.zipcode" class="btn btn-sm btn-success">Save</button>
                </div>
             </div>
          </form>

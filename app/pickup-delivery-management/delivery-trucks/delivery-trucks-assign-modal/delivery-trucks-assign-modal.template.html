@@ -10,7 +10,7 @@
                             <label>Select Driver:</label>
                         </div>
                         <div class="col-sm-5">
-                            <select style="width: 250px;" class="form-control" ng-model="$ctrl.assign.driverid" ng-click="$ctrl.chaeckAvail()">
+                            <select style="width: 250px;" class="form-control" ng-model="$ctrl.assign.driverid" ng-click="$ctrl.checkAvail()">
                                 <option value="">--Select Driver--</option>
                                 <option ng-repeat="driver in $ctrl.drivers | filter: $ctrl.trkhistories.driverName" value="{{driver.driverID}}">{{driver.firstName}} {{driver.lastName}}</option>
                             </select>
@@ -24,12 +24,15 @@
                             <label>Select Truck:</label>
                         </div>
                         <div class="col-sm-5">
-                            <select style="width: 250px;" class="form-control" ng-model="$ctrl.assign.truckid" ng-click="$ctrl.chaeckAvail()>
+                            <select style="width: 250px;" class="form-control" ng-model="$ctrl.assign.truckid" ng-click="$ctrl.checkAvail()">
                                 <option value="">--Select Truck--</option>
                                 <option ng-repeat="truck in $ctrl.trucks | filter: $ctrl.trkhistories.truckID" value="{{truck.truckID}}">{{truck.licensePlate}}</option>
                             </select>
                         </div>
                     </div>
+                </div>
+                <div ng-if="!$ctrl.isAvail" style="margin-left: 28%">
+                  <span class="red">Already assigned for today</span>
                 </div>
                 <!-- <br>
                 <div class="row">
@@ -60,12 +63,9 @@
                          </table>
                    </div> 
                 </div> -->
-                <div ng-if="!$ctrl.isAvail">
-                  <span class="red">*Already assigned for today</span>
-                </div>
                 <div class="btn-main">
                     <button type="button" ng-click="$ctrl.cancel()" class="btn btn-sm btn-default">Cancel</button>
-                    <button type="button" ng-click="$ctrl.assign($ctrl.assign.driverid,$ctrl.assign.truckid)" class="btn btn-sm btn-success">Assign</button>
+                    <button type="button" ng-click="$ctrl.assign($ctrl.assign.driverid,$ctrl.assign.truckid)" class="btn btn-sm btn-success" ng-disabled="!$ctrl.enableAssign">Assign</button>
                 </div>
             </div>
         </div>

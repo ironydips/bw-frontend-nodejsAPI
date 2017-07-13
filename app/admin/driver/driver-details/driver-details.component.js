@@ -18,26 +18,8 @@
 			ctrl.showLoader = false;
 			ctrl.initLoader = false;
 			ctrl.noData = false;
-
-			ctrl.gotoTopButton = false;
-			ctrl.gotoTopButtonStatus = 0;
 			ctrl.searchUser = "";
 		};
-
-
-
-
-		// ctrl.increment = function() {
-		// 	ctrl.gotoTopButtonStatus = 2;
-		// 	console.log(ctrl.gotoTopButtonStatus);
-		// 	debugger;
-		// };
-		// ctrl.decrement = function() {
-		// 	ctrl.gotoTopButtonStatus = 0;
-		// 	debugger;
-		// }
-
-
 
 		//Add Driver Modal
 		ctrl.addDriver = function(){
@@ -59,28 +41,31 @@
 
 		ctrl.search = function(driver){
 			driver = driver.toLowerCase();
-			DriverService.searchDrivers(driver)
-			.then(function(response){
+			if(ctrl.tempDriver != driver){
 				if(driver){
-					ctrl.drivers = response.data.result.message;
-					ctrl.showLoader = false;
-				}
-				else{
-					// ctrl.init();
-					ctrl.drivers = ctrl.tempDrivers;
+					DriverService.searchDrivers(driver)
+					.then(function(response){
+						ctrl.drivers = response.data.result.message;
+						ctrl.showLoader = false;
+					})
+					.catch(function(err){
+						console.log('Error getting driver details:');
+						console.log(err);
+					})
 					debugger;
 				}
-				
-			})
-			.catch(function(err){
-				console.log('Error getting driver details:');
-				console.log(err);
-			})
+				else{
+					ctrl.drivers = ctrl.tempDrivers;
+				}
+			}
+			ctrl.tempDriver = driver;
 		}
 		
 		ctrl.resetOnBlank = function(driver){
 			if(!driver){
 				ctrl.drivers = ctrl.tempDrivers;
+				ctrl.searchUser = "";
+				ctrl.tempDriver = "";
 			}
 		}
 
@@ -91,18 +76,23 @@
 	     };
 
 	    ctrl.delete = function(driverID){
-	  //   	DriverService.deleteDriver(driverID)
-			// .then(function(response){
-			// 	if(response.data.result.message == "success"){
-   //                  ctrl.init();
-   //              }	
-			// })
-			// .catch(function(err){
-			// 	console.log('Error deleting driver:');
-			// 	console.log(err);
-			// })
 			ctrl.openDeletePopUp(driverID);
 	    }
+
+
+	    // $(window).scroll(function () {
+	    // 	if ($(this).scrollTop() > 100) {
+	    // 		$('.scrollToTop').fadeIn();
+	    // 	} else {
+	    // 		$('.scrollToTop').fadeOut();
+	    // 	}
+	    // });
+	    
+	    // $('.scrollToTop').click(function () {
+	    // 	$("html, body").animate({ scrollTop: 0 }, 1000);
+	    // 	return false;
+	    // });
+
 
 		ctrl.init();
 
@@ -112,7 +102,6 @@
 				lastKey == null? ctrl.drivers = response.data.result.message : ctrl.drivers = ctrl.drivers.concat(response.data.result.message) ;
 
 				ctrl.tempDrivers = ctrl.drivers;
-				ctrl.gotoTopButtonStatus++;
 
 				ctrl.lastKey = response.data.result.lastKey && response.data.result.lastKey.driverID['S'] || null;
 				ctrl.showLoader = true;
@@ -123,9 +112,6 @@
 				}
 				if(ctrl.lastKey == null){
 					ctrl.showLoader = false;
-				}
-				if(ctrl.gotoTopButtonStatus>1){
-					ctrl.gotoTopButton = true;
 				}
 
 				return ctrl.lastKey;

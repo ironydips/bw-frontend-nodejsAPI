@@ -41,6 +41,10 @@
             ctrl.openPopUpAdmin(null);
         };
 
+        ctrl.reset = function(){
+            ctrl.searchUser = "";
+        }
+
         function getAdminList(){
 
            AdminManagerService.listofAdmin()

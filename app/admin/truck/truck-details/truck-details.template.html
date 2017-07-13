@@ -4,14 +4,21 @@
 <a id="top" style="position:absolute;margin-top:-200px "></a>
 
 <div class="component4">
+
 	<div class="container"><br>
 
-        <input type="text" class="form-control pull-left" ng-model="$ctrl.searchTruck" placeholder="Search Trucks..." ng-keyup="$ctrl.resetOnBlank($ctrl.searchTruck)" style="width:89%">
-        &nbsp
-        <button type="button" class="btn btn-sm btn-success" ng-click="$ctrl.search($ctrl.searchTruck)">Search</button>
-		<button type="button" class="btn btn-sm btn-success" ng-click="$ctrl.init()">Reset</button>
+        <div class="input-group">
+			<div class="form-group has-feedback has-clear">
+				<input type="text" class="form-control pull-left" ng-model="$ctrl.searchTruck" placeholder="Search Drivers..." ng-keyup="$ctrl.resetOnBlank($ctrl.searchTruck)">
+				<span class="form-control-clear glyphicon glyphicon-remove form-control-feedback " ng-if="$ctrl.searchTruck" ng-click="$ctrl.resetOnBlank()" style="z-index: 10;
+				pointer-events: auto;
+				cursor: pointer;"></span>
+			</div>
+			<span class="input-group-btn">
+				<button type="button" class="btn btn-primary" ng-click="$ctrl.search($ctrl.searchTruck)">Search</button>
+			</span>
+		</div><br>
 
-        <br><br><br>
 		<div class="component-bg">
 
 			<ul infinite-scroll="$ctrl.getTrucks($ctrl.lastKey, $ctrl.limit)">
