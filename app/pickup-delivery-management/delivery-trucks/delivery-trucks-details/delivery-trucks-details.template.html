@@ -24,7 +24,7 @@
                <table class="table table-striped table-hover text-center">
                   <tr ng-repeat="history in $ctrl.trkhistories| orderBy: 'date' : true">
                      <td class="col-md-3">{{history.truckLicensePlate}}</td>
-                     <td class="col-md-3">{{history.date}}</td>
+                     <td class="col-md-3">{{history.date | myShowDateFilter}}</td>
                      <td class="col-md-3">{{history.driverName}}</td>
                      <td class="col-md-3">
                         <button type="button"  ng-click = "$ctrl.unAssign(history)" class="btn btn-primary btn-sm">UnAssign</button>

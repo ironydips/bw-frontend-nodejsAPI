@@ -20,7 +20,7 @@
 
       <div class="row-fluid">
          <div class="span12 text-center">
-            <h4 style="font-size: 15px;font-weight: bold;text-decoration: underline;">{{$ctrl.weekDateDisplay[0]}} &nbsp; To &nbsp; {{$ctrl.weekDateDisplay[5]}}</h4>
+            <h4 style="font-size: 15px;font-weight: bold;text-decoration: underline;">{{$ctrl.weekDate[0] | myShowDateFilter}} &nbsp; To &nbsp; {{$ctrl.weekDate[6] | myShowDateFilter}}</h4>
          </div>
       </div>
 
@@ -38,9 +38,9 @@
                      </tr>
                   </thead>
                   <tbody >
-                     <tr ng-repeat="weekDate in $ctrl.weekDateDisplay">
+                     <tr ng-repeat="weekDate in $ctrl.weekDate">
                      <th style="padding:20px 0 20px 0px;">{{$ctrl.weekDay[$index]}}</th>
-                        <th style="padding:20px 0 20px 0px;">{{weekDate}}</th>
+                        <th style="padding:20px 0 20px 0px;">{{weekDate | myShowDateFilter}}</th>
                         <td ng-repeat="timeslot in $ctrl.rDateData[$index]"  style="padding: 20px 0 20px 20px;">
                            Availability Count:<b>{{timeslot.availabilityCount}}</b>
                         </td>
@@ -48,10 +48,10 @@
                   </tbody>
                </table>
                <div>
-                  <a class="left carousel-control" ng-click="$ctrl.prevTimeslot()" style="margin:16% 0 3% 2%;width: 50px; border-radius: 50% 0% 0% 50%">
+                  <a class="left carousel-control" ng-click="$ctrl.prevTimeslot()" style="margin:201px 0 37px 2%;width: 50px; border-radius: 50% 0% 0% 50%">
                   <span class="glyphicon glyphicon-chevron-left" style="color: black; cursor:pointer;"></span>
                   </a>
-                  <a class="right carousel-control" ng-click="$ctrl.nextTimeslot()" style="margin:16% 3% 3% 0;width: 50px; border-radius: 0% 50% 50% 0%">
+                  <a class="right carousel-control" ng-click="$ctrl.nextTimeslot()" style="margin:201px 3% 37px 0;width: 50px; border-radius: 0% 50% 50% 0%">
                   <span class="glyphicon glyphicon-chevron-right" style="color: black; cursor:pointer;"></span>
                   </a>
                </div>

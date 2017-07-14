@@ -24,11 +24,11 @@ function TimeslotController($state, $uibModal,moment, TimeslotService) {
 		ctrl.$state = $state;
 		ctrl.rDateData = [];
 		ctrl.weekDate = [];
-		ctrl.weekDateDisplay = [];
 		ctrl.weekDay = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
 		ctrl.slotTime = ['8am-10am','10am-12pm','12pm-2pm','2pm-4pm','4pm-6pm','6pm-8pm'];	
 		ctrl.mDate = moment().day(1).format('MM.DD.YYYY');
 		ctrl.getTimeslotsForTheWeek(ctrl.mDate);
+		debugger;
 	};
 
 	ctrl.getTimeslotsForTheWeek = function(mDate){
@@ -38,10 +38,12 @@ function TimeslotController($state, $uibModal,moment, TimeslotService) {
 				if(timeslotDetails.data.result.message.length == 0){
 					ctrl.noResponse = true;
 					ctrl.getWeekDateArr(mDate);
+					debugger;
 				}else{
 					ctrl.noResponse = false;
 					ctrl.timeslots = timeslotDetails.data.result.message;	
 					calculateDates(ctrl.timeslots);
+					debugger;
 				}
 				
 			})
@@ -91,7 +93,6 @@ function TimeslotController($state, $uibModal,moment, TimeslotService) {
 		ctrl.selectedDate = "";
 		ctrl.rDateData = [];
 		ctrl.weekDate = [];
-		ctrl.weekDateDisplay = [];
         ctrl.objInit();
 		var mDate = moment(ctrl.mDate);
 		ctrl.mDate = mDate.add(7, 'days').format("MM.DD.YYYY");
@@ -102,7 +103,6 @@ function TimeslotController($state, $uibModal,moment, TimeslotService) {
 		ctrl.selectedDate = "";
         ctrl.rDateData = [];
 		ctrl.weekDate = [];
-		ctrl.weekDateDisplay = [];
         ctrl.objInit();
 		var mDate = moment(ctrl.mDate);
 		ctrl.mDate = mDate.add(-7, 'days').format("MM.DD.YYYY");
@@ -111,7 +111,6 @@ function TimeslotController($state, $uibModal,moment, TimeslotService) {
 	ctrl.getTimeslotsByDate = function(mDate){
 		ctrl.rDateData = [];
 		ctrl.weekDate = [];
-		ctrl.weekDateDisplay = [];
         ctrl.objInit();
         // ctrl.mDate = mDate;
         ctrl.mDate = moment(mDate).day(1).format('MM.DD.YYYY');
@@ -138,10 +137,6 @@ function TimeslotController($state, $uibModal,moment, TimeslotService) {
 		while (i < 7) {
 			var date = moment(ctrl.startDatePicker).format('MM.DD.YYYY');
 			ctrl.weekDate.push(date);
-
-			var dateDisplay = moment(ctrl.startDatePicker).format('DD.MM.YYYY');
-			ctrl.weekDateDisplay.push(dateDisplay);
-
 		    ctrl.startDatePicker = moment(ctrl.startDatePicker).add(1, 'd');
 		    i++;
 		}
@@ -151,8 +146,8 @@ function TimeslotController($state, $uibModal,moment, TimeslotService) {
 
 	function calculateDates(timesltArr){
 
-        ctrl.getWeekDateArr(timesltArr[0].date);
-
+        ctrl.getWeekDateArr(ctrl.mDate);
+        
     	for(var x = 0; x< ctrl.weekDate.length; x++){
     	    for(var i = 0; i< ctrl.slotTime.length; i++){					
     	    	for(var j = 0; j< ctrl.timeslots.length; j++){							

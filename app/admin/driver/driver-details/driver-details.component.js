@@ -1,7 +1,7 @@
 (function(angular) {
 	'use strict';
 //===========================DriverDetailsController IMPLEMENTATION START======================================
-	function DriverDetailsController($state, $uibModal, $window, $anchorScroll, $location, DriverService, ScrollService) {
+	function DriverDetailsController($state, $uibModal, $window, $anchorScroll, $location, ngToast, DriverService, ScrollService) {
 		var ctrl = this;
 		ctrl.init = function(){
 			ctrl.$uibModal = $uibModal;
@@ -85,7 +85,18 @@
 
 	    ctrl.delete = function(driverID){
 			ctrl.openDeletePopUp(driverID);
-	    }
+	    };
+
+	    ctrl.openNotice = function (text, type) {
+            ngToast.create({
+                // content: '<div class="" style="position:fixed;">Driver Successfully Added...</div>',
+                // className: 'info',
+                timeout: 8000,
+                content: '<div class="ngtoast-notice">Notice: {{text}}</div>',
+                className: 'ngtoast-default ' + 'ngtoast-notice--' + type,
+            });
+            debugger;
+        };
 
 		ctrl.init();
 
@@ -133,7 +144,12 @@
 
 			modalInstance.result.then(function(data){
 					//data passed when pop up closed.
-				if(data && data.action == "update") ctrl.init();
+				if(data && data.action == "update") {
+					ctrl.init();
+					console.log("Success");
+            		ctrl.openNotice('Hello!','info');
+            		debugger;
+				}
 					
 			}, function(err){
 				console.log('Error in add-driver Modal');
@@ -171,6 +187,6 @@
 	angular.module('driverDetails')
 	.component('driverDetails',{
 		templateUrl: 'admin/driver/driver-details/driver-details.template.html',
-		controller:['$state', '$uibModal','$window','$anchorScroll','$location','DriverService','ScrollService', DriverDetailsController]
+		controller:['$state', '$uibModal','$window','$anchorScroll','$location','ngToast','DriverService','ScrollService', DriverDetailsController]
 	});
 })(window.angular);

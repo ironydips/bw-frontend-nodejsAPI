@@ -5,7 +5,8 @@
 	'deliverytruckModal',
 	'unAssignDriverToTruck',
 	'historyModal',
-	'bathwaterApp.services'
+	'bathwaterApp.services',
+	'bathwaterApp.common',
 		]);
 
 })(window.angular);

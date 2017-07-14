@@ -5,5 +5,6 @@ angular.module('timeslotDetails',[
 		'bathwaterApp.services',
 	    'timeslotModal',
 	    'timeslotShowAllModal',
-	    'angularMoment'
+	    'angularMoment',
+	    'bathwaterApp.common'
 	]);
