@@ -10,12 +10,15 @@
         <div class="input-group">
 			<div class="form-group has-feedback has-clear">
 				<input type="text" class="form-control pull-left" ng-model="$ctrl.searchTruck" placeholder="Search Drivers..." ng-keyup="$ctrl.resetOnBlank($ctrl.searchTruck)">
-				<span class="form-control-clear glyphicon glyphicon-remove form-control-feedback " ng-if="$ctrl.searchTruck" ng-click="$ctrl.resetOnBlank()" style="z-index: 10;
-				pointer-events: auto;
-				cursor: pointer;"></span>
+				<span class="form-control-clear glyphicon glyphicon-remove form-control-feedback " ng-if="$ctrl.searchTruck" ng-click="$ctrl.resetOnBlank()" style="z-index: 10;pointer-events: auto;cursor: pointer;opacity:0.4""></span>
 			</div>
-			<span class="input-group-btn">
-				<button type="button" class="btn btn-primary" ng-click="$ctrl.search($ctrl.searchTruck)">Search</button>
+			<!-- <span class="input-group-btn">
+				<button type="button" class="btn btn-default" ng-click="$ctrl.search($ctrl.searchTruck)">
+          			<span class="glyphicon glyphicon-search" style="opacity: 0.6"></span>
+        		</button>
+			</span> -->
+			<span class="input-group-addon" ng-click="$ctrl.search($ctrl.searchTruck)" style="opacity: 0.6;cursor:pointer;">
+          		<span class="glyphicon glyphicon-search" ></span>
 			</span>
 		</div><br>
 
@@ -60,6 +63,6 @@
 
 <!-- BackToTop Script & Button  START-->
 <div>
-	<a ng-click="$ctrl.gotoTop()" class="scrollToTop">Go to top<span></span></a>
+	<a ng-click="$ctrl.gotoTop('top')" id="gotoTopButton"><span></span></a>
 </div>
 <!-- BackToTop Script & Button  END-->

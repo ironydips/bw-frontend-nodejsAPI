@@ -1,6 +1,6 @@
 <div ng-if="$ctrl.isSuperAdmin">
   <div class="container">
-    <div class="row" style="margin-top:15px;">
+    <div class="row" style="margin-top:30px;">
       <div class="pull-left" style="margin-left:15px;">
          <input class="btn btn-lg btn-primary" ng-click="$ctrl.addadmin()" value="Add Admin" type="button">
       </div>
@@ -11,30 +11,24 @@
     </div>
     <br>
 
-    <div class="input-group">
       <div class="form-group has-feedback has-clear">
         <input type="text" class="form-control pull-left" ng-model="$ctrl.searchUser" placeholder="Search Admin...">
-        <span class="form-control-clear glyphicon glyphicon-remove form-control-feedback " ng-if="$ctrl.searchUser" ng-click="$ctrl.reset()" style="z-index: 10;
-        pointer-events: auto;
-        cursor: pointer;"></span>
+        <span class="form-control-clear glyphicon glyphicon-remove form-control-feedback " ng-if="$ctrl.searchUser" ng-click="$ctrl.reset()" style="z-index: 10;pointer-events: auto;cursor: pointer;opacity:0.4"></span>
       </div>
-      <span class="input-group-btn">
-        <button type="button" class="btn btn-primary" ng-click="$ctrl.reset()">Reset</button>
-      </span>
-    </div><br>
+    <br>
 
     <div class="table table-border text-center" style="margin:0">
       <table class="table table-border table-fixed" style="margin:0">
         <thead> 
           <tr>
-            <th style="font-size: 13px;" class="col-md-2">Email</th>
+            <th style="font-size: 13px;" class="col-md-3">Email</th>
             <th style="font-size: 13px;" class="col-md-1">Super Admin</th>
             <th style="font-size: 13px;" class="col-md-1">Admin</th>
             <th style="font-size: 13px;" class="col-md-1">Pickup/Delivery</th>
             <th style="font-size: 13px;" class="col-md-1">Customers</th>
             <th style="font-size: 13px;" class="col-md-1">Inventory</th>
             <th style="font-size: 13px;" class="col-md-1">Warehouse</th>
-            <th style="font-size: 13px;" class="col-md-3">Action</th>
+            <th style="font-size: 13px;" class="col-md-2">Action</th>
           </tr>
         </thead>
       </table>
@@ -44,14 +38,14 @@
         <table class="table table-border table-fixed">
           <tbody>
             <tr ng-repeat="ad in $ctrl.adminList | filter: $ctrl.searchUser" ng-click="$ctrl.selectRow($index)" ng-class="{'highlight': $index == $ctrl.selectedRow}">
-              <td style="font-size: 13px;" class="col-md-2">{{ad.email}}</td>
+              <td style="font-size: 13px;" class="col-md-3">{{ad.email}}</td>
               <td style="font-size: 13px;" class="col-md-1">{{ad.role == 10 | YesNo}}</td>
               <td style="font-size: 13px;" class="col-md-1">{{ad.role == 4 | YesNo}}</td>
               <td style="font-size: 13px;" class="col-md-1">{{ad.role == 0 | YesNo}}</td>
               <td style="font-size: 13px;" class="col-md-1">{{ad.role == 1 | YesNo}}</td>
               <td style="font-size: 13px;" class="col-md-1">{{ad.role == 2 | YesNo}}</td>
               <td style="font-size: 13px;" class="col-md-1">{{ad.role == 3 | YesNo}}</td>
-              <td style="font-size: 13px;" class="col-md-3"><button type="button" ng-click = "$ctrl.edit(ad, $index)" class="btn btn-sm btn-primary">Edit</button>&nbsp;&nbsp;&nbsp;<button type="button" ng-click = "$ctrl.delete(ad.email)" class="btn btn-sm btn-danger">Delete</button> </td>
+              <td style="font-size: 13px;" class="col-md-2"><button type="button" ng-click = "$ctrl.edit(ad, $index)" class="btn btn-sm btn-primary">Edit</button>&nbsp;&nbsp;&nbsp;<button type="button" ng-click = "$ctrl.delete(ad.email)" class="btn btn-sm btn-danger">Delete</button> </td>
             </tr>
           </tbody>
         </table>

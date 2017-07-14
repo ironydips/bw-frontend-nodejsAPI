@@ -25,7 +25,7 @@ function TimeslotController($state, $uibModal,moment, TimeslotService) {
 		ctrl.rDateData = [];
 		ctrl.weekDate = [];
 		ctrl.weekDateDisplay = [];
-		ctrl.weekDay = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+		ctrl.weekDay = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
 		ctrl.slotTime = ['8am-10am','10am-12pm','12pm-2pm','2pm-4pm','4pm-6pm','6pm-8pm'];	
 		ctrl.mDate = moment().day(1).format('MM.DD.YYYY');
 		ctrl.getTimeslotsForTheWeek(ctrl.mDate);
@@ -135,7 +135,7 @@ function TimeslotController($state, $uibModal,moment, TimeslotService) {
 		var startDate = new Date(mDate);
 		ctrl.startDatePicker = new Date(startDate);
 		var i = 0;
-		while (i < 6) {
+		while (i < 7) {
 			var date = moment(ctrl.startDatePicker).format('MM.DD.YYYY');
 			ctrl.weekDate.push(date);
 

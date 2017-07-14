@@ -1,7 +1,7 @@
 (function(angular) {
 	'use strict';
 //===========================TruckDetailsController IMPLEMENTATION START======================================
-	function TruckDetailsController($state, $uibModal, $anchorScroll, $location, resizeService, TruckService) {
+	function TruckDetailsController($state, $uibModal, $window, $anchorScroll, $location, resizeService, TruckService) {
 		var ctrl = this;
 		ctrl.init = function(){
 			ctrl.$uibModal = $uibModal;
@@ -71,21 +71,19 @@
 			}
 
 		ctrl.gotoTop = function(loc) {
-	      	ctrl.$location.hash('top');
-	      	ctrl.$anchorScroll();
-	    };
+			ctrl.$location.hash('top');
+			ctrl.$anchorScroll();
+	     };
+
+		$window.onscroll = function() {
+			if ($window.pageYOffset > 50) {
+				angular.element('#gotoTopButton')[0].className = "scrollToTop";
+			} else {
+				angular.element('#gotoTopButton')[0].className= "";
+			}
+		};
 
 	    ctrl.delete = function(truckID){
-		  //   	TruckService.deleteTruck(truckID)
-				// .then(function(response){
-				// 	if(response.data.result.message == "success"){
-	   //                  ctrl.init();
-	   //              }	
-				// })
-				// .catch(function(err){
-				// 	console.log('Error deleting truck:');
-				// 	console.log(err);
-				// })
 			ctrl.openDeletePopUp(truckID);
 		}
 
@@ -172,6 +170,6 @@
 	angular.module('truckDetails')
 		.component('truckDetails',{
 			templateUrl: 'admin/truck/truck-details/truck-details.template.html',
-			controller:['$state', '$uibModal','$anchorScroll','$location', 'resizeService','TruckService', TruckDetailsController]
+			controller:['$state', '$uibModal','$window','$anchorScroll','$location', 'resizeService','TruckService', TruckDetailsController]
 		});
 })(window.angular);

@@ -63,9 +63,11 @@
                          </table>
                    </div> 
                 </div> -->
-                <div class="btn-main">
-                    <button type="button" ng-click="$ctrl.cancel()" class="btn btn-sm btn-default">Cancel</button>
-                    <button type="button" ng-click="$ctrl.assign($ctrl.assign.driverid,$ctrl.assign.truckid)" class="btn btn-sm btn-success" ng-disabled="!$ctrl.enableAssign">Assign</button>
+                <div class="inner-adjust">
+                  <div class="btn-main" align="center">
+                      <button type="button" ng-click="$ctrl.cancel()" class="btn btn-sm btn-default">Cancel</button>
+                      <button type="button" ng-click="$ctrl.assign($ctrl.assign.driverid,$ctrl.assign.truckid)" class="btn btn-sm btn-success" ng-disabled="!$ctrl.enableAssign">Assign</button>
+                  </div>
                 </div>
             </div>
         </div>

@@ -1,7 +1,7 @@
 (function(angular) {
 	'use strict';
 //===========================DriverDetailsController IMPLEMENTATION START======================================
-	function DriverDetailsController($state, $uibModal, $anchorScroll, $location, DriverService, ScrollService) {
+	function DriverDetailsController($state, $uibModal, $window, $anchorScroll, $location, DriverService, ScrollService) {
 		var ctrl = this;
 		ctrl.init = function(){
 			ctrl.$uibModal = $uibModal;
@@ -75,24 +75,17 @@
 	      	// ScrollService.getTopScroll(loc);
 	     };
 
+		$window.onscroll = function() {
+			if ($window.pageYOffset > 50) {
+				angular.element('#gotoTopButton')[0].className = "scrollToTop";
+			} else {
+				angular.element('#gotoTopButton')[0].className= "";
+			}
+		};
+
 	    ctrl.delete = function(driverID){
 			ctrl.openDeletePopUp(driverID);
 	    }
-
-
-	    // $(window).scroll(function () {
-	    // 	if ($(this).scrollTop() > 100) {
-	    // 		$('.scrollToTop').fadeIn();
-	    // 	} else {
-	    // 		$('.scrollToTop').fadeOut();
-	    // 	}
-	    // });
-	    
-	    // $('.scrollToTop').click(function () {
-	    // 	$("html, body").animate({ scrollTop: 0 }, 1000);
-	    // 	return false;
-	    // });
-
 
 		ctrl.init();
 
@@ -178,6 +171,6 @@
 	angular.module('driverDetails')
 	.component('driverDetails',{
 		templateUrl: 'admin/driver/driver-details/driver-details.template.html',
-		controller:['$state', '$uibModal','$anchorScroll','$location','DriverService','ScrollService', DriverDetailsController]
+		controller:['$state', '$uibModal','$window','$anchorScroll','$location','DriverService','ScrollService', DriverDetailsController]
 	});
 })(window.angular);

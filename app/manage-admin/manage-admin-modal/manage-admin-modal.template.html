@@ -85,11 +85,7 @@
                </div>
             </div>
             <div class="row">
-               <div class="col-sm-2">
-               </div>
-               <div class="col-sm-2">
-               </div>
-               <div class="btn-main">
+               <div class="btn-main" align="center">
                   <button type="button"  ng-click = "$ctrl.cancel()" class="btn btn-sm btn-default">Cancel</button>
                   <button ng-hide="$ctrl.isEdited" type="button"  ng-click = "$ctrl.saveAdmin()" class="btn btn-sm btn-success" ng-disabled="!$ctrl.enableSave()">Save</button>
                   <button ng-show="$ctrl.isEdited" type="button"  ng-click = "$ctrl.updateAdmin()" class="btn btn-sm btn-success">Update</button>

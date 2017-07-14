@@ -80,6 +80,9 @@
             ctrl.showCancel = true;
         };
 
+        ctrl.reset = function(){
+            ctrl.searchText = "";
+        }
         ctrl.viewUserDetail = function(userDetail) {
 
             ctrl.userDetailPopUp(userDetail);
