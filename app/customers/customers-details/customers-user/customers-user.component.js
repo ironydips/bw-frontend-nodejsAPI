@@ -14,7 +14,8 @@
             //get users details.
             customerUserService.getUsers()
                 .then(function(userlist) {
-                    ctrl.listofUsers = userlist.data;
+                    ctrl.listofUsers = userlist.data.result.message;
+                    debugger
                 })
                 .catch(function(err) {
                     console.log('Error getting user details:');

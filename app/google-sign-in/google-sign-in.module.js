@@ -2,5 +2,7 @@
 
 angular.module('googleSignIn',[
 	'bathwaterApp.common',
-	'bathwaterApp.services'
+	'bathwaterApp.services',
+	'ui.bootstrap',
+	'googleModal'
 	]);

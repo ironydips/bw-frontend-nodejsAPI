@@ -5,11 +5,8 @@
 
 		var getUsers = function(){
 			return $http({
-		            url: '/rest/getUsers',
+		            url: '/api/customerApp/getUsers',
 		            method: "GET",
-		            headers:{
-	            		"Authorization": 'Basic YWRtaW46YWRtaW4='
-	            }
 	        });
 		};
 
