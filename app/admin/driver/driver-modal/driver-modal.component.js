@@ -35,9 +35,11 @@
                     ctrl.driver[i]= ctrl.driver[i].toLowerCase();
                 }
                 DriverService.addDriver(ctrl.driver)
-                .then(function(result) {
-                    ctrl.modalInstance.close({ action: 'update' });
-
+                .then(function(response) {
+                    ctrl.addResponse = response.data.result.message;
+                    if(ctrl.addResponse == "success"){
+                        ctrl.modalInstance.close({ action: ctrl.driver.firstName });
+                    }
                 })
                 .catch(function(err) {
                     console.log('Error Adding Driver');
@@ -52,10 +54,12 @@
         };
 
         ctrl.cancel = function() {
-            ctrl.modalInstance.close({ action: 'update' });
+            ctrl.modalInstance.close({ action: 'cancel' });
         };
 
         ctrl.init();
+
+      
     }
 
     angular.module('driverModal')

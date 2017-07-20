@@ -52,7 +52,6 @@
 						console.log('Error getting driver details:');
 						console.log(err);
 					})
-					debugger;
 				}
 				else{
 					ctrl.drivers = ctrl.tempDrivers;
@@ -87,24 +86,12 @@
 			ctrl.openDeletePopUp(driverID);
 	    };
 
-	    ctrl.openNotice = function (text, type) {
-            ngToast.create({
-                // content: '<div class="" style="position:fixed;">Driver Successfully Added...</div>',
-                // className: 'info',
-                timeout: 8000,
-                content: '<div class="ngtoast-notice">Notice: {{text}}</div>',
-                className: 'ngtoast-default ' + 'ngtoast-notice--' + type,
-            });
-            debugger;
-        };
-
 		ctrl.init();
 
 		function getDriverList(lastKey, limit) {
 			DriverService.getAllDrivers(lastKey, limit)
 			.then(function(response){
 				lastKey == null? ctrl.drivers = response.data.result.message : ctrl.drivers = ctrl.drivers.concat(response.data.result.message) ;
-
 				ctrl.tempDrivers = ctrl.drivers;
 
 				ctrl.lastKey = response.data.result.lastKey && response.data.result.lastKey.driverID['S'] || null;
@@ -117,7 +104,6 @@
 				if(ctrl.lastKey == null){
 					ctrl.showLoader = false;
 				}
-
 				return ctrl.lastKey;
 			})
 			.catch(function(err){
@@ -144,11 +130,14 @@
 
 			modalInstance.result.then(function(data){
 					//data passed when pop up closed.
-				if(data && data.action == "update") {
+				if(data && data.action == "cancel") {
 					ctrl.init();
-					console.log("Success");
-            		ctrl.openNotice('Hello!','info');
-            		debugger;
+					console.log("cancel");
+				}
+				else{
+					ctrl.init();
+					console.log(data);
+					ctrl.openNotice('Hello!','info');
 				}
 					
 			}, function(err){
@@ -156,6 +145,18 @@
 				console.log(err);
 			})
 		}
+
+
+		ctrl.openNotice = function (text, type) {
+	    	debugger
+            ngToast.create({
+                content: '<div>Driver Successfully Added...</div>',
+                className: 'info',
+                timeout: 1000,
+                // content: '<div class="ngtoast-notice">Notice: {{text}} </div>',
+                // className: 'ngtoast-default ' + 'ngtoast-notice--' + type,
+            });
+        };
 
 		ctrl.openDeletePopUp = function(details){
 			
