@@ -75,12 +75,17 @@
 	     };
 
 		$window.onscroll = function() {
-			if ($window.pageYOffset > 50) {
-				angular.element('#gotoTopButton')[0].className = "scrollToTop";
-			} else {
-				angular.element('#gotoTopButton')[0].className= "";
+			try{
+				if ($window.pageYOffset > 50) {
+					angular.element('#gotoTopButton')[0].className = "scrollToTop";
+				} else {
+					angular.element('#gotoTopButton')[0].className= "";
+				}
+			}
+			catch(err){
 			}
 		};
+
 
 	    ctrl.delete = function(driverID){
 			ctrl.openDeletePopUp(driverID);
@@ -128,33 +133,21 @@
 				backdrop: 'static'
 			});
 
-			modalInstance.result.then(function(data){
-					//data passed when pop up closed.
-				if(data && data.action == "cancel") {
-					ctrl.init();
-					console.log("cancel");
-				}
-				else{
-					ctrl.init();
-					console.log(data);
-					ctrl.openNotice('Hello!','info');
-				}
-					
+			modalInstance.result.then(function(data){	
+				//data passed when pop up closed.
+				if(data && data.action == "update") {
+					ctrl.openNotice('added successfully','info');
+				}		
 			}, function(err){
 				console.log('Error in add-driver Modal');
 				console.log(err);
 			})
 		}
 
-
-		ctrl.openNotice = function (text, type) {
-	    	debugger
+		ctrl.openNotice = function (action, type) {
             ngToast.create({
-                content: '<div>Driver Successfully Added...</div>',
-                className: 'info',
-                timeout: 1000,
-                // content: '<div class="ngtoast-notice">Notice: {{text}} </div>',
-                // className: 'ngtoast-default ' + 'ngtoast-notice--' + type,
+                content: '<span class="glyphicon glyphicon-ok"> <b>Driver</b> '+action ,
+                additionalClasses: 'ngtoast-notice--' + type
             });
         };
 
@@ -174,7 +167,9 @@
 
 			modalInstance.result.then(function(data){
 					//data passed when pop up closed.
-				if(data && data.action == "update") ctrl.init();
+				if(data && data.action == "update") {
+					ctrl.openNotice('deleted successfully','info');
+				}
 					
 			}, function(err){
 				console.log('Error in add-driver Modal');

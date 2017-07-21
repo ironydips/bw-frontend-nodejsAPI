@@ -4,7 +4,6 @@
     function deleteDriverModalModalController($state, DriverService) {
         var ctrl = this;
         ctrl.driver = (ctrl.resolve && ctrl.resolve.details) || {};
-        debugger;
         ctrl.cancel = function() {
             ctrl.modalInstance.close();
         };

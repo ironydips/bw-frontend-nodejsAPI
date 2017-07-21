@@ -17,7 +17,6 @@
 						console.log('Error getting user-items details:');
 						console.log(err);
 					});	
-
 		};
 
 		ctrl.openLightboxModal = function (images) {

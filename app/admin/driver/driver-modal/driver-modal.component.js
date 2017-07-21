@@ -38,7 +38,7 @@
                 .then(function(response) {
                     ctrl.addResponse = response.data.result.message;
                     if(ctrl.addResponse == "success"){
-                        ctrl.modalInstance.close({ action: ctrl.driver.firstName });
+                        ctrl.modalInstance.close({ action: 'update' });
                     }
                 })
                 .catch(function(err) {

@@ -4,7 +4,6 @@
     function deleteZipcodeModalModalController($rootScope,$state, ZipcodeService) {
         var ctrl = this;
         ctrl.zipcode = (ctrl.resolve && ctrl.resolve.details) || {};
-        debugger;
         ctrl.cancel = function() {
             ctrl.modalInstance.close();
         };

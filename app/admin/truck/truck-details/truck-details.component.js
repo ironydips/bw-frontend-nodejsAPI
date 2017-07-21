@@ -1,7 +1,7 @@
 (function(angular) {
 	'use strict';
 //===========================TruckDetailsController IMPLEMENTATION START======================================
-	function TruckDetailsController($state, $uibModal, $window, $anchorScroll, $location, resizeService, TruckService) {
+	function TruckDetailsController($state, $uibModal, $window, $anchorScroll, $location, ngToast, resizeService, TruckService) {
 		var ctrl = this;
 		ctrl.init = function(){
 			ctrl.$uibModal = $uibModal;
@@ -53,7 +53,6 @@
 						console.log('Error getting truck details:');
 						console.log(err);
 					})
-					debugger;
 				}
 				else{
 					ctrl.trucks = ctrl.tempTrucks;
@@ -76,10 +75,14 @@
 	     };
 
 		$window.onscroll = function() {
-			if ($window.pageYOffset > 50) {
-				angular.element('#gotoTopButton')[0].className = "scrollToTop";
-			} else {
-				angular.element('#gotoTopButton')[0].className= "";
+			try{
+				if ($window.pageYOffset > 50) {
+					angular.element('#gotoTopButton')[0].className = "scrollToTop";
+				} else {
+					angular.element('#gotoTopButton')[0].className= "";
+				}
+			}
+			catch(err){
 			}
 		};
 
@@ -132,13 +135,22 @@
 
 			modalInstance.result.then(function(data){
 			//data passed when pop up closed.
-			if(data && data.action == "update") ctrl.init();
+			if(data && data.action == "update") {
+				ctrl.openNotice('added successfully','info');
+			}
 
 		}),function(err){
 				console.log('Error in add-truck Modal');
 				console.log(err);
 			}		
 		}
+
+		ctrl.openNotice = function (action, type) {
+            ngToast.create({
+                content: '<span class="glyphicon glyphicon-ok"> <b>Truck</b> '+action ,
+                additionalClasses: 'ngtoast-notice--' + type
+            });
+        };
 
 		ctrl.openDeletePopUp = function(details){
 				
@@ -156,7 +168,9 @@
 
 			modalInstance.result.then(function(data){
 					//data passed when pop up closed.
-				if(data && data.action == "update") ctrl.init();
+				if(data && data.action == "update") {
+					ctrl.openNotice('deleted successfully','info');
+				}
 					
 			}, function(err){
 				console.log('Error in add-driver Modal');
@@ -170,6 +184,6 @@
 	angular.module('truckDetails')
 		.component('truckDetails',{
 			templateUrl: 'admin/truck/truck-details/truck-details.template.html',
-			controller:['$state', '$uibModal','$window','$anchorScroll','$location', 'resizeService','TruckService', TruckDetailsController]
+			controller:['$state', '$uibModal','$window','$anchorScroll','$location', 'ngToast', 'resizeService','TruckService', TruckDetailsController]
 		});
 })(window.angular);

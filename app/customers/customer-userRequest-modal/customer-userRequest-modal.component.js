@@ -49,15 +49,11 @@
 
             customerUserService.getUserRequest(ctrl.customer.userID)
                 .then(function(response) {
-
-
-                    if (response.data.length > 0) {
-
-                        response.data.forEach(function(data) {
+                    if (response.data.result.message.length > 0) {
+                        response.data.result.message.forEach(function(data) {
                             data.isChecked = false;
                         });
-
-                        ctrl.userReq = response.data;
+                        ctrl.userReq = response.data.result.message;
                         ctrl.UserReqmessage = false;
 
                     } else {

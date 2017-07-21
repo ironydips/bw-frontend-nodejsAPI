@@ -6,7 +6,6 @@
         ctrl.result = (ctrl.resolve && ctrl.resolve.details) || {};
         ctrl.email = ctrl.result.email;
         ctrl.profilePic = ctrl.result.picture;
-        debugger
         ctrl.cancel = function() {
             ctrl.modalInstance.close();
         };

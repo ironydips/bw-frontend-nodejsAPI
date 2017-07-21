@@ -22,7 +22,6 @@
             angular.forEach(ctrl.truckDetailForm.$error.required, function(field) {
                 field.$setDirty();
             });
-            console.log(ctrl.truck)
             if (!ctrl.truckDetailForm.$invalid) {
 
                 for(var i in ctrl.truck){
@@ -46,7 +45,7 @@
         };
 
         ctrl.cancel = function() {
-            ctrl.modalInstance.close();
+            ctrl.modalInstance.close({ action: 'cancel' });
         }
     }
 

@@ -94,7 +94,6 @@
                                   email: ctrl.admin.email,
                                   role: ctrl.role
                               });
-                    debugger;
 
                     return ctrl.params;
         }; 

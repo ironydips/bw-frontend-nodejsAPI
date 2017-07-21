@@ -4,7 +4,6 @@
     function deleteTruckModalModalController($state, TruckService) {
         var ctrl = this;
         ctrl.truckID = (ctrl.resolve && ctrl.resolve.details) || {};
-        debugger;
         ctrl.cancel = function() {
             ctrl.modalInstance.close();
         };

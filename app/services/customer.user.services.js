@@ -22,11 +22,8 @@
 
 		var getUserRequest = function(userID){
 			return $http({
-		            url: '/rest/getUserRequests?userid='+ userID,
-		            method: "GET",
-		            headers:{
-	            		"Authorization": 'Basic YWRtaW46YWRtaW4='
-	            }
+		            url: '/api/customerApp/getUserRequests?userID='+ userID,
+		            method: "GET"
 	        });
 		};
 		// var getTrucksByUserrequests = function(){

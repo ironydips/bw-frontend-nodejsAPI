@@ -10,11 +10,11 @@
 		ctrl.init = function(){
 			ctrl.initLoader = false;
 
-			$q.all([PickupTruckService.getTrucklist(), PickupTruckService.getDriverlist(), PickupTruckService.getAllDriverTruckHistory()])
+			$q.all([PickupTruckService.getDriverTruck(), PickupTruckService.getAllDriverTruckHistory()])
 			.then(function(response){
-				ctrl.trucks = response[0].data.result.message;
-				ctrl.drivers = response[1].data.result.message;
-				ctrl.trkhistories = response[2].data.result.message;
+				ctrl.drivers = response[0].data.result.message[0];
+				ctrl.trucks = response[0].data.result.message[1];
+				ctrl.trkhistories = response[1].data.result.message;
 				ctrl.initLoader = true;
 			})
 			.catch(function(err){
