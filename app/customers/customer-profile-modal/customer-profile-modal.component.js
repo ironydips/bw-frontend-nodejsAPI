@@ -6,7 +6,7 @@ function ProfileModalController($state,customerUserService) {
 
 	ctrl.customer = (ctrl.resolve && ctrl.resolve.details) || {};
 	ctrl.isDisabled = Object.keys(ctrl.customer).length > 0;
-debugger
+	
 	ctrl.init = function(){
 
 					if(!ctrl.customer.hasOwnProperty("address")){

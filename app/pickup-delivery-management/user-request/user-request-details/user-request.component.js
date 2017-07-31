@@ -41,9 +41,9 @@
                 })
 
 
-                PickupTruckService.getDriverlist()
+                PickupTruckService.getDriverTruck()
                 .then(function(response){
-                    ctrl.drivers = response.data.result.message;
+                    ctrl.drivers = response.data.result.message[0];
                 })
                 .catch(function(err){
                     console.log('Error User Driver Service..:');
@@ -90,7 +90,7 @@
 
         ctrl.assignDriver = function(reqId, dr) {
 
-            ctrl.assignDriverPopUp(reqId, dr);
+            ctrl.assignDriverPopUp(reqId, dr, ctrl.drivers);
         };
 
         ctrl.init();
@@ -176,7 +176,7 @@
             }
     };
 
-    ctrl.assignDriverPopUp = function(details, userDetail) {
+    ctrl.assignDriverPopUp = function(details, userDetail, drivers) {
 
         var modalInstance = ctrl.$uibModal.open({
             component: 'assignDriverModal',
@@ -187,6 +187,9 @@
                 },
                 userDetail: function() {
                     return (userDetail || {});
+                },
+                drivers: function(){
+                    return (drivers || {});
                 }
             },
             keyboard: false,

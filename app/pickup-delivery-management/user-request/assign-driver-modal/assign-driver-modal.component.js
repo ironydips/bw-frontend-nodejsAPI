@@ -3,18 +3,13 @@
 
     'use strict';
 
-    function AssignDriverModalController($state, DriverService, UserRequestService) {
+    function AssignDriverModalController($state, UserRequestService) {
         var ctrl = this;
         ctrl.userRequestDetail = (ctrl.resolve && ctrl.resolve.userDetail) || {};
+        ctrl.drivers = ctrl.resolve.drivers;
 
         ctrl.init = function() {
-            DriverService.getAllDrivers()
-                .then(function(response) {
-                    ctrl.drivers = response.data.result.message;
-                })
-                .catch(function(err) {
-                    console.log("Error while calling DriverService:" + err);
-                })
+            
         }
 
         ctrl.assignDriver = function() {
@@ -42,7 +37,7 @@
     angular.module('assignDriverModal')
         .component('assignDriverModal', {
             templateUrl: 'pickup-delivery-management/user-request/assign-driver-modal/assign-driver-modal.template.html',
-            controller: ['$state', 'DriverService', 'UserRequestService', AssignDriverModalController],
+            controller: ['$state', 'UserRequestService', AssignDriverModalController],
             bindings: {
                 modalInstance: '<',
                 resolve: '<'

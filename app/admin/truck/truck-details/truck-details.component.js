@@ -135,14 +135,15 @@
 
 			modalInstance.result.then(function(data){
 			//data passed when pop up closed.
-			if(data && data.action == "update") {
-				ctrl.openNotice('added successfully','info');
-			}
+				if(data && data.action == "update") {
+					ctrl.openNotice('added successfully','info');
+					ctrl.init();
+				}
 
-		}),function(err){
-				console.log('Error in add-truck Modal');
-				console.log(err);
-			}		
+			}),function(err){
+					console.log('Error in add-truck Modal');
+					console.log(err);
+				}		
 		}
 
 		ctrl.openNotice = function (action, type) {
@@ -170,6 +171,7 @@
 					//data passed when pop up closed.
 				if(data && data.action == "update") {
 					ctrl.openNotice('deleted successfully','info');
+					ctrl.init();
 				}
 					
 			}, function(err){

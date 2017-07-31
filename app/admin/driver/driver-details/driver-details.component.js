@@ -137,6 +137,7 @@
 				//data passed when pop up closed.
 				if(data && data.action == "update") {
 					ctrl.openNotice('added successfully','info');
+					ctrl.init();
 				}		
 			}, function(err){
 				console.log('Error in add-driver Modal');
@@ -169,6 +170,7 @@
 					//data passed when pop up closed.
 				if(data && data.action == "update") {
 					ctrl.openNotice('deleted successfully','info');
+					ctrl.init();
 				}
 					
 			}, function(err){
