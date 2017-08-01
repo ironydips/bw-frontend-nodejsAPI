@@ -18,7 +18,7 @@
                     <table class="table table-striped text-center">
                         <tbody>
                             <tr ng-repeat="ts in $ctrl.alltimeslot | orderBy: 'date'">
-                                <td class="col-md-4">{{ts.date}}</td>
+                                <td class="col-md-4">{{ts.date | myShowDateFilter}}</td>
                                 <td class="col-md-4">{{ts.timeslot}}</td>
                                 <td class="col-md-4">{{ts.availabilityCount}}</td>
                             </tr>

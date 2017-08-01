@@ -117,7 +117,7 @@
 			})
 		}
 
-		//===========================POPUP IMPLEMENTATION START======================================
+//===========================POPUP IMPLEMENTATION START======================================
 
 		ctrl.openPopUp = function(details){
 			

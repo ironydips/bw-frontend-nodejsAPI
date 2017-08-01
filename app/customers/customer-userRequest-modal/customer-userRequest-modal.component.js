@@ -55,7 +55,6 @@
                         });
                         ctrl.userReq = response.data.result.message;
                         ctrl.UserReqmessage = false;
-
                     } else {
                         ctrl.message = true;
                         ctrl.itemsMessage = "Data does not exist";
@@ -69,7 +68,6 @@
 
 
         ctrl.getItems = function(item) {
-
             if (item.items) {
                 if (item.isChecked) {
 
@@ -77,6 +75,7 @@
                     ctrl.noUserReqMessage = false;
                     for (var i = 0; i < item.items.length; i++) {
                         for (var j = 0; j <= i; j++) {
+                            debugger
                             if (typeof item.items[i].imagesBase64[j] == "undefined") {
                                 //ctrl.value = item.items[i].imagesBase64[j];
                                 item.items[i].imagesBase64[j] = "img/notAvailable.jpg";

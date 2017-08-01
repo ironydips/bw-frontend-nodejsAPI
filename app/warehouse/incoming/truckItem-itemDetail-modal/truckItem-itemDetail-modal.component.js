@@ -1,57 +1,6 @@
 (function(angular) {
     'use strict';
 
-    function openSubItemPopUp(details) {
-
-        var popUpCtrl = this;
-        var modalInstance = popUpCtrl.$uibModal.open({
-            component: 'customerSubItemModal',
-            windowClass: 'app-modal-window-large',
-            keyboard: false,
-            resolve: {
-                details: function() {
-                    return (details || {});
-                }
-            },
-            backdrop: 'static'
-        });
-
-        modalInstance.result.then(function(data) {
-                //data passed when pop up closed.
-                //if (data && data.action == "update");
-
-            }),
-            function(err) {
-                console.log('Error in SubItem Modal in warehouseMoveItemService');
-                console.log(err);
-            }
-    }
-
-    function userDetailPopUp(details) {
-
-        var popUpCtrl = this;
-        var modalInstance = popUpCtrl.$uibModal.open({
-            component: 'viewUserDetailModal',
-            windowClass: 'app-modal-window-large',
-            keyboard: false,
-            resolve: {
-                details: function() {
-                    return (details || {});
-                }
-            },
-            backdrop: 'static'
-        });
-
-        modalInstance.result.then(function(data) {
-                //data passed when pop up closed.
-                //if (data && data.action == "update");
-
-            }),
-            function(err) {
-                console.log('Error in user detail Modal of Incoming Warehouse');
-                console.log(err);
-            }
-    }
 
     function ViewTruckItemModalController($state, $uibModal, ngToast, warehouseMoveItemService, Lightbox) {
         var ctrl = this;
@@ -142,8 +91,6 @@
 
         ctrl.receiveItem = function(storedItemId, location, item) {
 
-
-
             warehouseMoveItemService.checkInStoredItem(storedItemId, "RECEIVED", "", 0)
                 .then(function(result) {
                     if (result && result.data && result.data.message == "Success") {
@@ -174,6 +121,62 @@
 
         ctrl.init();
     }
+
+       
+//===========================POPUP IMPLEMENTATION START======================================
+    
+    function openSubItemPopUp(details) {
+
+        var popUpCtrl = this;
+        var modalInstance = popUpCtrl.$uibModal.open({
+            component: 'customerSubItemModal',
+            windowClass: 'app-modal-window-large',
+            keyboard: false,
+            resolve: {
+                details: function() {
+                    return (details || {});
+                }
+            },
+            backdrop: 'static'
+        });
+
+        modalInstance.result.then(function(data) {
+                //data passed when pop up closed.
+                //if (data && data.action == "update");
+
+            }),
+            function(err) {
+                console.log('Error in SubItem Modal in warehouseMoveItemService');
+                console.log(err);
+            }
+    }
+
+    function userDetailPopUp(details) {
+
+        var popUpCtrl = this;
+        var modalInstance = popUpCtrl.$uibModal.open({
+            component: 'viewUserDetailModal',
+            windowClass: 'app-modal-window-large',
+            keyboard: false,
+            resolve: {
+                details: function() {
+                    return (details || {});
+                }
+            },
+            backdrop: 'static'
+        });
+
+        modalInstance.result.then(function(data) {
+                //data passed when pop up closed.
+                //if (data && data.action == "update");
+
+            }),
+            function(err) {
+                console.log('Error in user detail Modal of Incoming Warehouse');
+                console.log(err);
+            }
+    }
+//===========================POPUP IMPLEMENTATION END======================================
 
     angular.module('viewTruckItemModal')
         .component('viewTruckItemModal', {

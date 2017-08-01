@@ -3,19 +3,19 @@
 'use strict';
 //===========================TimeslotController IMPLEMENTATION START======================================
 
-function TimeslotController($state, $uibModal,moment, TimeslotService) {
+function TimeslotController($state, $uibModal, moment, TimeslotService) {
 	var ctrl = this;
 
 	ctrl.objInit = function(){
 		ctrl.timeslotFilter = [];
 		ctrl.slotTimeObj = [
-							{"timeslot": '8am-10am', "availabilityCount": 0},
-							{"timeslot": '10am-12pm', "availabilityCount": 0},
-							{"timeslot": '12pm-2pm', "availabilityCount": 0},
-							{"timeslot": '2pm-4pm', "availabilityCount": 0},
-							{"timeslot": '4pm-6pm', "availabilityCount": 0},
-							{"timeslot": '6pm-8pm', "availabilityCount": 0}
-							];
+							{"timeslot": '8am-10am', "availabilityCount": 0, "bookedCount": 0},
+							{"timeslot": '10am-12pm', "availabilityCount": 0, "bookedCount": 0},
+							{"timeslot": '12pm-2pm', "availabilityCount": 0, "bookedCount": 0},
+							{"timeslot": '2pm-4pm', "availabilityCount": 0, "bookedCount": 0},
+							{"timeslot": '4pm-6pm', "availabilityCount": 0, "bookedCount": 0},
+							{"timeslot": '6pm-8pm', "availabilityCount": 0, "bookedCount": 0}
+						];
 	}
 
 	ctrl.init = function(){
@@ -148,7 +148,8 @@ function TimeslotController($state, $uibModal,moment, TimeslotService) {
     	    		if(ctrl.timeslots[j].timeslot == ctrl.slotTime[i] && ctrl.timeslots[j].date == ctrl.weekDate[x]){							
     	    			ctrl.timeslotFilter.push({"date": ctrl.timeslots[j].date,
     	    									  "timeslot": ctrl.timeslots[j].timeslot,															
-    	    									  "availabilityCount": ctrl.timeslots[j].availabilityCount															
+    	    									  "availabilityCount": ctrl.timeslots[j].availabilityCount,
+    	    									  "bookedCount": ctrl.timeslots[j].bookedCount
     	    									});						
     	    		}					
     	    	}				
@@ -157,6 +158,7 @@ function TimeslotController($state, $uibModal,moment, TimeslotService) {
     	    	for (var j = 0; j < ctrl.timeslotFilter.length; j++) {						
     	    		if(ctrl.slotTimeObj[i].timeslot == ctrl.timeslotFilter[j].timeslot){							
     	    			ctrl.slotTimeObj[i].availabilityCount = ctrl.timeslotFilter[j].availabilityCount;						
+    	    			ctrl.slotTimeObj[i].bookedCount = ctrl.timeslotFilter[j].bookedCount;						
     	    		}					
     	    	}				
     	    }		

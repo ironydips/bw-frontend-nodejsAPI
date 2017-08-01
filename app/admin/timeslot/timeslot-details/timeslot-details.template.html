@@ -41,8 +41,9 @@
                      <tr ng-repeat="weekDate in $ctrl.weekDate">
                      <th style="padding:20px 0 20px 0px;">{{$ctrl.weekDay[$index]}}</th>
                         <th style="padding:20px 0 20px 0px;">{{weekDate | myShowDateFilter}}</th>
-                        <td ng-repeat="timeslot in $ctrl.rDateData[$index]"  style="padding: 20px 0 20px 20px;">
-                           Availability Count:<b>{{timeslot.availabilityCount}}</b>
+                        <td ng-repeat="timeslot in $ctrl.rDateData[$index]"  style="padding: 10px 0 10px 20px;">
+                           Availability Count:<b>{{timeslot.availabilityCount}}</b><br>
+                           Booked Count:<b>{{timeslot.bookedCount}}</b> 
                         </td>
                      </tr>
                   </tbody>
