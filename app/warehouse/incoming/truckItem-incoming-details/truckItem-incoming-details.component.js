@@ -53,9 +53,9 @@
                         ctrl.message = true;
                         ctrl.loader = false;
                     }
-                    if (angular.isArray(response.data)) {
+                    if (angular.isArray(response.data.result.message)) {
                         ctrl.message = false;
-                        ctrl.incomingItems = response.data;
+                        ctrl.incomingItems = response.data.result.message;
                         ctrl.loader = false;
                     } else {
                         ctrl.message = true;

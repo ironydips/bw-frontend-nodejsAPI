@@ -88,6 +88,11 @@
             ctrl.displayRowValue = index;
             ctrl.selectedRow = "";
         };
+        ctrl.updateLocationCredit = function(item) {
+
+            angular.bind(ctrl, updateLocCreditPopup, angular.copy(item))();
+
+        };
 
         ctrl.receiveItem = function(storedItemId, location, item) {
 

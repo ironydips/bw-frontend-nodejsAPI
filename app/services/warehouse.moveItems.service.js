@@ -56,11 +56,8 @@
 
         var incomingItems = function(date){
             return $http({
-                    url: '/rest/admin/incomingItems?date='+ date,
+                    url: '/api/inventory/incomingItems?date='+ date,
                     method: "GET",
-                    headers:{
-                        "Authorization": 'Basic YWRtaW46YWRtaW4='
-                }
             });
         };
 
@@ -83,7 +80,7 @@
         var checkInStoredItem = function(storedID, status, location, credit){
            // status = "RECEIVED";
             return $http({
-                    url: '/rest/admin/checkInStoredItem?storedID='+ storedID + '&credits=' + credit + '&status='+ status + '&location=' + location,
+                    url: '/api/inventory/checkInStoredItem?storedID='+ storedID + '&credits=' + credit + '&status='+ status + '&location=' + location,
                     method: "GET",
                     headers:{
                         "Authorization": 'Basic YWRtaW46YWRtaW4='
