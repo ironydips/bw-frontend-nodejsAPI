@@ -4,7 +4,6 @@
 function ZipModalModalController($rootScope,$state, ZipcodeService) {
 	var ctrl = this;
 	ctrl.zip = (ctrl.resolve && ctrl.resolve.details) || {};
-
 	ctrl.save = function(){                  
 		
 		ZipcodeService.addZipCode(ctrl.zip)

@@ -49,17 +49,12 @@
 
             customerUserService.getUserRequest(ctrl.customer.userID)
                 .then(function(response) {
-
-
-                    if (response.data.length > 0) {
-
-                        response.data.forEach(function(data) {
+                    if (response.data.result.message.length > 0) {
+                        response.data.result.message.forEach(function(data) {
                             data.isChecked = false;
                         });
-
-                        ctrl.userReq = response.data;
+                        ctrl.userReq = response.data.result.message;
                         ctrl.UserReqmessage = false;
-
                     } else {
                         ctrl.message = true;
                         ctrl.itemsMessage = "Data does not exist";
@@ -73,22 +68,21 @@
 
 
         ctrl.getItems = function(item) {
-
             if (item.items) {
                 if (item.isChecked) {
 
                     ctrl.noItemMessage = false;
                     ctrl.noUserReqMessage = false;
-                    for (var i = 0; i < item.items.length; i++) {
-                        for (var j = 0; j <= i; j++) {
-                            if (typeof item.items[i].imagesBase64[j] == "undefined") {
-                                //ctrl.value = item.items[i].imagesBase64[j];
-                                item.items[i].imagesBase64[j] = "img/notAvailable.jpg";
+                    // for (var i = 0; i < item.items.length; i++) {
+                    //     for (var j = 0; j <= i; j++) {
+                    //         if (typeof item.items[i].imagesBase64[j] == "undefined") {
+                    //             //ctrl.value = item.items[i].imagesBase64[j];
+                    //             item.items[i].imagesBase64[j] = "img/notAvailable.jpg";
 
 
-                            }
-                        }
-                    }
+                    //         }
+                    //     }
+                    // }
                     item.items.forEach(function(data) { data.userRequestID = item.userRequestID });
                     ctrl.itemsArray = ctrl.itemsArray.concat(item.items);
                     ctrl.selectedRow = item.userRequestID;

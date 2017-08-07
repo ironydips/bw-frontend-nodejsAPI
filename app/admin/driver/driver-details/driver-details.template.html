@@ -1,44 +1,71 @@
 
+<toast></toast>
 <!-- / component4 \ -->
+
+<a id="top" style="position:absolute;margin-top:-200px "></a>
 
 <div class="component4">
 
-	<div class="container">
+	<div class="container"><br>
 
-        <input type="text" class="form-control pull-right" ng-model="$ctrl.searchUser" placeholder="Search" ng-keyup="$ctrl.search($ctrl.searchUser)">
-        {{$ctrl.searchUser}}
-        <!-- <button type="button" class="btn btn-sm btn-success" ng-click="$ctrl.search($ctrl.searchUser)">Search</button> -->
-        <br>
+		<div class="input-group">
+			<div class="form-group has-feedback has-clear">
+				<input type="text" class="form-control pull-left" ng-model="$ctrl.searchUser" placeholder="Search Drivers..." ng-keyup="$ctrl.resetOnBlank($ctrl.searchUser)">
+				<span class="form-control-clear glyphicon glyphicon-remove form-control-feedback " ng-if="$ctrl.searchUser" ng-click="$ctrl.resetOnBlank()" style="z-index: 10;pointer-events: auto;cursor: pointer;opacity:0.4""></span>
+			</div>
+			<span class="input-group-addon" ng-click="$ctrl.search($ctrl.searchUser)" style="opacity: 0.6;cursor:pointer;">
+          		<span class="glyphicon glyphicon-search" ></span>
+			</span>
+
+		</div><br>
+
 		<div class="component-bg">
-				
+
 			<ul infinite-scroll="$ctrl.getDrivers($ctrl.lastKey, $ctrl.limit)">
 				<li><a href="" ng-click="$ctrl.addDriver()" class="drive">Add Drivers</a></li>
+				<li class="full" ng-repeat="driver in $ctrl.drivers | orderBy:'firstName'">
 
-				<li class="full" ng-repeat="driver in $ctrl.drivers | orderBy:'firstName'" ng-click="$ctrl.showDetails(driver)">
-					<a href=""><img style="width: 209px; height: 207px" src="img/list_img.jpg"></a>		
-					<h2><a href="">{{::driver.firstName || 'No Name' | myUpperCaseFilter}}</a></h2>
+					<div style="position: absolute;top: 0;right: 3px;">
+						<button ng-click="$ctrl.delete(driver)" type="button" class="close" aria-label="Close">
+  							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+
+					<div ng-click="$ctrl.showDetails(driver)">
+						<a href=""><img style="width: 209px; height: 207px" src="img/list_img.jpg"></a>		
+						<h2><a href="">{{::driver.firstName || 'No Name' | myUpperCaseFilter}}</a></h2>
+					</div>
+					
 				</li>
+				
+				<!-- 
+				<div class="loading" ng-hide="$ctrl.initLoader">
+					Loading&#8230;
+				</div> -->
 
-				<!-- <div class="loading" ng-hide="$ctrl.initLoader">
-            		Loading&#8230;
-        		</div> -->
-
-        		<!-- <div class="loader" ng-hide="!$ctrl.showLoader">	
-        		</div> -->
+				<!-- <div class="loader" ng-hide="!$ctrl.showLoader">	
+				</div> -->
 
 				<li style=" background-color: lightblue; width: 209px; height: 207px" class="full" ng-hide="!$ctrl.showLoader">
 					<div class="loader">
 					</div>
 				</li>
 
-				
+
 			</ul>
 
 			<div class="clear"></div>
-			      
+
 		</div>	
 
 	</div>
-	
+
 </div>
 <!-- \ component4 end / -->
+
+
+<!-- BackToTop Button  START-->
+<div>
+	<a ng-click="$ctrl.gotoTop('top')" id="gotoTopButton"><span></span></a>
+</div>
+<!-- BackToTop Button  END-->

@@ -11,14 +11,11 @@ config(['$urlRouterProvider', '$stateProvider', '$httpProvider', 'ngToastProvide
 
         //ngToast Provider Config
         ngToast.configure({
-
             className: 'success',
-            verticalPosition: 'top',
+            verticalPosition: 'center',
             horizontalPosition: 'center',
             dismissButton: true,
-            timeout: 900,
-
-
+            timeout: 1000,
         });
 
         // UI-Routing Config

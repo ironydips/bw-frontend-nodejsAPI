@@ -5,11 +5,11 @@
     	var ctrl = this;
 
         ctrl.init = function() {
-                
-                ctrl.driver = (ctrl.resolve && ctrl.resolve.details) || {};
-                ctrl.isDisabled = Object.keys(ctrl.driver).length > 0;
-                ctrl.image = {};
-            }
+
+            ctrl.driver = (ctrl.resolve && ctrl.resolve.details) || {};
+            ctrl.isDisabled = Object.keys(ctrl.driver).length > 0;
+            ctrl.image = {};
+        }
         // if (ctrl.driver.images && ctrl.driver.images.length > 0) {
         //     ctrl.imageUrl = ctrl.driver.images[0].url;
         // }
@@ -20,7 +20,7 @@
             return ctrl.selectedImage;
         }), function(value) {
             value ?
-                (ctrl.imageUrl = 'data:image/jpeg;base64, ' + value.base64, ctrl.image.driverImage = value.base64) : (ctrl.image.driverImage = '');
+            (ctrl.imageUrl = 'data:image/jpeg;base64, ' + value.base64, ctrl.image.driverImage = value.base64) : (ctrl.image.driverImage = '');
         });
             //Add Driver
         ctrl.save = function() {
@@ -28,24 +28,23 @@
             angular.forEach(ctrl.driverDetailForm.$error.required, function(field) {
                 field.$setDirty();
             });
+
             if (!ctrl.driverDetailForm.$invalid) {
 
-                // $q.all([DriverService.addDriver(ctrl.driver), DriverService.driverImageUpload(ctrl.image)])
-                //     .then(function(response){
-                //         ctrl.modalInstance.close({ action: 'update' });
-                //     })
-                //     .catch(function(err){
-                //         console.log('Error Adding Driver/Uploading driver Image');
-                //         console.log(err);
-                //     });
+                for(var i in ctrl.driver){
+                    ctrl.driver[i]= ctrl.driver[i].toLowerCase();
+                }
                 DriverService.addDriver(ctrl.driver)
-                    .then(function(result) {
+                .then(function(response) {
+                    ctrl.addResponse = response.data.result.message;
+                    if(ctrl.addResponse == "success"){
                         ctrl.modalInstance.close({ action: 'update' });
-                    })
-                    .catch(function(err) {
-                        console.log('Error Adding Driver');
-                        console.log(err);
-                    });
+                    }
+                })
+                .catch(function(err) {
+                    console.log('Error Adding Driver');
+                    console.log(err);
+                });
             }
         };
 
@@ -53,20 +52,23 @@
             var show = input.$invalid && (input.$dirty || input.$touched);
             return show;
         };
+
         ctrl.cancel = function() {
-            ctrl.modalInstance.close();
+            ctrl.modalInstance.close({ action: 'cancel' });
         };
 
         ctrl.init();
+
+      
     }
 
     angular.module('driverModal')
-        .component('driverModal', {
-            templateUrl: 'admin/driver/driver-modal/driver-modal.template.html',
-            controller: ['$state','$q','$scope', 'DriverService', DriverModalController],
-            bindings: {
-                modalInstance: '<',
-                resolve: '<'
-            }
-        });
+    .component('driverModal', {
+        templateUrl: 'admin/driver/driver-modal/driver-modal.template.html',
+        controller: ['$state','$q','$scope', 'DriverService', DriverModalController],
+        bindings: {
+            modalInstance: '<',
+            resolve: '<'
+        }
+    });
 })(window.angular);

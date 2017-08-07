@@ -22,8 +22,11 @@
             angular.forEach(ctrl.truckDetailForm.$error.required, function(field) {
                 field.$setDirty();
             });
-            console.log(ctrl.truck)
             if (!ctrl.truckDetailForm.$invalid) {
+
+                for(var i in ctrl.truck){
+                    ctrl.truck[i]= ctrl.truck[i].toLowerCase();
+                }
                 TruckService.addTruck(ctrl.truck)
                     .then(function(result) {
                         ctrl.modalInstance.close({ action: 'update' });
@@ -42,7 +45,7 @@
         };
 
         ctrl.cancel = function() {
-            ctrl.modalInstance.close();
+            ctrl.modalInstance.close({ action: 'cancel' });
         }
     }
 

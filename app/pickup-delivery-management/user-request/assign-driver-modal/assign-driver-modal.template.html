@@ -12,6 +12,7 @@
                         </div>
                         <div class="col-sm-9">
                             <select class="form-control" ng-model="$ctrl.userRequestDetail.selectedDriver">
+                                <option value="">--Select Driver--</option>
                                 <option ng-repeat="driver in $ctrl.drivers" value="{{driver}}">{{driver.firstName}} {{driver.lastName}}</option>
                             </select>
                         </div>

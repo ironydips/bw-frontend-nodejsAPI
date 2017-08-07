@@ -1,52 +1,39 @@
 <div class="component4">
    <div class="container">
-   <div class="row">
-         <div class="col-sm-3"><button type="button"  ng-click = "$ctrl.assign()" class="btn btn-sm btn-success" style="margin-bottom: 1cm;">Assign Driver to Truck</button></div>
-         <div class="col-sm-4">
-               
-         </div>
-   </div>
-      <div><br>
-      
-         <!-- <div class="row">
-            <div class="col-sm-3"></div>
-            <div class="col-sm-4">
-               <button type="button"  ng-click = "$ctrl.assign()" class="btn btn-lg btn-success" style="margin-bottom: 1cm;">Assign</button>
-            </div>
-            <div class="col-sm-4">
-               <button type="button"  ng-click = "$ctrl.history()" class="btn btn-lg btn-success" style="margin-bottom: 1cm;">History</button>
-            </div>
-            <div class="col-sm-1"></div>
-         </div> -->
 
-         <div class="loading" ng-hide="$ctrl.initLoader">
+      <div class="row">
+         <div class="col-sm-3">
+            <button type="button"  ng-click = "$ctrl.assign()" class="btn btn-sm btn-success" style="margin-bottom: 15px;">Assign Driver to Truck</button>
          </div>
+      </div>
+
+      <!-- <div>
+         <div class="loading" ng-hide="$ctrl.initLoader">
+      </div> -->
 
          <div class="row">
-            <div style="height:500px;overflow:auto;">
-            <table class="table table-striped table-hover text-center">
+            <table class="table table-striped table-hover text-center" style="margin:0;">
                <tr>
-                  <th class="col-md-4">License Plate</th>
-                  <th class="col-md-4">Date</th>
-                  <th class="col-md-6">Driver</th>
-                  <th class="col-md-6">UnAssign</th>
-               </tr>
-               <tr ng-repeat="history in $ctrl.trkhistories| orderBy: 'date' : true">
-                  <td>{{history.truckLicensePlate}}</td>
-                  <td>{{history.date}}</td>
-                  <td>{{history.driverName}}</td>
-                  <td>
-                     <div class="col-sm-3">
-                        <button type="button"  ng-click = "$ctrl.unAssign(history)" class="btn btn-sm btn-success" style="margin-bottom: 1cm;">UnAssign</button>
-                        {{$ctrl.num1}}
-                     </div>
-                  </td>
+                  <th class="col-md-3">License Plate</th>
+                  <th class="col-md-3">Date</th>
+                  <th class="col-md-3">Driver</th>
+                  <th class="col-md-3">UnAssign</th>
                </tr>
             </table>
+            <div style="height:375px;overflow:auto;">
+               <table class="table table-striped table-hover text-center">
+                  <tr ng-repeat="history in $ctrl.trkhistories| orderBy: 'date' : true">
+                     <td class="col-md-3">{{history.truckLicensePlate}}</td>
+                     <td class="col-md-3">{{history.date | myShowDateFilter}}</td>
+                     <td class="col-md-3">{{history.driverName}}</td>
+                     <td class="col-md-3">
+                        <button type="button"  ng-click = "$ctrl.unAssign(history)" class="btn btn-primary btn-sm">UnAssign</button>
+                     </td>
+                  </tr>
+               </table>
+            </div>
          </div>
-         </div>
-         <div class="clear"></div>
-      </div>
+
    </div>
 </div>
 <!-- \ component4 end /

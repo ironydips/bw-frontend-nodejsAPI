@@ -51,8 +51,6 @@
                         <table class="table table-condensed text-center">
                             <tr>
                                 <th class="col-md-1">Images</th>
-                                <th style="font-size: 13px;" class="col-md-3">UserRequestID</th>
-                                <th style="font-size: 13px;" class="col-md-2">Stored ItemID</th>
                                 <th style="font-size: 13px;" class="col-md-1">Item Name</th>
                                 <th style="font-size: 13px;" class="col-md-1">Item Code</th>
                                 <th style="font-size: 13px;" class="col-md-1">Location</th>
@@ -68,8 +66,6 @@
                                         <img ng-src="{{item.imagesBase64[0]}}" class="img-thumbnail">
                                     </a>
                                 </td>
-                                <td class="col-md-3">{{item.userRequestID}}</td>
-                                <td class="col-md-2">{{item.storedItemID}}</td>
                                 <td class="col-md-1">{{item.itemName}}</td>
                                 <td class="col-md-1">{{item.itemCodes[0]}}</td>
                                 <td class="col-md-1">{{item.location}}</td>
@@ -80,7 +76,7 @@
                                     <button type="button" ng-if="item.subItems" ng-click="$ctrl.subItems(item)" class="btn btn-sm btn-primary">View</button>
                                 </td>
                                 <td>
-                                    <button type="button" ng-click="$ctrl.receiveItem(item.storedItemID, item.location, item)" class="btn btn-sm btn-primary">Receive Item</button>
+                                    <button type="button" ng-click="$ctrl.updateLocationCredit(item.storedItemID, item.credits)" class="btn btn-sm btn-primary">Update Item</button>
                                 </td>
                             </tr>
                             <tr ng-show="$ctrl.noItemMessage">

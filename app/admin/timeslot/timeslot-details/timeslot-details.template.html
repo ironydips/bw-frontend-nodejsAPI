@@ -1,168 +1,72 @@
 <div class="timeslotComponent">
    <div class="container">
       <br>
-      <a ng-click="$ctrl.addTimeslot()" class="btn btn-sm btn-success">Add Timeslot</a>
-      <a ng-click="$ctrl.showallTimeslot()" class="btn btn-sm btn-success">Show All</a>
-      <br><br>
-       <input type="hidden" value="$ctrl.newvalue={{timeslot.availabilityCount}}"/>
-      <table class="table table-striped">
-         <thead>
-            <tr>
-               <th>Date/Time</th>
-               <th ng-repeat="time in $ctrl.slotTime">
-               {{time}}
-               </th>
-            </tr>
-         </thead>
 
-         <tbody>
-         <tr ng-repeat="weekDate in $ctrl.weekDate">
-            <th>{{weekDate}}</th>
-            <td ng-repeat="time in $ctrl.slotTime">
+      <div class="pull-left" style="margin-left: 0;margin-right: 60%;">
+            <a ng-click="$ctrl.addTimeslot()" class="btn btn-sm btn-success">Add Timeslot</a>
+            <a ng-click="$ctrl.showallTimeslot()" class="btn btn-sm btn-success">Show All</a>
+      </div>
+      
+      <div class="col-sm-3">
+         <datepicker date-format="MM.dd.yyyy" date-week-start-day="1" selector="form-control">
+            <div class="input-group">
+                  <input ng-model="$ctrl.selectedDate" class="form-control" placeholder="Choose a date"/>
+                  <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-search" ng-click="$ctrl.getTimeslotsByDate($ctrl.selectedDate)" style="opacity: 0.6;cursor:pointer;"></span>
+                  </span>
+            </div>
+         </datepicker>
+      </div>
 
-               <div ng-repeat="timeslot in $ctrl.timeslots">
-                  <div ng-if="timeslot.date==weekDate">
+      <div class="row-fluid">
+         <div class="span12 text-center">
+            <h4 style="font-size: 15px;font-weight: bold;text-decoration: underline;">{{$ctrl.weekDate[0] | myShowDateFilter}} &nbsp; To &nbsp; {{$ctrl.weekDate[6] | myShowDateFilter}}</h4>
+         </div>
+      </div>
 
-                     <div ng-if="timeslot.timeslot==time">
-                        {{timeslot.availabilityCount}}
-                     </div>
-                     <!-- <div ng-if="timeslot.timeslot!=time">
-                           0
-                     </div> -->
-                  </div>
+
+      <div class="container-fluid">
+         <div class="row"> 
+
+            <div>
+               <table class="table table-striped">
+                  <thead>
+                     <tr>
+                        <th style="width:9%;">Day</th>
+                        <th style="width:9%;">Date\Time</th>
+                        <th ng-repeat="time in $ctrl.slotTime">{{time}}</th>
+                     </tr>
+                  </thead>
+                  <tbody >
+                     <tr ng-repeat="weekDate in $ctrl.weekDate">
+                     <th style="padding:20px 0 20px 0px;">{{$ctrl.weekDay[$index]}}</th>
+                        <th style="padding:20px 0 20px 0px;">{{weekDate | myShowDateFilter}}</th>
+                        <td ng-repeat="timeslot in $ctrl.rDateData[$index]"  style="padding: 10px 0 10px 20px;">
+                           Availability Count:<b>{{timeslot.availabilityCount}}</b><br>
+                           Booked Count:<b>{{timeslot.bookedCount}}</b> 
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+
+               <div>
+                  <a class="left carousel-control" ng-click="$ctrl.prevTimeslot()" style="margin:201px 0 15px 2%;width: 50px; border-radius: 50% 0% 0% 50%;">
+                  <span class="glyphicon glyphicon-chevron-left" style="color: black; cursor:pointer;"></span>
+                  </a>
+                  <a class="right carousel-control" ng-click="$ctrl.nextTimeslot()" style="margin:201px 3% 15px 0;width: 50px; border-radius: 0% 50% 50% 0%">
+                  <span class="glyphicon glyphicon-chevron-right" style="color: black; cursor:pointer;"></span>
+                  </a>
                </div>
 
-
-               <div ng-repeat="remDate in $ctrl.diffArr">
-                  <div ng-if="remDate==weekDate">
-                     0
-                  </div>
-               </div>
-
-            </td>
-         </tr>
+            </div>
 
 
+            <div ng-if="$ctrl.noResponse">
+               <h4 style="margin:-25% 0 20% 3%;">No Record Found</h4>
+            </div>
 
-        <!--  <tr>
-            <th>8am-10am</th>
-            <td ng-repeat="d in $ctrl.weekDate">
-               <div ng-repeat="timeslot in $ctrl.timeslots">
-                  <div ng-if="timeslot.timeslot=='8am-10am'">
-                     <div ng-if="timeslot.date==d">
-                     {{timeslot.availabilityCount}}
-                     </div>
-                  </div>
-               </div>
-               <div ng-if="timeslot.date!=d">
-                     0
-               </div>
-            </td>
-         </tr>
+         </div>
+      </div>
 
-         <tr>
-            <th>10am-12pm</th>
-            <td ng-repeat="d in $ctrl.weekDate">
-               <div ng-repeat="timeslot in $ctrl.timeslots">
-                  <div ng-if="timeslot.date==d">
-                     <div ng-if="timeslot.timeslot=='10am-12pm'">
-                        {{timeslot.availabilityCount}}
-                     </div>
-                     <div ng-if="timeslot.timeslot!='10am-12pm'">
-                        0
-                     </div>
-                  </div>
-               </div>
-               <div ng-repeat="remDate in $ctrl.diffArr">
-                  <div ng-if="remDate==d">
-                     0
-                  </div>
-               </div>
-            </td>
-         </tr>
-
-         <tr>
-            <th>12pm-2pm</th>
-            <td ng-repeat="d in $ctrl.weekDate">
-
-               <div ng-repeat="timeslot in $ctrl.timeslots">
-                  <div ng-if="timeslot.date==d">
-                     <div ng-if="timeslot.timeslot=='12pm-2pm'">
-                        {{timeslot.availabilityCount}}
-                     </div>
-                     <div ng-if="timeslot.timeslot!='12pm-2pm'">
-                        0
-                     </div>
-                  </div>
-               </div>
-
-               <div ng-repeat="remDate in $ctrl.diffArr">
-                  <div ng-if="remDate==d">
-                     0
-                  </div>
-               </div>
-
-            </td>
-         </tr>
-
-         <tr>
-            <th>2pm-4pm</th>
-            <td ng-repeat="d in $ctrl.weekDate">
-               <div ng-repeat="timeslot in $ctrl.timeslots">
-                  <div ng-if="timeslot.timeslot=='2pm-4pm'">
-                     <div ng-if="timeslot.date==d">
-                     {{timeslot.availabilityCount}}
-                     </div>
-                  </div>
-               </div>
-               <div ng-if="timeslot.date!=d">
-                     0
-               </div>
-            </td>
-         </tr>
-
-         <tr>
-            <th>4pm-6pm</th>
-            <td ng-repeat="d in $ctrl.weekDate">
-               <div ng-repeat="timeslot in $ctrl.timeslots">
-                  <div ng-if="timeslot.timeslot=='4pm-6pm'">
-                     <div ng-if="timeslot.date==d">
-                     {{timeslot.availabilityCount}}
-                     </div>
-                  </div>
-               </div>
-               <div ng-if="timeslot.date!=d">
-                     0
-               </div>
-               </div>
-            </td>
-         </tr>
-
-         <tr>
-            <th>6pm-8pm</th>
-            <td ng-repeat="d in $ctrl.weekDate">
-               <div ng-repeat="timeslot in $ctrl.timeslots">
-                  <div ng-if="timeslot.timeslot=='6pm-8pm'">
-                     <div ng-if="timeslot.date==d">
-                     {{timeslot.availabilityCount}}
-                     </div>
-                  </div>
-               </div>
-               <div ng-if="timeslot.date!=d">
-                     0
-               </div>
-            </td>
-         </tr> -->
-
-            <!-- <tr ng-repeat="ts in $ctrl.timeslots">
-               <td class="text-center">{{ts.time}}</td>
-               <td class="text-center" ng-repeat="count in ts.counts">
-                  <span>Available: {{count.availabilityCount}} </span> 
-                  <hr>
-                  Booked: {{count.bookedCount}}
-               </td>
-            </tr> -->
-         </tbody>
-      </table>
    </div>
 </div>

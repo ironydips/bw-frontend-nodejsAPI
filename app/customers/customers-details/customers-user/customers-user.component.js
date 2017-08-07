@@ -14,7 +14,7 @@
             //get users details.
             customerUserService.getUsers()
                 .then(function(userlist) {
-                    ctrl.listofUsers = userlist.data;
+                    ctrl.listofUsers = userlist.data.result.message;
                 })
                 .catch(function(err) {
                     console.log('Error getting user details:');
@@ -65,60 +65,60 @@
                 console.log('Error in customer profile Modal');
                 console.log(err);
             }
-    }
+        }
 
-    ctrl.openPopUpSubscribe = function(details) {
+        ctrl.openPopUpSubscribe = function(details) {
 
-        var modalInstance = ctrl.$uibModal.open({
-            component: 'customerSubscribeModal',
-            windowClass: 'app-modal-window-large',
-            keyboard: false,
-            resolve: {
-                details: function() {
-                    return (details || {});
+            var modalInstance = ctrl.$uibModal.open({
+                component: 'customerSubscribeModal',
+                windowClass: 'app-modal-window-large',
+                keyboard: false,
+                resolve: {
+                    details: function() {
+                        return (details || {});
+                    }
+                },
+                backdrop: 'static'
+            });
+
+            modalInstance.result.then(function(data) {
+                    //data passed when pop up closed.
+                    //if (data && data.action == "update");
+
+                }),
+                function(err) {
+                    console.log('Error in customer subscribe Modal');
+                    console.log(err);
                 }
-            },
-            backdrop: 'static'
-        });
+        }
 
-        modalInstance.result.then(function(data) {
-                //data passed when pop up closed.
-                //if (data && data.action == "update");
+        ctrl.openPopUpUserReq = function(details) {
 
-            }),
-            function(err) {
-                console.log('Error in customer subscribe Modal');
-                console.log(err);
-            }
-    }
+            var modalInstance = ctrl.$uibModal.open({
+                component: 'customerUserReqModal',
+                windowClass: 'app-modal-window-large',
+                keyboard: false,
+                resolve: {
+                    details: function() {
+                        return (details || {});
+                    }
+                },
+                backdrop: 'static'
+            });
 
-    ctrl.openPopUpUserReq = function(details) {
-
-        var modalInstance = ctrl.$uibModal.open({
-            component: 'customerUserReqModal',
-            windowClass: 'app-modal-window-large',
-            keyboard: false,
-            resolve: {
-                details: function() {
-                    return (details || {});
-                }
-            },
-            backdrop: 'static'
-        });
-
-        modalInstance.result.then(function(data) {
-                //data passed when pop up closed.
-                //if (data && data.action == "update");
+            modalInstance.result.then(function(data) {
+                    //data passed when pop up closed.
+                    //if (data && data.action == "update");
 
             }),
             function(err) {
                 console.log('Error in customer user request Modal');
                 console.log(err);
             }
-    }
+        }
 //===========================POPUP IMPLEMENTATION END======================================
 
-}
+    }
 //===========================customersUserController IMPLEMENTATION END======================================
 
     angular.module('customersUser')

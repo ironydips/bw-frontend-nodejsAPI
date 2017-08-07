@@ -6,21 +6,13 @@
 		var getUserList = function(){
 			return $http({
 					        url: "/api/pickup/getUserTS",
-					        headers: {
-					            'Authorization': "Basic YWRtaW46YWRtaW4=",
-					            'Content-Type':'application/json'
-					        },
 					        method: "GET"
             			})
 					};
 
 		var assignDriver = function(reqId, driver){
 			return $http({
-				            url: '/rest/assignDriverToUserRequest/' + driver.driverID + '?userReqID=' + reqId,
-				            headers: {
-				                'Content-Type': 'text/plain',
-				                'Authorization': "Basic YWRtaW46YWRtaW4="
-				            },
+				            url: '/api/pickup/assignDriverToUserRequest?driverID=' + driver.driverID + '&userRequestID=' + reqId,
 				            method: "GET"
         				});
 					};

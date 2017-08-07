@@ -6,7 +6,7 @@ function ProfileModalController($state,customerUserService) {
 
 	ctrl.customer = (ctrl.resolve && ctrl.resolve.details) || {};
 	ctrl.isDisabled = Object.keys(ctrl.customer).length > 0;
-
+	
 	ctrl.init = function(){
 
 					if(!ctrl.customer.hasOwnProperty("address")){
@@ -20,6 +20,7 @@ function ProfileModalController($state,customerUserService) {
 				customerUserService.getUserInventory(ctrl.customer.userID)
 					.then(function(response){
 						ctrl.userInventory = response.data;
+						debugger
 					})
 					.catch(function(err){
 						console.log('Error getting user-profile details:');

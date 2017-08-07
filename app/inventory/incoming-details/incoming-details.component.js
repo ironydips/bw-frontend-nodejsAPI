@@ -11,13 +11,12 @@
 
 			inventoryService.getInventory()
 					.then(function(response){
-						ctrl.Inventory = response.data;
+						ctrl.Inventory = response.data.result.message;
 					})
 					.catch(function(err){
 						console.log('Error getting user-items details:');
 						console.log(err);
 					});	
-
 		};
 
 		ctrl.openLightboxModal = function (images) {
@@ -38,31 +37,31 @@
 
 		ctrl.openPopupCreditUpdate = function(details){
 
-        var modalInstance = ctrl.$uibModal.open({
-            component: 'updateCreditModal',
-            windowClass: 'app-modal-window-small',
-            keyboard: false,
-            resolve: {
-                details: function() {
-                    return (details || {});
-                }
-            },
-            backdrop: 'static'
-        });
+	        var modalInstance = ctrl.$uibModal.open({
+	            component: 'updateCreditModal',
+	            windowClass: 'app-modal-window-small',
+	            keyboard: false,
+	            resolve: {
+	                details: function() {
+	                    return (details || {});
+	                }
+	            },
+	            backdrop: 'static'
+	        });
 
-        modalInstance.result.then(function(data) {
-            //data passed when pop up closed.
-            //if (data && data.action == "update");
-            if(data && data.action == "update") ctrl.init();
-            
-        }), function(err) {
-            console.log('Error in inventory-incoming-credit-update Modal');
-            console.log(err);
-        }
-	}
+	        modalInstance.result.then(function(data) {
+	            //data passed when pop up closed.
+	            //if (data && data.action == "update");
+	            if(data && data.action == "update") ctrl.init();
+	            
+	        }), function(err) {
+	            console.log('Error in inventory-incoming-credit-update Modal');
+	            console.log(err);
+	        }
+		}
 //===========================POPUP IMPLEMENTATION END======================================
 
-}
+	}	
 //===========================inventoryIncomingDetailsController IMPLEMENTATION END======================================
 	
 	angular.module('inventoryIncomingDetails')

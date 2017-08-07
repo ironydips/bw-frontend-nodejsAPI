@@ -26,34 +26,36 @@
 			});
 		};
 
-		var getDriverlist = function(){
+					
+		var getDriverTruck = function(){
 			return $http({
-			    url: '/api/admin/getDrivers?drivers=' + "drivers",
-			    method: "GET",
-			});
-		};
-
-		var getTrucklist = function(){
-			return $http({
-				url: '/api/admin/getTrucks?trucks=' + "trucks",
+				url: '/api/pickup/getDriverTruck',
 				method: "GET"
 			});
 		}
-					
+
 		var getAllDriverTruckHistory = function(){
 			return $http({
-				            url: '/api/pickup/getDriverTruckHistory',
-				            method: "GET",
-	        		});
-				};
+				url: '/api/pickup/getDriverTruckHistory',
+				method: "GET",
+			});
+		};
+		
+		var getDriverlist = function(){
+			return $http({
+				url: '/api/pickup/getDriverlist',
+				method: "GET",
+			});
+		};
+
 
 		//EXPORTED Object
 		return {
 			assignDriverToTruck,
 			unAssignDriverToTruck,
 			getAllDriverTruckHistory,
-			getDriverlist,
-			getTrucklist	
+			getDriverTruck,
+			getDriverlist
 		}
 	}
 

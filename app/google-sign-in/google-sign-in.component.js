@@ -1,8 +1,9 @@
 'use strict';
 
-function GoogleSignInController($state,$interval, GAuth, AdminManagerService, AdminRightsService){
+function GoogleSignInController($state,$interval, $uibModal, GAuth, AdminManagerService, AdminRightsService){
 
 	var ctrl = this;
+    ctrl.$uibModal = $uibModal;
    // ctrl.isSuperAdmin = false;
     ctrl.profile ={};
     var rights = {
@@ -30,19 +31,17 @@ function GoogleSignInController($state,$interval, GAuth, AdminManagerService, Ad
                         ctrl.loginAdmin(profile);
 	         });
 		    	console && console.clear ? console.clear() : null;
-			},1000);
+			},2000);
 		};
 
     ctrl.loginAdmin = function(profile){
 
             ctrl.profile = profile;
-
             AdminManagerService.loginAdmin(ctrl.profile.email)
                 .then(function(response) {
                     if (response && response.data.result.message) {
+                        
                         ctrl.profile.role = response.data.result.message.role;
-                       // ctrl.profile.key = response.data.result.message.key;
-
                         switch(profile.role){
                             case "0":
                                 rights.Pickup = true;
@@ -69,13 +68,16 @@ function GoogleSignInController($state,$interval, GAuth, AdminManagerService, Ad
                                 break;
                         }
                     }
+                    else{
+                        console.log("Server not responding");
+                    }
                 })
                 .catch(function(err) {
                     console.log('Error logging as Admin');
                     console.log(err);
+                    ctrl.openPopUp(ctrl.profile);
                 });
     };
-
 
     ctrl.AssignSuperadmin = function(){
                             rights.isSuperAdmin = true;
@@ -88,17 +90,45 @@ function GoogleSignInController($state,$interval, GAuth, AdminManagerService, Ad
                             $state.go('manageAdmin');
                     };
 
-     ctrl.AssignAdmin = function(){
+    ctrl.AssignAdmin = function(){
                             AdminRightsService.saveProfile(ctrl.profile);
                             AdminRightsService.addRights(rights);
                             $state.go('index');
                     };
-     ctrl.init();
+    ctrl.init();
 
-        }
+    //===========================POPUP IMPLEMENTATION START======================================
 
-angular.module('googleSignIn')
-.component('gSign',{
-	templateUrl: 'google-sign-in/google-sign-in.template.html',
-	controller: ['$state','$interval','GAuth','AdminManagerService','AdminRightsService', GoogleSignInController]
+    ctrl.openPopUp = function(details){
+        var modalInstance = ctrl.$uibModal.open({
+            component: 'googleModal',
+            windowClass: 'app-modal-window-small',
+            keyboard: false,
+            resolve:{
+                details: function(){
+                    return (details || {});
+                }
+            },
+            backdrop: 'static'
+        });
+        modalInstance.result.then(function(data){
+                //data passed when pop up closed.
+            if(data && data.action == "update") {
+                ctrl.init();
+                console.log("Success");
+            }
+                
+        }, function(err){
+            console.log('Error in Sign In Modal');
+            console.log(err);
+        })
+    }
+
+
+    }
+
+    angular.module('googleSignIn')
+    .component('gSign',{
+    	templateUrl: 'google-sign-in/google-sign-in.template.html',
+    	controller: ['$state','$interval', '$uibModal','GAuth','AdminManagerService','AdminRightsService', GoogleSignInController]
 });

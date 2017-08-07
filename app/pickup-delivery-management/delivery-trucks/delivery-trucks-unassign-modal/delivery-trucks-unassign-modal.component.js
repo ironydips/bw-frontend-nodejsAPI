@@ -25,7 +25,6 @@ function unAssignDriverToTruckController($state,TruckService,DriverService,Picku
         ctrl.modalInstance.close();
     }   
     ctrl.init();
-    debugger;
 }
 
 angular.module('unAssignDriverToTruck')

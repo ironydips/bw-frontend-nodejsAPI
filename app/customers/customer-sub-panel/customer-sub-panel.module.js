@@ -1,8 +1,8 @@
 (function(angular) {
-'use strict';
+	'use strict';
 
-angular.module('customersSubPanel',[
-	'customersUser'
+	angular.module('customersSubPanel',[
+		'customersUser'
 		]);
 
 })(window.angular);

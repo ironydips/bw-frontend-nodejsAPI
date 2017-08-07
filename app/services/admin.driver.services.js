@@ -32,12 +32,20 @@
 			});
 		};
 
+		var deleteDriver = function(driverID){
+			return $http({
+			    url: '/api/admin/deleteDriver?driverID='+driverID,
+			    method: "GET",
+			});
+		};
+
 		//EXPORTED Object
 		return {
 			getAllDrivers,
 			addDriver ,
 			driverImageUpload,
-			searchDrivers
+			searchDrivers,
+			deleteDriver
 		}
 	}
 

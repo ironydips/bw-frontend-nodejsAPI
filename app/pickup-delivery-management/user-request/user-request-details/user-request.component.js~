@@ -19,7 +19,6 @@
         ctrl.init = function() {
             $q.all([UserRequestService.getUserList(), DriverService.getAllDrivers()])
                 .then(function(response) {
- debugger;
                     ctrl.timeslots = response[0].data;
                     ctrl.drivers = response[1].data;
 

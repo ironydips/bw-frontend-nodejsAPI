@@ -10,9 +10,9 @@
                             <label>Select Driver:</label>
                         </div>
                         <div class="col-sm-5">
-                            <select style="width: 250px;" class="form-control" ng-model="$ctrl.assign.driverid">
+                            <select style="width: 250px;" class="form-control" ng-model="$ctrl.assign.driverid" ng-click="$ctrl.checkAvail()">
                                 <option value="">--Select Driver--</option>
-                                <option ng-repeat="driver in $ctrl.drivers" value="{{driver.driverID}}">{{driver.firstName}} {{driver.lastName}}</option>
+                                <option ng-repeat="driver in $ctrl.drivers | filter: $ctrl.trkhistories.driverName" value="{{driver.driverID}}">{{driver.firstName}} {{driver.lastName}}</option>
                             </select>
                         </div>
                     </div>
@@ -24,12 +24,15 @@
                             <label>Select Truck:</label>
                         </div>
                         <div class="col-sm-5">
-                            <select style="width: 250px;" class="form-control" ng-model="$ctrl.assign.truckid">
+                            <select style="width: 250px;" class="form-control" ng-model="$ctrl.assign.truckid" ng-click="$ctrl.checkAvail()">
                                 <option value="">--Select Truck--</option>
-                                <option ng-repeat="truck in $ctrl.trucks" value="{{truck.truckID}}">{{truck.licensePlate}}</option>
+                                <option ng-repeat="truck in $ctrl.trucks | filter: $ctrl.trkhistories.truckID" value="{{truck.truckID}}">{{truck.licensePlate}}</option>
                             </select>
                         </div>
                     </div>
+                </div>
+                <div ng-if="!$ctrl.isAvail" style="margin-left: 28%">
+                  <span class="red">Already assigned for today</span>
                 </div>
                 <!-- <br>
                 <div class="row">
@@ -39,30 +42,32 @@
                     </div>
                 </div> -->
                 <!-- <br>
-            <h3>List Of Trucks</h3>
-            <div class="row">
-               <div style="height:350px;overflow:auto;">
-                     <table class="table table-striped table-hover text-center">
-                        <tr>
-                           <th class="col-md-3">Truck ID</th>
-                           <th class="col-md-3">License Plate Number</th>
-                           <th class="col-md-3">Image</th>
-                        </tr>
-                        <tr ng-repeat="truck in $ctrl.trucks">
-                           <td>{{truck.truckID}}</td>
-                           <td>{{truck.licensePlate}}</td>
-                           <td>
-                              <div class="row" ng-repeat="image in truck.images">
-                                 <img src="{{image.url}}" alt="truck image" width="60" height="60">
-                              </div>
-                           </td>
-                        </tr>
-                     </table>
-               </div> 
-            </div> -->
-                <div class="btn-main">
-                    <button type="button" ng-click="$ctrl.cancel()" class="btn btn-sm btn-default">Cancel</button>
-                    <button type="button" ng-click="$ctrl.assign($ctrl.assign.driverid,$ctrl.assign.truckid)" class="btn btn-sm btn-success">Assign</button>
+                <h3>List Of Trucks</h3>
+                <div class="row">
+                   <div style="height:350px;overflow:auto;">
+                         <table class="table table-striped table-hover text-center">
+                            <tr>
+                               <th class="col-md-3">Truck ID</th>
+                               <th class="col-md-3">License Plate Number</th>
+                               <th class="col-md-3">Image</th>
+                            </tr>
+                            <tr ng-repeat="truck in $ctrl.trucks">
+                               <td>{{truck.truckID}}</td>
+                               <td>{{truck.licensePlate}}</td>
+                               <td>
+                                  <div class="row" ng-repeat="image in truck.images">
+                                     <img src="{{image.url}}" alt="truck image" width="60" height="60">
+                                  </div>
+                               </td>
+                            </tr>
+                         </table>
+                   </div> 
+                </div> -->
+                <div class="inner-adjust">
+                  <div class="btn-main" align="center">
+                      <button type="button" ng-click="$ctrl.cancel()" class="btn btn-sm btn-default">Cancel</button>
+                      <button type="button" ng-click="$ctrl.assign($ctrl.assign.driverid,$ctrl.assign.truckid)" class="btn btn-sm btn-success" ng-disabled="!$ctrl.enableAssign">Assign</button>
+                  </div>
                 </div>
             </div>
         </div>

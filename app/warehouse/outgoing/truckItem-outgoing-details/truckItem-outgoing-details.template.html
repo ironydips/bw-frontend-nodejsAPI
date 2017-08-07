@@ -9,7 +9,8 @@
                 <datepicker date-format="MM.dd.yyyy" selector="form-control">
                     <div class="input-group">
                         <input ng-model="$ctrl.todayDate" class="form-control" placeholder="Choose a date" />
-                        <span class="input-group-addon" ng-click="$ctrl.selectedDate($ctrl.todayDate)" style="cursor: pointer">Go
+                        <span class="input-group-addon" ng-click="$ctrl.selectedDate($ctrl.todayDate)" style="opacity: 0.6;cursor:pointer;">
+                            <span class="glyphicon glyphicon-search" ></span>
                         </span>
                     </div>
                 </datepicker>

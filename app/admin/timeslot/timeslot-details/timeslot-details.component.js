@@ -3,179 +3,168 @@
 'use strict';
 //===========================TimeslotController IMPLEMENTATION START======================================
 
-function TimeslotController($state, $uibModal, TimeslotService) {
+function TimeslotController($state, $uibModal, moment, TimeslotService) {
 	var ctrl = this;
-	ctrl.$uibModal = $uibModal;
-	ctrl.$state = $state;
-	ctrl.weekDate = [];
-	ctrl.remDate  = [];
-	ctrl.slotTime = ['8am-10am','10am-12pm','12pm-2pm','2pm-4pm','4pm-6pm','6pm-8pm'];
-	ctrl.zero = [];
+
+	ctrl.objInit = function(){
+		ctrl.timeslotFilter = [];
+		ctrl.slotTimeObj = [
+							{"timeslot": '8am-10am', "availabilityCount": 0, "bookedCount": 0},
+							{"timeslot": '10am-12pm', "availabilityCount": 0, "bookedCount": 0},
+							{"timeslot": '12pm-2pm', "availabilityCount": 0, "bookedCount": 0},
+							{"timeslot": '2pm-4pm', "availabilityCount": 0, "bookedCount": 0},
+							{"timeslot": '4pm-6pm', "availabilityCount": 0, "bookedCount": 0},
+							{"timeslot": '6pm-8pm', "availabilityCount": 0, "bookedCount": 0}
+						];
+	}
 
 	ctrl.init = function(){
+		ctrl.objInit();
+		ctrl.$uibModal = $uibModal;
+		ctrl.$state = $state;
+		ctrl.rDateData = [];
+		ctrl.weekDate = [];
+		ctrl.weekDay = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+		ctrl.slotTime = ['8am-10am','10am-12pm','12pm-2pm','2pm-4pm','4pm-6pm','6pm-8pm'];	
+		ctrl.mDate = moment().day(1).format('MM.DD.YYYY');
+		ctrl.getTimeslotsForTheWeek(ctrl.mDate);
+	};
 
-		TimeslotService.getTimeslotsForTheWeek()
+	ctrl.getTimeslotsForTheWeek = function(mDate){
+
+		TimeslotService.getTimeslotsForTheWeek(mDate)
 			.then(function(timeslotDetails){
-				ctrl.timeslots = timeslotDetails.data.result.message;	
-				calculateDates(ctrl.timeslots);
-				// for(var i = 0; i< ctrl.timeslots.length; i++){
-
-				// 	for(var j = 0; j< ctrl.slotTime.length; j++){
-
-				// 		for(var k = 0; k< ctrl.weekDate.length; k++){
-
-				// 			if(ctrl.timeslots[i].date == ctrl.weekDate[k]){	
-
-				// 				if(ctrl.timeslots[i].timeslot == ctrl.slotTime[j]){
-				// 					var ts = ctrl.timeslots[i].timeslot;
-				// 					var date = ctrl.timeslots[i].date;
-				// 					var ac = ctrl.timeslots[i].availabilityCount;
-
-				// 					ctrl.zero.push({ts:ts,date:date,ac:ac});
-				// 				}
-				// 				else{
-				// 					if(ctrl.slotTime.indexof(ctrl.timeslots[i].timeslot) > -1){
-
-				// 					}
-				// 					// var ts = ctrl.slotTime[j];
-				// 					// var date = ctrl.timeslots[i].date;
-				// 					// var ac = 0;
-				// 					// ctrl.zero.push({ts:ts,date:date,ac:ac});
-				// 				}	
-				// 			}
-				// 			else{
-				// 				// var ts = ctrl.slotTime[j]; 
-				// 				// var date = ctrl.weekDate[k];
-				// 				// var ac = 0;
-				// 				// ctrl.zero.push({ts:ts,date:date,ac:ac});
-				// 			}
-				// 		}
-				// 	}
-				// }
-				// debugger;
-
-				for(var i = 0; i< ctrl.timeslots.length; i++){
-					for(var j = 0; j< ctrl.my_array.length; j++){
-							if(ctrl.timeslots[i].date==ctrl.my_array[j].date){
-								if(ctrl.timeslots[i].timeslot==ctrl.my_array[j].ts){
-									ctrl.my_array[j].ac = ctrl.timeslots[i].availabilityCount;
-								}
-							}
-					}
-					debugger;
+				if(timeslotDetails.data.result.message.length == 0){
+					ctrl.noResponse = true;
+					ctrl.getWeekDateArr(mDate);
+				}else{
+					ctrl.noResponse = false;
+					ctrl.timeslots = timeslotDetails.data.result.message;	
+					calculateDates(ctrl.timeslots);
 				}
 				
 			})
 			.catch(function(err){
 				console.log('Error getting timeslot details:');
 				console.log(err);
-		})
+			})
 
-		
-	};
+		// ctrl.timeslots = [
+		// 				{
+		// 					availabilityCount:"2",
+		// 					date:"07.10.2017",
+		// 					timeslot:"12pm-2pm",
+		// 					timeslotID:"06aed535-6866-4c72-b9b7-f16e9e34c2a7"
+		// 				 },
+		// 				{
+		// 					availabilityCount:"522",
+		// 					date:"07.10.2017",
+		// 					timeslot:"4pm-6pm",
+		// 					timeslotID:"e0411162-5332-4c43-b683-75ca79606d0d"
+		// 				 },
+		// 				{
+		// 					availabilityCount:"2555",
+		// 					date:"07.11.2017",
+		// 					timeslot:"12pm-2pm",
+		// 					timeslotID:"06aed535-6866-4c72-b9b7-f16e9e34c2a7"
+		// 				 },
+		// 				{
+		// 					availabilityCount:"5",
+		// 					date:"07.14.2017",
+		// 					timeslot:"4pm-6pm",
+		// 					timeslotID:"e0411162-5332-4c43-b683-75ca79606d0d"
+		// 				 }
+		// 				];
+		// if(ctrl.timeslots.length == 0){
+		// 	ctrl.noResponse = true;
+		// }else{
+		// 	ctrl.noResponse = false;
+		// 	ctrl.timeslots = ctrl.timeslots;	
+		// 	calculateDates(ctrl.timeslots);
+		// }
+	}
+
+	ctrl.nextTimeslot = function(){
+		ctrl.selectedDate = "";
+		ctrl.rDateData = [];
+		ctrl.weekDate = [];
+        ctrl.objInit();
+		var mDate = moment(ctrl.mDate);
+		ctrl.mDate = mDate.add(7, 'days').format("MM.DD.YYYY");
+		ctrl.getTimeslotsForTheWeek(ctrl.mDate);
+	}
+
+	ctrl.prevTimeslot = function(){
+		ctrl.selectedDate = "";
+        ctrl.rDateData = [];
+		ctrl.weekDate = [];
+        ctrl.objInit();
+		var mDate = moment(ctrl.mDate);
+		ctrl.mDate = mDate.add(-7, 'days').format("MM.DD.YYYY");
+		ctrl.getTimeslotsForTheWeek(ctrl.mDate);
+	}
+	ctrl.getTimeslotsByDate = function(mDate){
+		ctrl.rDateData = [];
+		ctrl.weekDate = [];
+        ctrl.objInit();
+        // ctrl.mDate = mDate;
+        ctrl.mDate = moment(mDate).day(1).format('MM.DD.YYYY');
+		ctrl.getTimeslotsForTheWeek(ctrl.mDate);
+	}
 
 	//Add Timeslot
 	ctrl.addTimeslot = function(){
 		// angular.bind(ctrl,addTimeslotPopUp,null)();
 		ctrl.addTimeslotPopUp(null);
 	};
+
 	//Show Timeslot
 	ctrl.showallTimeslot = function(){
 		// angular.bind(ctrl, showTimeslotPopup, null)();
 		ctrl.showTimeslotPopup(null);
 	};
 
-	ctrl.init(); 
-
-	ctrl.formateDate = function(date){
-		var date =	('0' + (date.getMonth()+1)).slice(-2) + '.'
-             		+ ('0' + date.getDate()).slice(-2) + '.'
-             		+ date.getFullYear();
-    	return date;
+	ctrl.getWeekDateArr = function(mDate){
+		var startDate = new Date(mDate);
+		ctrl.startDatePicker = new Date(startDate);
+		var i = 0;
+		while (i < 7) {
+			var date = moment(ctrl.startDatePicker).format('MM.DD.YYYY');
+			ctrl.weekDate.push(date);
+		    ctrl.startDatePicker = moment(ctrl.startDatePicker).add(1, 'd');
+		    i++;
+		}
 	}
+
+	ctrl.init(); 
 
 	function calculateDates(timesltArr){
 
-		var startDate = new Date(timesltArr[0].date);
-		function getMonday(d) {
-  			var d = new Date(d);
-  			var day = d.getDay(),
-      		diff = d.getDate() - day + (day == 0 ? -6:1);
-  			return new Date(d.setDate(diff));
-			}
-		var fDate = getMonday(startDate);
-
-		ctrl.startDatePicker = new Date(fDate);
-		var i = 0;
-		while (i < 6) {
-						var date = ctrl.formateDate(ctrl.startDatePicker);
-						ctrl.weekDate.push(date);
-                        ctrl.startDatePicker.setDate(ctrl.startDatePicker.getDate() + 1);
-                        i++;
-        }
-
-
-
-        ctrl.my_array = [
-        [{
-            date: weekDate[0],
-            ts: slotTime[0],
-            ac: 0
-        }, {
-            date: weekDate[0],
-            ts: slotTime[1],
-            ac: 0
-        }, {
-            date: weekDate[0],
-            ts: slotTime[2],
-            ac: 0
-        }],
-        [{
-            date: weekDate[0],
-            ts: slotTime[3],
-            ac: 0
-        }, {
-            date: weekDate[0],
-            ts: slotTime[4],
-            ac: 0
-        }, {
-            date: weekDate[0],
-            ts: slotTime[5],
-            ac: 0
-        }]
-    ];
-
-
-
-
-
-
-
-				function arr_diff (a1, a2) {
-
-				    var a = [], diff = [];
-
-				    for (var i = 0; i < a1.length; i++) {
-				        a[a1[i].date] = true;
-				    }
-
-				    for (var i = 0; i < a2.length; i++) {
-				        if (a[a2[i]]) {
-				            delete a[a2[i]];
-				        } else {
-				            a[a2[i]] = true;
-				        }
-				    }
-
-				    for (var k in a) {
-				        diff.push(k);
-				    }
-
-				    return diff;
-				};
-				ctrl.diffArr = arr_diff(ctrl.timeslots,ctrl.weekDate);
-				debugger;
-
+        ctrl.getWeekDateArr(ctrl.mDate);
+        
+    	for(var x = 0; x< ctrl.weekDate.length; x++){
+    	    for(var i = 0; i< ctrl.slotTime.length; i++){					
+    	    	for(var j = 0; j< ctrl.timeslots.length; j++){							
+    	    		if(ctrl.timeslots[j].timeslot == ctrl.slotTime[i] && ctrl.timeslots[j].date == ctrl.weekDate[x]){							
+    	    			ctrl.timeslotFilter.push({"date": ctrl.timeslots[j].date,
+    	    									  "timeslot": ctrl.timeslots[j].timeslot,															
+    	    									  "availabilityCount": ctrl.timeslots[j].availabilityCount,
+    	    									  "bookedCount": ctrl.timeslots[j].bookedCount
+    	    									});						
+    	    		}					
+    	    	}				
+    	    }	
+    	    for (var i = 0; i < ctrl.slotTimeObj.length; i++) {					
+    	    	for (var j = 0; j < ctrl.timeslotFilter.length; j++) {						
+    	    		if(ctrl.slotTimeObj[i].timeslot == ctrl.timeslotFilter[j].timeslot){							
+    	    			ctrl.slotTimeObj[i].availabilityCount = ctrl.timeslotFilter[j].availabilityCount;						
+    	    			ctrl.slotTimeObj[i].bookedCount = ctrl.timeslotFilter[j].bookedCount;						
+    	    		}					
+    	    	}				
+    	    }		
+    	    ctrl.rDateData.push(ctrl.slotTimeObj);
+    		ctrl.objInit();
+		}
 	}
 
 //===========================POPUP IMPLEMENTATION START======================================
@@ -224,6 +213,6 @@ function TimeslotController($state, $uibModal, TimeslotService) {
 angular.module('timeslotDetails')
 	.component('timeslotDetails',{
 		templateUrl: 'admin/timeslot/timeslot-details/timeslot-details.template.html',
-		controller:['$state','$uibModal','TimeslotService', TimeslotController]
+		controller:['$state','$uibModal','moment','TimeslotService', TimeslotController]
 	});
 })(window.angular);

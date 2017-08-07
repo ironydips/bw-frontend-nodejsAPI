@@ -1,8 +1,8 @@
 (function(angular) {
-'use strict';
+	'use strict';
 
-angular.module('truckModal',[
+	angular.module('truckModal',[
 		'bathwaterApp.services',
-	]);
+		]);
 
 })(window.angular);

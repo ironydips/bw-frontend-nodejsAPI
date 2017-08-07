@@ -3,9 +3,9 @@
 
     function TimeslotServiceHandler($http) {
 
-        var getTimeslotsForTheWeek = function() {
+        var getTimeslotsForTheWeek = function(date) {
             return $http({
-                url: '/api/admin/getTimeslotsForTheWeek',
+                url: '/api/admin/getTimeslotsForTheWeek?date='+date,
                 method: "GET",
             });
         };

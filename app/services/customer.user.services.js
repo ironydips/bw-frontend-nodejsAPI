@@ -5,11 +5,8 @@
 
 		var getUsers = function(){
 			return $http({
-		            url: '/rest/getUsers',
+		            url: '/api/customer/getUsers',
 		            method: "GET",
-		            headers:{
-	            		"Authorization": 'Basic YWRtaW46YWRtaW4='
-	            }
 	        });
 		};
 
@@ -25,11 +22,8 @@
 
 		var getUserRequest = function(userID){
 			return $http({
-		            url: '/rest/getUserRequests?userid='+ userID,
-		            method: "GET",
-		            headers:{
-	            		"Authorization": 'Basic YWRtaW46YWRtaW4='
-	            }
+		            url: '/api/customer/getUserRequests?userID='+ userID,
+		            method: "GET"
 	        });
 		};
 		// var getTrucksByUserrequests = function(){

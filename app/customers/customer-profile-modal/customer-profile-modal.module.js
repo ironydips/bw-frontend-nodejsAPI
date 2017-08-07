@@ -1,8 +1,8 @@
 (function(angular) {
-'use strict';
+	'use strict';
 
-angular.module('customerProfileModal',[
-	'bathwaterApp.services',
-	]);
+	angular.module('customerProfileModal',[
+		'bathwaterApp.services',
+		]);
 
 })(window.angular);

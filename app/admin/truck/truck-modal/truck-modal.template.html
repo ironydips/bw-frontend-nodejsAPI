@@ -2,17 +2,21 @@
 <div class="profileComponent">
     <div class="container">
         <div class="profileBg">
+
             <h2>Truck Profile</h2>
             <div class="inner-adjust">
                 <form name="$ctrl.truckDetailForm">
+
                     <h3>Image</h3>
+
                     <div class="image">
                         <img ng-src="{{$ctrl.imageUrl}}" alt="No Image Selected" style="width: 208px;height: 200px" />
                     </div>
+
                     <input style="margin-left:250px" ng-disabled={{$ctrl.isDisabled}} type="file" class="form-controls" name="imageUrl" ng-model="$ctrl.selectedImage" base-sixty-four-input accept="image/*">
-                    <!-- <span class="red">*</span>
-                    <span class="red" ng-show="$ctrl.showMessage($ctrl.truckDetailForm.imageUrl)">This field is mandatory.</span> -->
+
                     <h3>General Info</h3>
+                    
                     <table class="table-responsive">
                         <tbody>
                             <tr>
@@ -57,11 +61,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <div class="row">
-                        <div class="col-sm-2">
-                        </div>
-                        <div class="col-sm-2">
-                        </div>
+                    <div class="row" align="center">
                         <div class="btn-main">
                             <button type="button" ng-click="$ctrl.cancel()" class="btn btn-sm btn-default">Cancel</button>
                             <button type="button" ng-disabled={{$ctrl.isDisabled}} ng-click="$ctrl.save()" class="btn btn-sm btn-success">Save</button>

@@ -14,7 +14,11 @@
             var day = d.getDate();
             var year = d.getFullYear();
 
-            if (month < 10) {
+            if(day < 10){
+                day = "0" + day;
+            }
+
+            if (month < 10 ) {
                 date = "0" + month + "." + day + "." + year;
             } else {
                 date = month + "." + day + "." + year;
@@ -53,9 +57,9 @@
                         ctrl.message = true;
                         ctrl.loader = false;
                     }
-                    if (angular.isArray(response.data)) {
+                    if (angular.isArray(response.data.result.message)) {
                         ctrl.message = false;
-                        ctrl.incomingItems = response.data;
+                        ctrl.incomingItems = response.data.result.message;
                         ctrl.loader = false;
                     } else {
                         ctrl.message = true;

@@ -2,7 +2,7 @@
     'use strict';
 //===========================UserRequestController IMPLEMENTATION START======================================
 
-    function UserRequestController($state, $uibModal, UserRequestService, DriverService, $q) {
+    function UserRequestController($state, $uibModal, UserRequestService, PickupTruckService, $q) {
         var ctrl = this;
         ctrl.$uibModal = $uibModal;
         ctrl.$state = $state;
@@ -17,12 +17,10 @@
 
 
         ctrl.init = function() {
-            $q.all([UserRequestService.getUserList(), DriverService.getAllDrivers()])
-                .then(function(response) {
- debugger;
-                    ctrl.timeslots = response[0].data;
-                    ctrl.drivers = response[1].data;
 
+                UserRequestService.getUserList()
+                .then(function(response){
+                    ctrl.timeslots = response.data.result.message;
                     ctrl.completeRequest = ctrl.timeslots.filter(function(data) {
                         return data.status == "completed";
                     });
@@ -35,12 +33,22 @@
                     ctrl.cancelRequest = ctrl.timeslots.filter(function(data) {
                         return data.status == "cancelled";
                     });
-
                     ctrl.loader = false;
                 })
-                .catch(function(err) {
-                    console.log('Error User Request/Driver Service..')
-                });
+                .catch(function(err){
+                    console.log('Error User Driver Service..:');
+                    console.log(err);
+                })
+
+
+                PickupTruckService.getDriverTruck()
+                .then(function(response){
+                    ctrl.drivers = response.data.result.message[0];
+                })
+                .catch(function(err){
+                    console.log('Error User Driver Service..:');
+                    console.log(err);
+                })
         };
 
         ctrl.complete = function() {
@@ -72,14 +80,17 @@
             ctrl.showCancel = true;
         };
 
+        ctrl.reset = function(){
+            ctrl.searchText = "";
+        }
         ctrl.viewUserDetail = function(userDetail) {
 
-            angular.bind(ctrl, userDetailPopUp, userDetail)();
+            ctrl.userDetailPopUp(userDetail);
         };
 
         ctrl.assignDriver = function(reqId, dr) {
 
-            angular.bind(ctrl, assignDriverPopUp, reqId, dr)();
+            ctrl.assignDriverPopUp(reqId, dr, ctrl.drivers);
         };
 
         ctrl.init();
@@ -165,7 +176,7 @@
             }
     };
 
-    ctrl.assignDriverPopUp = function(details, userDetail) {
+    ctrl.assignDriverPopUp = function(details, userDetail, drivers) {
 
         var modalInstance = ctrl.$uibModal.open({
             component: 'assignDriverModal',
@@ -176,6 +187,9 @@
                 },
                 userDetail: function() {
                     return (userDetail || {});
+                },
+                drivers: function(){
+                    return (drivers || {});
                 }
             },
             keyboard: false,
@@ -231,6 +245,6 @@
     angular.module('userRequest')
         .component('userRequest', {
             templateUrl: 'pickup-delivery-management/user-request/user-request-details/user-request.template.html',
-            controller: ['$state', '$uibModal', 'UserRequestService', 'DriverService', '$q', UserRequestController]
+            controller: ['$state', '$uibModal', 'UserRequestService', 'PickupTruckService', '$q', UserRequestController]
         });
 })(window.angular);

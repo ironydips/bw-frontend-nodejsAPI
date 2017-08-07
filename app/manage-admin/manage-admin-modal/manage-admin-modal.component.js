@@ -4,9 +4,11 @@
     function addAdminModalModalController($state, AdminManagerService) {
         var ctrl = this;
         ctrl.admin = (ctrl.resolve && ctrl.resolve.details) || {};
+        ctrl.adminList = ctrl.resolve.adminList;
         ctrl.isEdited = Object.keys(ctrl.admin).length > 0;
         ctrl.role = "";
         ctrl.params = {};
+        ctrl.isRegister = false;
 
         ctrl.init = function(){
             
@@ -53,7 +55,6 @@
         ctrl.cancel = function() {
             ctrl.modalInstance.close();
         };
-
                 
         ctrl.updateAdmin = function() {
             //Edit Admin
@@ -95,7 +96,28 @@
                               });
 
                     return ctrl.params;
-            }; 
+        }; 
+
+        ctrl.checkAdminEmail = function(){
+            ctrl.isRegister = false;
+            if(ctrl.admin.email){
+                for (var i = 0; i < ctrl.adminList.length; i++) {                      
+                     if(ctrl.adminList[i].email==ctrl.admin.email){
+                        ctrl.isRegister  = true;
+                     }           
+                } 
+            }
+        }
+
+        ctrl.enableSave = function(){
+            if((ctrl.manageAdminForm.email.$error.email) || ctrl.isRegister || !ctrl.admin.email){
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
+
         ctrl.init();   
     }
 

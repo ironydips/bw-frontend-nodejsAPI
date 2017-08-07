@@ -9,7 +9,8 @@
                 <datepicker date-format="MM.dd.yyyy" selector="form-control">
                     <div class="input-group">
                         <input ng-model="$ctrl.todayDate" class="form-control" placeholder="Choose a date" />
-                        <span class="input-group-addon" ng-click="$ctrl.selectedDate($ctrl.todayDate)" style="cursor: pointer">Go
+                        <span class="input-group-addon" ng-click="$ctrl.selectedDate($ctrl.todayDate)" style="opacity: 0.6;cursor:pointer;">
+                            <span class="glyphicon glyphicon-search" ></span>
                         </span>
                     </div>
                 </datepicker>
@@ -35,7 +36,7 @@
             </thead>
             <tbody>
                 <tr ng-hide="$ctrl.message" ng-repeat="item in $ctrl.incomingItems" ng-click="$ctrl.selectRow($index)" ng-class="{'highlight': $index == $ctrl.selectedRow}">
-                    <td>{{item.truckId}}</td>
+                    <td>{{item.truckID}}</td>
                     <td>{{item.licensePlate}}</td>
                     <td>{{item.totalItemsCount}}</td>
                     <td><a ng-click="$ctrl.viewDriverDetail(item.driver)" class="btn btn-primary btn-sm">View</a></td>

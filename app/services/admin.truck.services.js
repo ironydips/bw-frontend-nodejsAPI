@@ -13,16 +13,32 @@
 		var addTruck = function(truck){
 			
 			return $http({
-							url: '/api/admin/addTruck',
-				            method: "POST",
-				            data: angular.toJson(truck)
-						});
-					}
+						url: '/api/admin/addTruck',
+			            method: "POST",
+			            data: angular.toJson(truck)
+			});
+		}
+
+		var searchTrucks = function(truck){
+			return $http({
+			    url: '/api/admin/searchRecord?truckType='+truck,
+			    method: "GET",
+			});
+		};
+
+		var deleteTruck = function(truckID){
+			return $http({
+			    url: '/api/admin/deleteTruck?truckID='+truckID,
+			    method: "GET",
+			});
+		};
 
 		//EXPORTED Object
 		return {
 			getAllTrucks,
-			addTruck
+			addTruck,
+			searchTrucks,
+			deleteTruck
 		}
 	}
 

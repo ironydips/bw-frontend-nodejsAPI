@@ -41,6 +41,10 @@
             ctrl.openPopUpAdmin(null);
         };
 
+        ctrl.reset = function(){
+            ctrl.searchUser = "";
+        }
+
         function getAdminList(){
 
            AdminManagerService.listofAdmin()
@@ -59,16 +63,16 @@
 
 //===========================POPUP IMPLEMENTATION START======================================
 
-        ctrl.openPopUpDelete = function(details){
+    ctrl.openPopUpDelete = function(details){
 
-            var modalInstance = ctrl.$uibModal.open({
-                component:'deleteAdminModal',
-                windowClass: 'app-modal-window-small',
-                keyboard: false,
-                resolve: {
-                    details: function(){
+        var modalInstance = ctrl.$uibModal.open({
+            component:'deleteAdminModal',
+            windowClass: 'app-modal-window-small',
+            keyboard: false,
+            resolve: {
+                details: function(){
                     return (details || {});
-                }   
+                }  
             },
             backdrop: 'static'
 
@@ -77,10 +81,11 @@
         modalInstance.result.then(function(data) {
             if (data && data.action == "update") ctrl.init();
 
-            }), function(err){
-                    console.log('Error in manage-admin Modal');
-                    console.log(err);        }
-            };
+        }), function(err){
+                console.log('Error in manage-admin Modal');
+                console.log(err);
+            }
+    };
 
     ctrl.openPopUpAdmin = function(details) {
 
@@ -91,7 +96,10 @@
             resolve: {
                 details: function() {
                     return (details || {});
-                }
+                },
+                adminList: function(){
+                    return ctrl.adminList;
+                } 
             },
             backdrop: 'static'
         });
