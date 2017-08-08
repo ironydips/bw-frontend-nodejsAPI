@@ -25,7 +25,7 @@
       </div>
 
 
-      <div class="container-fluid">
+      <div class="container-fluid"> 
          <div class="row"> 
 
             <div style="position:relative;">
@@ -49,6 +49,7 @@
                   </tbody>
                </table>
 
+<!-- Next - Prev Button START-->
                <div>
                   <a class="left carousel-control" ng-click="$ctrl.prevTimeslot()" style="margin:0 0 0 -40px;width: 50px; border-radius: 50% 0% 0% 50%;">
                   <span class="glyphicon glyphicon-chevron-left" style="color: black; cursor:pointer;"></span>
@@ -58,11 +59,26 @@
                   </a>
                </div>
 
+                <!-- <div>
+                  <a class="left carousel-control" ng-click="$ctrl.prevTimeslot()" style="margin:201px 0 15px 2%;width: 50px; border-radius: 50% 0% 0% 50%">
+                  <span class="glyphicon glyphicon-chevron-left" style="color: black; cursor:pointer;"></span>
+                  </a>
+
+                  <a class="right carousel-control" ng-click="$ctrl.nextTimeslot()" style="margin:201px 3% 15px 0;width: 50px; border-radius: 0% 50% 50% 0%">
+                  <span class="glyphicon glyphicon-chevron-right" style="color: black; cursor:pointer;"></span>
+                  </a>
+               </div> -->
+<!-- Next - Prev Button END -->
+
             </div>
 
 
             <div ng-if="$ctrl.noResponse">
                <h4 style="margin:-25% 0 20% 3%;">No Record Found</h4>
+            </div>
+
+            <div class="loading" ng-hide="$ctrl.initLoader">
+               Loading&#8230;
             </div>
 
          </div>

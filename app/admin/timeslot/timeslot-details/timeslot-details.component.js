@@ -28,6 +28,7 @@ function TimeslotController($state, $uibModal, moment, TimeslotService) {
 		ctrl.slotTime = ['8am-10am','10am-12pm','12pm-2pm','2pm-4pm','4pm-6pm','6pm-8pm'];	
 		ctrl.mDate = moment().day(1).format('MM.DD.YYYY');
 		ctrl.getTimeslotsForTheWeek(ctrl.mDate);
+		ctrl.initLoader = false;
 	};
 
 	ctrl.getTimeslotsForTheWeek = function(mDate){
@@ -37,10 +38,12 @@ function TimeslotController($state, $uibModal, moment, TimeslotService) {
 				if(timeslotDetails.data.result.message.length == 0){
 					ctrl.noResponse = true;
 					ctrl.getWeekDateArr(mDate);
+					ctrl.initLoader = true;
 				}else{
 					ctrl.noResponse = false;
 					ctrl.timeslots = timeslotDetails.data.result.message;	
 					calculateDates(ctrl.timeslots);
+					ctrl.initLoader = true;
 				}
 				
 			})
@@ -91,6 +94,7 @@ function TimeslotController($state, $uibModal, moment, TimeslotService) {
         ctrl.objInit();
 		var mDate = moment(ctrl.mDate);
 		ctrl.mDate = mDate.add(7, 'days').format("MM.DD.YYYY");
+		ctrl.initLoader = false;
 		ctrl.getTimeslotsForTheWeek(ctrl.mDate);
 	}
 
@@ -101,6 +105,7 @@ function TimeslotController($state, $uibModal, moment, TimeslotService) {
         ctrl.objInit();
 		var mDate = moment(ctrl.mDate);
 		ctrl.mDate = mDate.add(-7, 'days').format("MM.DD.YYYY");
+		ctrl.initLoader = false;
 		ctrl.getTimeslotsForTheWeek(ctrl.mDate);
 	}
 	ctrl.getTimeslotsByDate = function(mDate){

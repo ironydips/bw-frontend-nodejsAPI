@@ -21,7 +21,7 @@
                             </td>
                             <td class="text-center">
                                 <a href="" ng-click="$ctrl.openLightboxModal(req.signatureURLArray)">
-                                    <img ng-src="{{req.signatureURLArray[0].url}}" class="img-thumbnail">
+                                    <img ng-src="{{req.signatureURLArray[0].url}}" class="img-thumbnail" width="50%" height="50%">
                                 </a>
                             </td>
                             <td>{{req.userRequestID}}</td>
@@ -51,11 +51,15 @@
                         <table class="table table-condensed text-center">
                             <tr>
                                 <th class="col-md-1">Images</th>
+                                <th style="font-size: 13px;" class="col-md-2">Stored ItemID</th>
+                                <th style="font-size: 13px;" class="col-md-1">Storage ID</th>
                                 <th style="font-size: 13px;" class="col-md-1">Item Name</th>
                                 <th style="font-size: 13px;" class="col-md-1">Item Code</th>
+                                <th style="font-size: 13px;" class="col-md-1">CategoryID</th>
                                 <th style="font-size: 13px;" class="col-md-1">Location</th>
+                                <th style="font-size: 13px;" class="col-md-1">Credit</th>
                                 <th style="font-size: 13px;" class="col-md-1">Brand Name</th>
-                                <th style="font-size: 13px;" class="col-md-2">Eventual Damage</th>
+                                <th style="font-size: 13px;" class="col-md-1">Eventual Damage</th>
                                 <th style="font-size: 13px;" class="col-md-1">Condition</th>
                                 <th style="font-size: 13px;" class="col-md-1">Sub Items</th>
                                 <th style="font-size: 13px;" class="col-md-1">Action</th>
@@ -63,14 +67,18 @@
                             <tr ng-repeat="item in $ctrl.itemsArray" ng-click="$ctrl.displayRow($index)" ng-class="{'highlight': item.userRequestID == $ctrl.selectedRow || $index == $ctrl.displayRowValue}">
                                 <td class="text-center">
                                     <a href="" ng-click="$ctrl.openLightboxModal(item.imagesBase64)">
-                                        <img ng-src="{{item.imagesBase64[0]}}" class="img-thumbnail">
+                                        <img ng-src="{{item.imagesBase64[0]}}" class="img-thumbnail" width="50%" height="50%">
                                     </a>
                                 </td>
+                                <td class="col-md-2">{{item.storedItemID}}</td>
+                                <td class="col-md-1">{{item.storageID}}</td>
                                 <td class="col-md-1">{{item.itemName}}</td>
-                                <td class="col-md-1">{{item.itemCodes[0]}}</td>
+                                <td class="col-md-1">{{item.itemCode[0]}}</td>
+                                <td class="col-md-1">{{item.categoryID}}</td>
                                 <td class="col-md-1">{{item.location}}</td>
+                                <td class="col-md-1">{{item.credits}}</td>
                                 <td class="col-md-1">{{item.brandName}}</td>
-                                <td class="col-md-2">{{item.eventualDamages}}</td>
+                                <td class="col-md-1">{{item.eventualDamages}}</td>
                                 <td class="col-md-1">{{item.condition}}</td>
                                 <td>
                                     <button type="button" ng-if="item.subItems" ng-click="$ctrl.subItems(item)" class="btn btn-sm btn-primary">View</button>
@@ -82,9 +90,9 @@
                             <tr ng-show="$ctrl.noItemMessage">
                                 <td class="col-md-3"></td>
                                 <td class="col-md-2"></td>
-                                <td style="font-size: 15px;" class="col-md-4"><b>No Items to Display</b></td>
-                                <td class="col-md-1"></td>
                                 <td class="col-md-2"></td>
+                                <td class="col-md-1"></td>
+                                <td style="font-size: 15px;" class="col-md-4"><b>No Items to Display</b></td>
                                 <td class="col-md-1"></td>
                                 <td class="col-md-1"></td>
                                 <td class="col-md-1"></td>

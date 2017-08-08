@@ -7,16 +7,13 @@
 		var getInventory = function(){
 			return $http({
 		            url: '/api/inventory/getAllInventoryProduct',
-		            method: "GET",
-		            headers:{
-	            		"Authorization": 'Basic YWRtaW46YWRtaW4='
-	            }
+		            method: "GET"
 	        });
 		};
 
 		var updateInventory = function(storedItemID, credit){
 			return $http({
-		            url: '/rest/admin/updateCredits?storedID='+storedItemID+'&credits='+credit,
+		            url: '/api/inventory/updateCredits?storedID='+storedItemID+'&credits='+credit,
 		            method: "GET",
 		            headers:{
 	            		"Authorization": 'Basic YWRtaW46YWRtaW4='

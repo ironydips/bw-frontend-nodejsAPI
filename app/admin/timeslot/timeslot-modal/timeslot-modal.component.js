@@ -16,13 +16,16 @@ function TimeslotModalController($state, TimeslotService) {
 		ctrl.timeSlotArr = ['8am-10am', '10am-12pm', '12pm-2pm', '2pm-4pm', '4pm-6pm', '6pm-8pm'];
 		ctrl.checkCountSD = 0;
 		ctrl.checkCountTS = 0;
+		ctrl.initLoader = true;
 	}
 
 	ctrl.save = function() {
+	  ctrl.initLoader = false;
 	  createTimeSlot();	
       TimeslotService.createTimeSlotsRange(ctrl.resultFinal)
 			.then(function(result){
 				ctrl.modalInstance.close({action: "update"});
+				ctrl.initLoader = true;
 			})
 			.catch(function(err){
 				console.log('Error Timeslot detail');

@@ -78,13 +78,20 @@
                     //         if (typeof item.items[i].imagesBase64[j] == "undefined") {
                     //             //ctrl.value = item.items[i].imagesBase64[j];
                     //             item.items[i].imagesBase64[j] = "img/notAvailable.jpg";
-
-
                     //         }
                     //     }
                     // }
                     item.items.forEach(function(data) { data.userRequestID = item.userRequestID });
                     ctrl.itemsArray = ctrl.itemsArray.concat(item.items);
+
+                    for (var i = 0; i < ctrl.itemsArray.length; i++) {
+                        for (var j = 0; j <= i; j++) {
+                            if (ctrl.itemsArray[i].imagesBase64 == null || ctrl.itemsArray[i].imagesBase64.length == 0 || typeof ctrl.itemsArray[i].imagesBase64[j] == "undefined") {
+                                ctrl.itemsArray[i].imagesBase64 = ["img/notAvailable.jpg"];
+                            }
+                        }
+                    }
+
                     ctrl.selectedRow = item.userRequestID;
                 } else {
                     ctrl.itemsArray = ctrl.itemsArray.filter(function(data) {

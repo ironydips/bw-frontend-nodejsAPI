@@ -12,23 +12,23 @@
 			inventoryService.getInventory()
 					.then(function(response){
 						ctrl.Inventory = response.data.result.message;
-						debugger
+						for (var i = 0; i < ctrl.Inventory.length; i++) {
+			                if (ctrl.Inventory[i].imageURLs == null || ctrl.Inventory[i].imageURLs.length == 0 || typeof item.items[i].imagesBase64[j] == "undefined") {
+			                    ctrl.Inventory[i].imageURLs = ["img/notAvailable.jpg"];
+			                }
+			            }
+			            debugger
 					})
 					.catch(function(err){
 						console.log('Error getting user-items details:');
 						console.log(err);
-					});	
-
-			for (var i = 0; i < ctrl.Inventory.length; i++) {
-                if (ctrl.Inventory[i].imageURLs[0] == null || ctrl.Inventory[i].imageURLs[0].length == 0 || typeof item.items[i].imagesBase64[j] == "undefined") {
-                    ctrl.Inventory[i].imageURLs[0] = "img/notAvailable.jpg";
-                }
-            }
+					});			
 		};
 
 		ctrl.openLightboxModal = function (images) {
 		//LightBox Library used as Image Viewer.
 			Lightbox.openModal(images, 0);
+			debugger
   		};
   		ctrl.selectRow = function(rowIndex){
          ctrl.selectedRow = rowIndex;

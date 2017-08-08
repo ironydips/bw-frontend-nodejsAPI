@@ -31,7 +31,6 @@
         };
 
         ctrl.getRequestedItems = function(item) {
-
             if (item.items) {
                 if (item.isChecked) {
 
@@ -86,16 +85,17 @@
         ctrl.openLightboxModal = function(images, index) {
             //LightBox Library used as Image Viewer.
             Lightbox.openModal(images, 0);
+            debugger
         };
         ctrl.displayRow = function(index) {
 
             ctrl.displayRowValue = index;
             ctrl.selectedRow = "";
         };
-        ctrl.updateLocationCredit = function(item) {
+        ctrl.updateLocationCredit = function(storedItemID,credits) {
 
-            angular.bind(ctrl, updateLocCreditPopup, angular.copy(item))();
-
+            var details = {storedItemID:storedItemID,credits:credits}
+            ctrl.updateLocCreditPopup(details);
         };
 
         ctrl.receiveItem = function(storedItemId, location, item) {
@@ -129,7 +129,6 @@
         };
 
         ctrl.init();
-    }
 
        
 //===========================POPUP IMPLEMENTATION START======================================
@@ -185,6 +184,34 @@
                 console.log(err);
             }
     }
+
+    ctrl.updateLocCreditPopup = function(details) {
+        var popUpCtrl = this;
+        var modalInstance = popUpCtrl.$uibModal.open({
+            component: 'updateLocStoredModal',
+            windowClass: 'app-modal-window-small',
+            resolve: {
+                details: function() {
+                    return (details || {});
+                }
+            },
+            keyboard: false,
+            backdrop: 'static'
+        });
+
+        modalInstance.result.then(function(data) {
+                //data passed when pop up closed.
+                if (data && data.action == 'update') popUpCtrl.init();
+
+
+            }),
+            function(err) {
+                console.log('Error in update Location and Credit of received items Modal');
+                console.log(err);
+            }
+
+    }
+}
 //===========================POPUP IMPLEMENTATION END======================================
 
     angular.module('viewTruckItemModal')
