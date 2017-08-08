@@ -23,8 +23,12 @@
                 data.signatureURLArray = [];
                 data.signatureURLArray.push({ "url": data.signatureURL });
             });
+            for (var i = 0; i < ctrl.requestedItems.items.length; i++) {
+                if (ctrl.requestedItems.items[i].signatureURLArray[0].url == null || ctrl.requestedItems.items[i].signatureURLArray[0].url.length == 0 || typeof item.items[i].imagesBase64[j] == "undefined") {
+                    ctrl.requestedItems.items[i].signatureURLArray[0].url = "img/notAvailable.jpg";
+                }
+            }
         };
-
 
         ctrl.getRequestedItems = function(item) {
 
