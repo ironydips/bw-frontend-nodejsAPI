@@ -91,10 +91,9 @@
             ctrl.displayRowValue = index;
             ctrl.selectedRow = "";
         };
-        ctrl.updateLocationCredit = function(storedItemID,credits) {
+        ctrl.updateLocationCredit = function(item) {
 
-            var details = {storedItemID:storedItemID,credits:credits}
-            ctrl.updateLocCreditPopup(details);
+            ctrl.updateLocCreditPopup(item);
         };
 
         ctrl.receiveItem = function(storedItemId, location, item) {
@@ -200,7 +199,13 @@
 
         modalInstance.result.then(function(data) {
                 //data passed when pop up closed.
-                if (data && data.action == 'update') popUpCtrl.init();
+                if (data && data.action == 'update'){
+                    ctrl.itemsArray.splice(ctrl.itemsArray.indexOf(data.item), 1);
+                    if(ctrl.itemsArray.length == 0){
+                        ctrl.noItemMessage = true;
+                    }
+                    popUpCtrl.init();
+                } 
 
 
             }),

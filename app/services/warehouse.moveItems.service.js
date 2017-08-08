@@ -16,21 +16,15 @@
 
         var getItemsByStatus = function(status){
             return $http({
-                    url: '/rest/admin/getItemsByStatus?status='+ status,
+                    url: '/api/inventory/getItemsByStatus?status='+ status,
                     method: "GET",
-                    headers:{
-                        "Authorization": 'Basic YWRtaW46YWRtaW4='
-                }
             });
         };
 
         var updateItemInWarehouse = function(storedItemID, location, status){
             return $http({
-                    url: '/rest/admin/updateItemInWarehouse?storedItemID='+ storedItemID + '&status='+ status + '&location=' + location,
+                    url: '/api/inventory/updateItemInWarehouse?storedItemID='+ storedItemID + '&status='+ status + '&location=' + location,
                     method: "GET",
-                    headers:{
-                        "Authorization": 'Basic YWRtaW46YWRtaW4='
-                }
             });
         };
 

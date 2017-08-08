@@ -37,8 +37,8 @@
         ctrl.init = function() {
             warehouseMoveItemService.getItemsByStatus("STORED")
                 .then(function(response) {
-                    if (angular.isArray(response.data)) {
-                        ctrl.items = response.data;
+                    if (angular.isArray(response.data.result.message)) {
+                        ctrl.items = response.data.result.message;
                         for (var i = 0; i < ctrl.items.length; i++) {
                             if (ctrl.items[i].imageURLs == null || ctrl.items[i].imageURLs.length == 0) {
                                 ctrl.items[i].imageURLs = ["https://www.moh.gov.bh/Content/Upload/Image/636009821114059242-not-available.jpg"];

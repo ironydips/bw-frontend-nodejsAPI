@@ -17,6 +17,7 @@
 			                    ctrl.Inventory[i].imageURLs = ["img/notAvailable.jpg"];
 			                }
 			            }
+			            debugger
 					})
 					.catch(function(err){
 						console.log('Error getting user-items details:');
@@ -27,6 +28,8 @@
 		ctrl.openLightboxModal = function (images) {
 		//LightBox Library used as Image Viewer.
 			Lightbox.openModal(images, 0);
+			debugger
+  		};
   		ctrl.selectRow = function(rowIndex){
          ctrl.selectedRow = rowIndex;
     	};

@@ -14,7 +14,7 @@ function UpdateLocStoredModalController($state, ngToast, warehouseMoveItemServic
 
 		warehouseMoveItemService.checkInStoredItem(ctrl.itemDetail.storedItemID, "STORED", location, credits)
 				.then(function(result){
-			ctrl.modalInstance.close({action: 'update'});
+			ctrl.modalInstance.close({action: 'update', item: ctrl.itemDetail});
 		})
 		.catch(function(err){
 			console.log('Error updating status & location of item in warehouse');
