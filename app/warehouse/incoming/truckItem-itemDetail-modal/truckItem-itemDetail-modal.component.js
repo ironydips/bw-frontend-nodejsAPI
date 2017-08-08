@@ -85,7 +85,6 @@
         ctrl.openLightboxModal = function(images, index) {
             //LightBox Library used as Image Viewer.
             Lightbox.openModal(images, 0);
-            debugger
         };
         ctrl.displayRow = function(index) {
 
