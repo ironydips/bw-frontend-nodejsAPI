@@ -1,0 +1,55 @@
+
+<div class="slotComponent">
+   <div class="container">
+        <div class="slotBg">
+            <h2> Assigned {{$ctrl.assigned.type}} </h2>
+            <div class="table-responsive" ng-hide="$ctrl.assigned.type!='Trucks'">
+                <table class="table table-striped text-center" style="margin:0">
+                    <thead>
+                        <tr>
+                            <th class="col-md-3">Date </th>
+                            <th class="col-md-3">Truck License Plate </th>
+                            <th class="col-md-3">TruckID </th>
+                            <th class="col-md-3">Status </th>
+                        </tr>
+                    </thead> 
+                </table>
+                <div style="height:430px;overflow:auto;">
+                <table class="table table-striped text-center">
+                    <tbody>
+                        <tr ng-repeat="list in $ctrl.assigned">
+                            <td class="col-md-3">{{list.date | myShowDateFilter}}</td>
+                            <td class="col-md-3">{{list.truckLicensePlate}}</td>
+                            <td class="col-md-3">{{list.truckID}}</td>
+                            <td class="col-md-3">{{list.status}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+            <div class="table-responsive" ng-hide="$ctrl.assigned.type=='Trucks'">
+                <table class="table table-striped text-center" style="margin:0">
+                    <thead>
+                        <tr>
+                            <th class="col-md-6">User Request ID </th>
+                            <th class="col-md-6">Status </th>
+                        </tr>
+                    </thead> 
+                </table>
+                <div style="height:430px;overflow:auto;">
+                <table class="table table-striped text-center">
+                    <tbody>
+                        <tr ng-repeat="list in $ctrl.assigned">
+                            <td class="col-md-6">{{list.userRequestID}}</td>
+                            <td class="col-md-6">{{list.status}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+            <div  <div class="bottom-btn">
+                <input class="btn btn-primary cancel" ng-click="$ctrl.cancel()" value="Cancel" type="button">
+            </div>
+        </div>
+    </div>
+</div>

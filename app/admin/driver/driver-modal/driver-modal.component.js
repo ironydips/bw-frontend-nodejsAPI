@@ -1,11 +1,12 @@
 (function(angular) {
     'use strict';
 
-    function DriverModalController($state,$q,$scope, DriverService) {
+    function DriverModalController($state,$uibModal,$q,$scope, DriverService) {
     	var ctrl = this;
 
         ctrl.init = function() {
 
+            ctrl.$uibModal = $uibModal;
             ctrl.driver = (ctrl.resolve && ctrl.resolve.details) || {};
             ctrl.isDisabled = Object.keys(ctrl.driver).length > 0;
             ctrl.image = {};
@@ -57,15 +58,52 @@
             ctrl.modalInstance.close({ action: 'cancel' });
         };
 
+        ctrl.viewAssignedTrucks = function(assignedTrucks){
+            ctrl.openViewAssignedPopUp(assignedTrucks,"Trucks");
+        }
+
+        ctrl.viewAssignedRequests = function(assignedRequests){
+            ctrl.openViewAssignedPopUp(assignedRequests,"Requests");
+        }
+
         ctrl.init();
 
-      
+//===========================POPUP IMPLEMENTATION START======================================
+
+        ctrl.openViewAssignedPopUp = function(details,type){
+            
+            var modalInstance = ctrl.$uibModal.open({
+                component: 'viewAssignedModal',
+                windowClass: 'app-modal-window-large',
+                keyboard: false,
+                resolve:{
+                    details: function(){
+                        return (details || {});
+                    },
+                    type: function(){
+                        return(type || {});
+                    }
+                },
+                backdrop: 'static'
+            });
+
+            modalInstance.result.then(function(data){   
+                //data passed when pop up closed.
+                if(data && data.action == "update") {
+                    ctrl.openNotice('added successfully','info');
+                    ctrl.init();
+                }       
+            }, function(err){
+                console.log('Error in add-driver Modal');
+                console.log(err);
+            })
+        }
     }
 
     angular.module('driverModal')
     .component('driverModal', {
         templateUrl: 'admin/driver/driver-modal/driver-modal.template.html',
-        controller: ['$state','$q','$scope', 'DriverService', DriverModalController],
+        controller: ['$state','$uibModal','$q','$scope', 'DriverService', DriverModalController],
         bindings: {
             modalInstance: '<',
             resolve: '<'

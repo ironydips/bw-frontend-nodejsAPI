@@ -20,7 +20,6 @@ function ProfileModalController($state,customerUserService) {
 				customerUserService.getUserInventory(ctrl.customer.userID)
 					.then(function(response){
 						ctrl.userInventory = response.data;
-						debugger
 					})
 					.catch(function(err){
 						console.log('Error getting user-profile details:');

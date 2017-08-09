@@ -26,7 +26,7 @@
                 <tr ng-show="!$ctrl.message" ng-repeat="item in $ctrl.items | filter: $ctrl.searchItem">
                     <td class="text-center">
                         <a href="" ng-click="$ctrl.openLightboxModal(item.imageURLs)">
-                            <img ng-src="{{item.imageURLs[0]}}" class="img-thumbnail">
+                            <img ng-src="{{item.imageURLs[0]}}" class="img-thumbnail" width="50%" height="50%">
                         </a>
                     </td>
                     <td class="col-md-3">{{item.storedItemID}}</td>

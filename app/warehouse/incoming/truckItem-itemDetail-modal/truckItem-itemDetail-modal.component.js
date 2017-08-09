@@ -15,7 +15,6 @@
 
 
         ctrl.init = function() {
-
             ctrl.noUserReqMessage = true;
             ctrl.requestedItems.items.forEach(function(data) {
                 data.isChecked = false;
@@ -30,7 +29,8 @@
             }
         };
 
-        ctrl.getRequestedItems = function(item) {
+        ctrl.getRequestedItems = function(item,index) {
+            ctrl.index = index;
             if (item.items) {
                 if (item.isChecked) {
 
@@ -91,9 +91,9 @@
             ctrl.displayRowValue = index;
             ctrl.selectedRow = "";
         };
-        ctrl.updateLocationCredit = function(item) {
-
-            ctrl.updateLocCreditPopup(item);
+        ctrl.updateLocationCredit = function(item,index) {
+            ctrl.subIndex = index;
+            ctrl.updateLocCreditPopup(angular.copy(item));
         };
 
         ctrl.receiveItem = function(storedItemId, location, item) {
@@ -198,21 +198,22 @@
         });
 
         modalInstance.result.then(function(data) {
-                //data passed when pop up closed.
-                if (data && data.action == 'update'){
-                    ctrl.itemsArray.splice(ctrl.itemsArray.indexOf(data.item), 1);
-                    if(ctrl.itemsArray.length == 0){
-                        ctrl.noItemMessage = true;
-                    }
-                    popUpCtrl.init();
-                } 
+            //data passed when pop up closed.
+            if (data && data.action == 'update'){
+                ctrl.itemsArray.splice(ctrl.subIndex, 1);
+                if(ctrl.itemsArray.length == 0){
+                    ctrl.noItemMessage = true;
+                }
+                // popUpCtrl.init();
+                ctrl.requestedItems.items[ctrl.index].items.splice(ctrl.subIndex, 1);
+            } 
 
 
-            }),
-            function(err) {
-                console.log('Error in update Location and Credit of received items Modal');
-                console.log(err);
-            }
+        }),
+        function(err) {
+            console.log('Error in update Location and Credit of received items Modal');
+            console.log(err);
+        }
 
     }
 }

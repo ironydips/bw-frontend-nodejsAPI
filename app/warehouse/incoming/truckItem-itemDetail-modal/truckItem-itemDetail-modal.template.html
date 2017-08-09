@@ -17,7 +17,7 @@
                         </tr>
                         <tr ng-if="$ctrl.requestedItems" ng-repeat="req in $ctrl.requestedItems.items">
                             <td>
-                                <input type="checkbox" ng-model="req.isChecked" ng-click="$ctrl.getRequestedItems(req)">
+                                <input type="checkbox" ng-model="req.isChecked" ng-click="$ctrl.getRequestedItems(req,$index)">
                             </td>
                             <td class="text-center">
                                 <a href="" ng-click="$ctrl.openLightboxModal(req.signatureURLArray)">
@@ -84,7 +84,7 @@
                                     <button type="button" ng-if="item.subItems" ng-click="$ctrl.subItems(item)" class="btn btn-sm btn-primary">View</button>
                                 </td>
                                 <td>
-                                    <button type="button" ng-click="$ctrl.updateLocationCredit(item)" class="btn btn-sm btn-primary">Update Item</button>
+                                    <button type="button" ng-click="$ctrl.updateLocationCredit(item,$index)" class="btn btn-sm btn-primary">Update Item</button>
                                 </td>
                             </tr>
                             <tr ng-show="$ctrl.noItemMessage">

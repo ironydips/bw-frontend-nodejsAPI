@@ -3,6 +3,7 @@
 
 	angular.module('driverModal',[
 		'bathwaterApp.services',
+		'viewAssignedModal'
 		]);
 
 })(window.angular);
