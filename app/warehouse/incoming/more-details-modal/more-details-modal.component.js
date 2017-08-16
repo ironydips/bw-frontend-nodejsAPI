@@ -6,7 +6,6 @@
 
         ctrl.itemDetail = (ctrl.resolve && ctrl.resolve.details) || {};
         ctrl.isDisabled = Object.keys(ctrl.itemDetail).length > 0;
-
         ctrl.openLightboxModal = function(images) {
             //LightBox Library used as Image Viewer.
             Lightbox.openModal(images, 0);
@@ -14,7 +13,7 @@
 
         ctrl.init = function() {
         	
-            if (ctrl.itemDetail.subItems.length > 0) {
+            if (ctrl.itemDetail.subItems > 0) {
 
                 for (var i = 0; i < ctrl.itemDetail.subItems.length; i++) {
                     for (var j = 0; j <= i; j++) {
